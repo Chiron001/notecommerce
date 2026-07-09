@@ -10,7 +10,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-navy-900/5">
+    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40">
       <div className="h-1 gradient-cta" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -35,7 +35,7 @@ export default function Header() {
               href="/articles"
               className="rounded-full px-5 py-2.5 text-sm font-semibold text-white gradient-cta hover:opacity-90 transition-opacity"
             >
-              Read Latest Insights
+              Start reading
             </Link>
           </div>
 

@@ -21,7 +21,7 @@ export const CONTENT_PILLARS = [
     slug: "performance-marketing",
     title: "Performance & Marketing",
     description:
-      "Meta, Google, and marketplace ads — CAC, incrementality, and what's actually working now.",
+      "Meta, Google, and marketplace ads: CAC, incrementality, and what's actually working right now.",
     stat: "60+",
     statLabel: "Channel deep-dives",
     accent: "violet",
@@ -39,7 +39,7 @@ export const CONTENT_PILLARS = [
     slug: "ecommerce-platforms",
     title: "Ecommerce Platforms",
     description:
-      "Shopify, Amazon, Flipkart, Blinkit, and Zepto — how each platform actually works, in practice.",
+      "Shopify, Amazon, Flipkart, Blinkit, and Zepto: how each platform actually works in practice.",
     stat: "30+",
     statLabel: "Platforms covered",
     accent: "emerald",
@@ -48,7 +48,7 @@ export const CONTENT_PILLARS = [
     slug: "economics-profitability",
     title: "Economics & Profitability",
     description:
-      "Unit economics, contribution margins, and fulfilment costs — the math behind sustainable growth.",
+      "Unit economics, contribution margins, and fulfilment costs: the math behind sustainable growth.",
     stat: "50+",
     statLabel: "Economics teardowns",
     accent: "amber",

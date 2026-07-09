@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import { CONTENT_PILLARS } from "@/lib/pillars";
@@ -8,19 +9,34 @@ import { LogoFull } from "@/components/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-950 text-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
+    <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center text-cream-50" aria-label="NotEcommerce home">
-              <LogoFull className="h-8 w-auto" />
+              <LogoFull className="h-7 w-auto" />
             </Link>
-            <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              Making ecommerce expertise accessible — market intelligence and
-              growth strategy for founders and operators building in D2C,
-              marketplaces, and quick commerce.
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wide text-white/70">
+                Ecommerce Intelligence
+              </span>
+              <span className="h-0.5 w-8 rounded-full gradient-cta" />
+            </div>
+            <p className="mt-4 text-sm text-white/50 leading-relaxed max-w-xs">
+              We write about D2C, marketplaces, and quick commerce for people
+              who actually run these businesses, not just read about them
+              from the sidelines.
             </p>
-            <div className="mt-6 flex items-center gap-3">
+
+            <a
+              href="mailto:hello@notecommerce.com"
+              className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+            >
+              <Mail className="h-4 w-4" />
+              hello@notecommerce.com
+            </a>
+
+            <div className="mt-5 flex items-center gap-3">
               {SOCIAL_LINKS.map((s) => (
                 <a
                   key={s.label}
@@ -37,15 +53,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/90 uppercase tracking-wide">
-              Content Pillars
+            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
+              Content
             </h4>
             <ul className="mt-4 space-y-3">
               {CONTENT_PILLARS.map((p) => (
                 <li key={p.slug}>
                   <Link
                     href={`/articles?pillar=${p.slug}`}
-                    className="text-sm text-white/60 hover:text-white transition-colors"
+                    className="text-sm text-white/50 hover:text-white transition-colors"
                   >
                     {p.title}
                   </Link>
@@ -55,22 +71,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/90 uppercase tracking-wide">
+            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
               Explore
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link href="/articles" className="text-sm text-white/60 hover:text-white transition-colors">
+                <Link href="/articles" className="text-sm text-white/50 hover:text-white transition-colors">
                   All Articles
                 </Link>
               </li>
               <li>
-                <Link href="/#process" className="text-sm text-white/60 hover:text-white transition-colors">
+                <Link href="/#process" className="text-sm text-white/50 hover:text-white transition-colors">
                   The 6-D Process
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="text-sm text-white/60 hover:text-white transition-colors">
+                <Link href="/#about" className="text-sm text-white/50 hover:text-white transition-colors">
                   About NotEcommerce
                 </Link>
               </li>
@@ -78,32 +94,71 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/90 uppercase tracking-wide">
-              Stay in the loop
+            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
+              Connect
             </h4>
-            <p className="mt-4 text-sm text-white/60">
-              Weekly ecommerce intelligence, straight to your inbox.
-            </p>
-            <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="you@company.com"
-                className="min-w-0 flex-1 rounded-full bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <button
-                type="submit"
-                className="rounded-full gradient-cta px-4 py-2.5 text-sm font-semibold text-white shrink-0"
-              >
-                Join
-              </button>
-            </form>
+            <ul className="mt-4 space-y-3">
+              {SOCIAL_LINKS.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-white/50 hover:text-white transition-colors"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40">
-          <p>© {new Date().getFullYear()} NotEcommerce. All rights reserved.</p>
-          <p>notecommerce.com · @notecommerce</p>
+        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {SOCIAL_LINKS.map((s) => (
+            <div key={s.label} className="flex items-start gap-2">
+              <SocialIcon
+                name={s.label as "Instagram" | "X" | "LinkedIn" | "Facebook"}
+                className="h-4 w-4 mt-0.5 text-indigo-400 shrink-0"
+              />
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wide text-white/70">
+                  {s.label}
+                </div>
+                <div className="text-xs text-white/40">@notecommerce</div>
+              </div>
+            </div>
+          ))}
         </div>
+
+        <div className="mt-10 border-t border-white/10 pt-8">
+          <span className="text-xs font-semibold uppercase tracking-widest text-white/40">
+            The Reader Promise
+          </span>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {["Independent analysis", "No sponsored placements", "Free to read, always"].map(
+              (item) => (
+                <span
+                  key={item}
+                  className="glass-dark rounded-full px-4 py-1.5 text-xs font-medium text-white/70"
+                >
+                  {item}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+
+        <div className="mt-10 border-t border-white/10 pt-8 text-center text-xs text-white/40">
+          <p>© {new Date().getFullYear()} NotEcommerce. All rights reserved. notecommerce.com</p>
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="select-none pointer-events-none text-center leading-none font-display font-extrabold text-white/[0.04] text-[16vw] whitespace-nowrap translate-y-[28%]"
+      >
+        NOTECOMMERCE
       </div>
     </footer>
   );

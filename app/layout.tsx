@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MotionProvider from "@/components/MotionProvider";
 
 const heading = Plus_Jakarta_Sans({
   variable: "--font-heading",
@@ -17,9 +18,9 @@ const body = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NotEcommerce — Ecommerce Intelligence, Made Accessible",
+  title: "NotEcommerce: Ecommerce Knowledge That's Actually Useful",
   description:
-    "NotEcommerce is an ecommerce insights and education platform for founders, operators, and growth teams — market intelligence, brand growth strategy, and platform breakdowns across D2C, marketplaces, and quick commerce.",
+    "NotEcommerce writes about what's really working in D2C, marketplaces, and quick commerce. Market intelligence, brand growth strategy, and honest platform breakdowns for founders and operators.",
 };
 
 export default function RootLayout({
@@ -33,9 +34,11 @@ export default function RootLayout({
       className={`${heading.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-navy-900">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );
