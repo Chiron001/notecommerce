@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import { CONTENT_PILLARS } from "@/lib/pillars";
+import { LogoFull } from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -11,11 +12,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 font-display font-extrabold text-lg tracking-tight text-white">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg gradient-cta text-white text-sm font-bold">
-                N
-              </span>
-              NotEcommerce
+            <Link href="/" className="flex items-center text-cream-50" aria-label="NotEcommerce home">
+              <LogoFull className="h-8 w-auto" />
             </Link>
             <p className="mt-4 text-sm text-white/60 leading-relaxed">
               Making ecommerce expertise accessible — market intelligence and

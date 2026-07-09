@@ -2,19 +2,25 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0b1440;
+  --foreground: #003466;
 }
 
 @theme {
-  --color-navy-950: #060b26;
-  --color-navy-900: #0b1440;
-  --color-navy-800: #131f5e;
-  --color-navy-700: #1c2b74;
-  --color-indigo-600: #4f46e5;
-  --color-indigo-500: #6d5bf0;
-  --color-violet-500: #8b5cf6;
-  --color-cream-50: #fdf6ee;
-  --color-cream-100: #f8ece0;
+  /* Brand navy — exact color from the NotEcommerce logo */
+  --color-navy-950: #001b33;
+  --color-navy-900: #003466;
+  --color-navy-800: #0b4a82;
+  --color-navy-700: #14619f;
+
+  /* Brand blue accent, derived from navy-900 for gradients/links/CTAs */
+  --color-indigo-600: #0b4a82;
+  --color-indigo-500: #14619f;
+  --color-violet-500: #2f8fd6;
+
+  /* Brand light blue — exact color from the NotEcommerce logo background */
+  --color-cream-50: #daf5ff;
+  --color-cream-100: #bfe9f7;
+
   --color-emerald-500: #16a37a;
   --color-amber-500: #e58a2a;
 }
@@ -37,12 +43,12 @@ h1, h2, h3, h4, .font-display {
 }
 
 .gradient-cta {
-  background: linear-gradient(115deg, #2c3a9b 0%, #5b4fe0 45%, #9b4fd6 100%);
+  background: linear-gradient(115deg, #003466 0%, #0b4a82 50%, #2f8fd6 100%);
 }
 
 .gradient-hero-blob {
-  background: radial-gradient(circle at 30% 30%, rgba(109, 91, 240, 0.35), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(139, 92, 246, 0.25), transparent 55%);
+  background: radial-gradient(circle at 30% 30%, rgba(47, 143, 214, 0.3), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(0, 52, 102, 0.18), transparent 55%);
 }
 
 .prose-article {

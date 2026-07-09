@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/nav";
+import { LogoFull } from "@/components/Logo";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -13,11 +14,8 @@ export default function Header() {
       <div className="h-1 gradient-cta" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-display font-extrabold text-lg tracking-tight text-navy-950">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg gradient-cta text-white text-sm font-bold">
-              N
-            </span>
-            NotEcommerce
+          <Link href="/" className="flex items-center text-navy-900" aria-label="NotEcommerce home">
+            <LogoFull className="h-8 w-auto" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
