@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
               <LogoFull />
@@ -63,7 +63,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Company
+              Explore
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
@@ -77,13 +77,41 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/connect" className="text-sm text-white/50 hover:text-white transition-colors">
+                  Book a Consultation
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
+              Company
+            </h4>
+            <ul className="mt-4 space-y-3">
+              <li>
                 <Link href="/about" className="text-sm text-white/50 hover:text-white transition-colors">
-                  About NotEcommerce
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="text-sm text-white/50 hover:text-white transition-colors">
+                  Careers
                 </Link>
               </li>
               <li>
                 <Link href="/connect" className="text-sm text-white/50 hover:text-white transition-colors">
-                  Book a Consultation
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-sm text-white/50 hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/code-of-conduct" className="text-sm text-white/50 hover:text-white transition-colors">
+                  Code of Conduct
                 </Link>
               </li>
             </ul>
