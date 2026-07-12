@@ -32,7 +32,7 @@ export default function Header() {
 
         <div className="hidden md:flex items-center">
           <Link
-            href="/articles"
+            href="/connect"
             className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-950 shadow-lg hover:bg-cream-50 transition-colors"
           >
             Connect
@@ -61,7 +61,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/articles"
+            href="/connect"
             className="block rounded-full bg-white px-5 py-2.5 text-center text-sm font-semibold text-navy-950"
             onClick={() => setOpen(false)}
           >
