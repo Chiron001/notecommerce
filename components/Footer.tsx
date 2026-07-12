@@ -5,13 +5,14 @@ import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import { CONTENT_PILLARS } from "@/lib/pillars";
 import { LogoFull } from "@/components/Logo";
+import FooterColumn from "@/components/FooterColumn";
 
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div>
             <Link href="/" className="flex items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
               <LogoFull />
             </Link>
@@ -43,11 +44,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Expertise
-            </h4>
-            <ul className="mt-4 space-y-3">
+          <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-x-8">
+            <FooterColumn title="Expertise">
               {CONTENT_PILLARS.map((p) => (
                 <li key={p.slug}>
                   <Link
@@ -58,14 +56,9 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
+            </FooterColumn>
 
-          <div>
-            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Explore
-            </h4>
-            <ul className="mt-4 space-y-3">
+            <FooterColumn title="Explore">
               <li>
                 <Link href="/articles" className="text-sm text-white/50 hover:text-white transition-colors">
                   Insights &amp; Case Studies
@@ -81,14 +74,9 @@ export default function Footer() {
                   Book a Consultation
                 </Link>
               </li>
-            </ul>
-          </div>
+            </FooterColumn>
 
-          <div>
-            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Company
-            </h4>
-            <ul className="mt-4 space-y-3">
+            <FooterColumn title="Company">
               <li>
                 <Link href="/about" className="text-sm text-white/50 hover:text-white transition-colors">
                   About Us
@@ -114,7 +102,7 @@ export default function Footer() {
                   Code of Conduct
                 </Link>
               </li>
-            </ul>
+            </FooterColumn>
           </div>
         </div>
 
