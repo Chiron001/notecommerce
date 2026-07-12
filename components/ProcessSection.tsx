@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
-import { avatarUrl } from "@/lib/images";
 import Reveal from "@/components/Reveal";
 
 const STEPS = [
@@ -12,37 +10,37 @@ const STEPS = [
     letter: "D",
     name: "Discover",
     description:
-      "We keep an eye on category shifts, platform changes, and how people are actually shopping right now. Everything starts from what's happening, not a hunch.",
+      "We map category shifts, competitive dynamics, and consumer behavior in real time. Every engagement, and every report we publish, starts from evidence, not assumptions.",
   },
   {
     letter: "D",
     name: "Define",
     description:
-      "Once we've spotted something worth writing about, we work out what's actually changing, why it matters, and who needs to know.",
+      "Raw signal becomes a clear, prioritized thesis: what's actually changing, why it matters, and precisely what to do about it.",
   },
   {
     letter: "D",
     name: "Design",
     description:
-      "We build every piece to be useful on a random Tuesday afternoon. Frameworks and checklists, not just commentary.",
+      "We architect frameworks and roadmaps built for execution, not analysis for its own sake. Every deliverable is built to be acted on.",
   },
   {
     letter: "D",
     name: "Develop",
     description:
-      "Before anything goes out, we run it past real brand data and conversations with people who are actually doing the work.",
+      "Every recommendation is stress-tested against real data and hands-on operating experience before it reaches a client or a reader.",
   },
   {
     letter: "D",
     name: "Deploy",
     description:
-      "It goes out as an article, sometimes a newsletter note, sometimes a quick post on social. Wherever you happen to be reading.",
+      "Strategy becomes execution: campaigns launched, platforms optimized, teams enabled. We stay in the work, not just the deck.",
   },
   {
     letter: "D",
     name: "Deliver",
     description:
-      "We come back and update things as markets shift. A playbook from six months ago is often already a little out of date.",
+      "We track results and refine the approach continuously. A strategy that was right six months ago may already need to change.",
   },
 ];
 
@@ -50,21 +48,22 @@ export default function ProcessSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="bg-noise bg-navy-950 pt-32 pb-24 lg:pt-40">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative bg-noise bg-navy-950 pt-32 pb-24 lg:pt-40">
+      <div className="absolute inset-0 bg-grid-dark pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
-              How We Work
+              Our Methodology
             </span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-              How we actually{" "}
-              <span className="text-white/40">put this together.</span>
+              A rigorous, repeatable{" "}
+              <span className="text-white/40">methodology.</span>
             </h2>
             <p className="mt-4 text-white/60 leading-relaxed">
-              Every article goes through the same six steps before it gets
-              published. We call it the 6-D Process, mostly because it's
-              easier to remember than &ldquo;the thing we do every time.&rdquo;
+              Every engagement, and every piece of intelligence we publish,
+              moves through the same disciplined process. We call it the 6-D
+              Methodology.
             </p>
           </div>
         </Reveal>
@@ -113,32 +112,19 @@ export default function ProcessSection() {
           </div>
 
           <div className="lg:col-span-2 rounded-3xl glass-dark p-8">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                {[12, 47, 33].map((id) => (
-                  <Image
-                    key={id}
-                    src={avatarUrl(id)}
-                    alt=""
-                    width={36}
-                    height={36}
-                    className="h-9 w-9 rounded-full ring-2 ring-navy-950 object-cover"
-                  />
-                ))}
-              </div>
-              <h4 className="font-display text-base font-bold text-white">
-                Who&apos;s actually writing this
-              </h4>
-            </div>
+            <h4 className="font-display text-base font-bold text-white">
+              Senior-led. Every engagement.
+            </h4>
             <p className="mt-3 text-sm text-white/50 leading-relaxed">
-              Real operators, not people who just read about ecommerce for a
-              living.
+              Every engagement is led by practitioners who have built and
+              scaled ecommerce businesses themselves, not junior analysts
+              running a template.
             </p>
             <ul className="mt-6 space-y-4">
               {[
-                "New post most Mondays",
-                "We don't recycle other newsletters",
-                "We update old pieces when we get something wrong",
+                "Senior-led engagements, always",
+                "Proprietary research, not recycled data",
+                "Continuously refined as markets shift",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-white/70">
                   <CheckCircle2 className="h-4 w-4 mt-0.5 text-emerald-400 shrink-0" />

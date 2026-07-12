@@ -10,16 +10,16 @@ export default function ContentPillars() {
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              What We Cover
+              Our Expertise
             </span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-              The six things{" "}
-              <span className="text-navy-900/40">we actually write about.</span>
+              Six practice areas.{" "}
+              <span className="text-navy-900/40">One growth partner.</span>
             </h2>
             <p className="mt-4 text-navy-900/60 leading-relaxed">
-              Everything we publish falls under one of these. If you only
-              care about one of them, the tag on each article will get you
-              there directly.
+              Every engagement, and every report we publish, draws on deep,
+              proprietary expertise across ecommerce&apos;s most critical
+              growth levers.
             </p>
           </div>
         </Reveal>

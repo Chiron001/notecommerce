@@ -23,15 +23,16 @@ export default function PlatformCoverage() {
         <Reveal>
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              Platform Coverage
+              Market Coverage
             </span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-              We track every platform{" "}
+              Deep expertise across every platform{" "}
               <span className="text-navy-900/40">that matters.</span>
             </h2>
             <p className="mt-4 text-navy-900/60 leading-relaxed">
-              D2C storefronts, marketplaces, quick commerce apps. If your
-              customers are shopping there, we&apos;re paying attention to it.
+              D2C storefronts, marketplaces, and quick commerce apps. Wherever
+              your customers are shopping, our research and advisory teams
+              are already there.
             </p>
           </div>
         </Reveal>
@@ -59,13 +60,13 @@ export default function PlatformCoverage() {
           <Reveal delay={0.08}>
             <div className="rounded-2xl bg-navy-950 p-8 text-center">
               <Counter value={6} className="font-display text-3xl font-extrabold text-white" />
-              <div className="mt-2 text-sm text-white/50">Categories of ecommerce covered</div>
+              <div className="mt-2 text-sm text-white/50">Dedicated practice areas</div>
             </div>
           </Reveal>
           <Reveal delay={0.16}>
             <div className="rounded-2xl bg-navy-950 p-8 text-center">
               <div className="font-display text-3xl font-extrabold text-white">Weekly</div>
-              <div className="mt-2 text-sm text-white/50">Platform and policy updates</div>
+              <div className="mt-2 text-sm text-white/50">Market and policy updates</div>
             </div>
           </Reveal>
         </div>

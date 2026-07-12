@@ -3,7 +3,9 @@ export const CONTENT_PILLARS = [
     slug: "market-intelligence",
     title: "Market Intelligence",
     description:
-      "Category shifts, consumer behavior, and platform dynamics shaping ecommerce in real time.",
+      "Proprietary research into category shifts, consumer behavior, and platform dynamics, delivered as intelligence, not commentary.",
+    serviceDescription:
+      "We run continuous, proprietary research programs so your team makes category decisions on evidence, not instinct. Category tracking, competitive benchmarking, and demand forecasting, built around the markets you actually operate in.",
     stat: "120+",
     statLabel: "Reports & briefings",
     accent: "emerald",
@@ -12,45 +14,55 @@ export const CONTENT_PILLARS = [
     slug: "brand-growth-strategy",
     title: "Brand Growth Strategy",
     description:
-      "Acquisition, retention, pricing, assortment, and channel mix playbooks for scaling brands.",
+      "End-to-end growth strategy across acquisition, retention, pricing, assortment, and channel mix.",
+    serviceDescription:
+      "We design and execute the growth strategy, not just the slide deck. Acquisition architecture, pricing and assortment strategy, and channel mix, built with your team and carried through to execution.",
     stat: "80+",
-    statLabel: "Strategy breakdowns",
+    statLabel: "Strategy engagements",
     accent: "amber",
   },
   {
     slug: "performance-marketing",
     title: "Performance & Marketing",
     description:
-      "Meta, Google, and marketplace ads: CAC, incrementality, and what's actually working right now.",
+      "Full-funnel performance marketing across Meta, Google, and marketplace ads, engineered for measurable incrementality.",
+    serviceDescription:
+      "Our media team manages spend across Meta, Google, and marketplace ads with a single mandate: provable incrementality. No blended CAC theater, no vanity metrics.",
     stat: "60+",
-    statLabel: "Channel deep-dives",
+    statLabel: "Channel engagements",
     accent: "violet",
   },
   {
     slug: "customer-retention",
     title: "Customer & Retention",
     description:
-      "CRM, lifecycle marketing, and LTV frameworks that turn buyers into repeat customers.",
+      "CRM, lifecycle marketing, and LTV infrastructure that turns first-time buyers into your most valuable customers.",
+    serviceDescription:
+      "We build the CRM and lifecycle infrastructure your growth actually depends on: segmentation, retention flows, and LTV modeling designed to compound, not just convert.",
     stat: "45+",
-    statLabel: "Retention frameworks",
+    statLabel: "Retention programs",
     accent: "indigo",
   },
   {
     slug: "ecommerce-platforms",
     title: "Ecommerce Platforms",
     description:
-      "Shopify, Amazon, Flipkart, Blinkit, and Zepto: how each platform actually works in practice.",
+      "Deep operating expertise across Shopify, Amazon, Flipkart, Blinkit, and Zepto, from setup to ongoing optimization.",
+    serviceDescription:
+      "From storefront architecture to marketplace operations, our platform specialists run day-to-day execution across Shopify, Amazon, Flipkart, Blinkit, and Zepto so your team doesn't have to become platform experts themselves.",
     stat: "30+",
-    statLabel: "Platforms covered",
+    statLabel: "Platforms managed",
     accent: "emerald",
   },
   {
     slug: "economics-profitability",
     title: "Economics & Profitability",
     description:
-      "Unit economics, contribution margins, and fulfilment costs: the math behind sustainable growth.",
+      "Unit economics and contribution margin modeling that shows exactly where to invest, and where to stop.",
+    serviceDescription:
+      "We build the contribution margin models your finance team wishes it had: channel-level, cohort-level, and built to inform real capital allocation decisions, not just quarterly reporting.",
     stat: "50+",
-    statLabel: "Economics teardowns",
+    statLabel: "Economics engagements",
     accent: "amber",
   },
 ] as const;

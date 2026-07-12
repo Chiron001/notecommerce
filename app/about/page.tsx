@@ -11,7 +11,7 @@ import NewsletterCTA from "@/components/home/NewsletterCTA";
 export const metadata: Metadata = {
   title: "About: NotEcommerce",
   description:
-    "NotEcommerce is a small team of ecommerce operators writing about what's actually working in D2C, marketplaces, and quick commerce.",
+    "NotEcommerce is a data-led ecommerce intelligence and growth consultancy, serving D2C, marketplace, and quick commerce leaders with proprietary research and senior-led advisory.",
 };
 
 export default function AboutPage() {
@@ -19,6 +19,7 @@ export default function AboutPage() {
     <>
       <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
         <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
+        <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
@@ -26,14 +27,14 @@ export default function AboutPage() {
                 About Us
               </span>
               <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
-                We&apos;re not another ecommerce blog.
+                Built for ecommerce&apos;s most demanding teams.
               </h1>
               <p className="mt-5 text-lg text-navy-900/70 leading-relaxed">
-                NotEcommerce started because most ecommerce content is either
-                recycled LinkedIn takes or vendor marketing dressed up as
-                advice. We wanted something written by people who&apos;ve
-                actually run these businesses, updated as often as the market
-                actually changes.
+                NotEcommerce is a data-led intelligence and growth
+                consultancy. We combine proprietary research with senior,
+                hands-on advisory, the same rigor top-tier consultancies
+                bring to any other industry, applied specifically to D2C,
+                marketplaces, and quick commerce.
               </p>
             </div>
           </Reveal>
@@ -41,10 +42,10 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6">
               {[
-                { value: 220, suffix: "+", label: "Articles published" },
-                { value: 6, suffix: "", label: "Content pillars" },
-                { value: 45, suffix: "+", label: "Platforms covered" },
-                { value: 4, suffix: "", label: "People behind it" },
+                { value: 220, suffix: "+", label: "Proprietary reports" },
+                { value: 6, suffix: "", label: "Practice areas" },
+                { value: 45, suffix: "+", label: "Markets covered" },
+                { value: 100, suffix: "%", label: "Senior-led engagements" },
               ].map((s) => (
                 <div key={s.label}>
                   <Counter value={s.value} suffix={s.suffix} className="font-display text-3xl font-extrabold text-navy-950" />
@@ -61,22 +62,24 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <Reveal>
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-                What We Actually Do
+                How We Work
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">
-                Market intelligence and growth strategy, minus the fluff.
+                Research-led. Execution-driven.
               </h2>
               <p className="mt-4 text-navy-900/60 leading-relaxed">
-                Everything we publish falls into one of six pillars, covering
-                D2C brands, marketplaces, and quick commerce. No sponsored
-                placements, no pay-to-play rankings. If a platform or brand
-                looks bad in the data, we say so.
+                Every engagement draws on the same proprietary research we
+                publish. We don&apos;t hand you a report and disappear, our
+                team stays embedded until strategy becomes results. No
+                sponsored placements, no pay-to-play rankings: if a platform
+                or approach doesn&apos;t hold up in the data, we say so, even
+                to our own clients.
               </p>
               <Link
                 href="/process"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy-950 hover:gap-3 transition-all"
               >
-                See how we put each piece together
+                See our methodology
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Reveal>
@@ -107,10 +110,10 @@ export default function AboutPage() {
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-                The Reader Promise
+                Our Standards
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">
-                A few things we won&apos;t do.
+                A few things we categorically won&apos;t do.
               </h2>
             </div>
           </Reveal>
@@ -119,8 +122,8 @@ export default function AboutPage() {
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
               {[
                 "Take money to feature a platform or brand",
-                "Publish something we haven't checked against real data",
-                "Leave old articles wrong once we know better",
+                "Publish a recommendation we haven't checked against real data",
+                "Staff an engagement with anyone junior to the work",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 rounded-xl bg-white p-5 ring-1 ring-navy-900/5">
                   <CheckCircle2 className="h-5 w-5 mt-0.5 text-emerald-500 shrink-0" />
@@ -144,6 +147,31 @@ export default function AboutPage() {
                   <SocialIcon name={s.label as "Instagram" | "X" | "LinkedIn" | "Facebook"} className="h-4 w-4" />
                 </a>
               ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <Reveal>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-8 rounded-3xl bg-navy-950 p-10 sm:p-12">
+              <div>
+                <h2 className="font-display text-2xl font-bold text-white">
+                  Ready to work with us directly?
+                </h2>
+                <p className="mt-2 text-white/60 max-w-xl">
+                  Every engagement starts with a working session to understand
+                  your business before we recommend anything.
+                </p>
+              </div>
+              <Link
+                href="/connect"
+                className="shrink-0 inline-flex items-center gap-2 rounded-full gradient-cta px-6 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+              >
+                Book a Consultation
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </Reveal>
         </div>

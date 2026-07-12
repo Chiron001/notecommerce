@@ -5,26 +5,28 @@ import PillarNav from "@/components/articles/PillarNav";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Articles: NotEcommerce",
+  title: "Insights & Case Studies: NotEcommerce",
   description:
-    "Market intelligence, growth strategy, and platform breakdowns for founders and operators building in D2C, marketplaces, and quick commerce.",
+    "Proprietary research, case studies, and market intelligence for founders and operators building in D2C, marketplaces, and quick commerce.",
 };
 
 export default function ArticlesPage() {
   return (
-    <section className="bg-cream-50 pt-32 pb-20 lg:pt-40">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
+      <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              The Library
+              Insights &amp; Case Studies
             </span>
             <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
-              Everything we&apos;ve written
+              Proprietary research, published.
             </h1>
             <p className="mt-4 text-navy-900/60 leading-relaxed">
-              Every breakdown and briefing we&apos;ve published, in one place.
-              Jump to a topic page if you already know what you&apos;re after.
+              The same intelligence behind our advisory work, in one place.
+              Jump to a practice area if you already know what you&apos;re
+              after.
             </p>
           </div>
         </Reveal>

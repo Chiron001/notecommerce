@@ -1,6 +1,7 @@
 export const NAV_LINKS = [
-  { label: "Our Process", href: "/process" },
-  { label: "Articles", href: "/articles" },
+  { label: "Expertise", href: "/pillars" },
+  { label: "Insights", href: "/articles" },
+  { label: "Methodology", href: "/process" },
   { label: "About", href: "/about" },
 ];
 

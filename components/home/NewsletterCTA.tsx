@@ -11,15 +11,14 @@ export default function NewsletterCTA() {
           <div className="absolute inset-0 gradient-hero-blob opacity-60 pointer-events-none" />
           <div className="relative">
             <span className="glass inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold text-white">
-              The Monday Read
+              The Intelligence Briefing
             </span>
             <h2 className="mt-6 font-display text-3xl sm:text-4xl font-extrabold text-white max-w-2xl mx-auto">
-              Get one good email a week, that&apos;s it.
+              Proprietary intelligence, delivered weekly.
             </h2>
             <p className="mt-4 text-white/80 max-w-lg mx-auto leading-relaxed">
-              We send out what we&apos;re seeing in the market and what we think
-              it means for you. No daily spam, no sponsored placements
-              pretending to be advice.
+              The same research our advisory clients pay for, distilled into
+              one weekly briefing. No sponsored placements, no noise.
             </p>
             <form
               className="mt-8 mx-auto flex max-w-md flex-col sm:flex-row gap-3"

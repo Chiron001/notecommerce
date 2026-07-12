@@ -18,9 +18,9 @@ const body = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NotEcommerce: Ecommerce Knowledge That's Actually Useful",
+  title: "NotEcommerce: Ecommerce Intelligence & Growth Consultancy",
   description:
-    "NotEcommerce writes about what's really working in D2C, marketplaces, and quick commerce. Market intelligence, brand growth strategy, and honest platform breakdowns for founders and operators.",
+    "NotEcommerce is a data-led ecommerce intelligence and growth consultancy for D2C, marketplace, and quick commerce leaders. Proprietary research, senior-led advisory, and hands-on execution.",
 };
 
 export default function RootLayout({

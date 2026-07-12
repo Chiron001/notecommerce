@@ -14,18 +14,18 @@ export default function FeaturedArticles() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-xl">
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-                Recent Reads
+                Insights &amp; Case Studies
               </span>
               <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-                A few things{" "}
-                <span className="text-navy-900/40">worth your time.</span>
+                Proprietary research,{" "}
+                <span className="text-navy-900/40">applied.</span>
               </h2>
             </div>
             <Link
               href="/articles"
               className="inline-flex items-center gap-2 text-sm font-semibold text-navy-950 hover:gap-3 transition-all"
             >
-              See everything
+              View all insights
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

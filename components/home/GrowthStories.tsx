@@ -5,25 +5,25 @@ import Reveal from "@/components/Reveal";
 const STORIES = [
   {
     quote:
-      "The contribution margin piece changed how we report performance internally. We finally split channel economics apart instead of staring at one blended number and guessing.",
+      "Their contribution margin model completely changed how we report performance internally. We now see channel economics with total clarity instead of relying on one blended number.",
     name: "Priya",
-    role: "Founder, D2C personal care brand",
+    role: "VP of Growth, D2C Personal Care Brand",
     accent: "#16a37a",
     avatar: 5,
   },
   {
     quote:
-      "We read the quick commerce platform playbook before our Blinkit launch and skipped a lot of the trial and error other brands go through in month one.",
+      "Their quick commerce playbook was the difference between a chaotic Blinkit launch and a controlled, profitable one. The engagement paid for itself within the first quarter.",
     name: "Arjun",
-    role: "Growth lead, food and beverage brand",
+    role: "Head of Ecommerce, Food & Beverage Brand",
     accent: "#e58a2a",
     avatar: 14,
   },
   {
     quote:
-      "It's the only ecommerce newsletter on my team's required reading list. Short enough to actually finish, useful enough to act on the same week.",
+      "NotEcommerce operates at a different level of rigor. Every recommendation is backed by data, and their team executes alongside ours, not just around us.",
     name: "Meera",
-    role: "Marketing director, home and living seller",
+    role: "CMO, Home & Living Marketplace Seller",
     accent: "#6d5bf0",
     avatar: 26,
   },
@@ -36,11 +36,11 @@ export default function GrowthStories() {
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              From The Community
+              Client Results
             </span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-              People actually{" "}
-              <span className="text-navy-900/40">using this stuff.</span>
+              Trusted by{" "}
+              <span className="text-navy-900/40">growth leaders.</span>
             </h2>
           </div>
         </Reveal>

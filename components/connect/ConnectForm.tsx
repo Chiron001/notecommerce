@@ -14,7 +14,7 @@ export default function ConnectForm() {
     const company = data.get("company")?.toString() ?? "";
     const message = data.get("message")?.toString() ?? "";
 
-    const subject = `Message from ${name || "the website"}`;
+    const subject = `Consultation request from ${name || "the website"}`;
     const body = [
       message,
       "",
@@ -41,8 +41,8 @@ export default function ConnectForm() {
           Your email app should be open
         </h3>
         <p className="mt-2 text-sm text-navy-900/60 leading-relaxed">
-          We prefilled a message for you. Hit send from there and it lands
-          straight in our inbox.
+          We prefilled your request. Hit send from there and it lands
+          directly with our advisory team.
         </p>
         <button
           onClick={() => setSent(false)}
@@ -73,7 +73,7 @@ export default function ConnectForm() {
           </div>
           <div>
             <label className="text-xs font-semibold uppercase tracking-wide text-navy-900/50">
-              Email
+              Work Email
             </label>
             <input
               type="email"
@@ -99,13 +99,12 @@ export default function ConnectForm() {
 
         <div>
           <label className="text-xs font-semibold uppercase tracking-wide text-navy-900/50">
-            What&apos;s this about?
+            How can we help? <span className="normal-case text-navy-900/30">(optional)</span>
           </label>
           <textarea
             name="message"
-            required
             rows={4}
-            placeholder="Story tip, correction, partnership idea, anything."
+            placeholder="Tell us about your category, your goals, and the outcome you're chasing."
             className="mt-1.5 w-full resize-none rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/30 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
           />
         </div>
@@ -114,11 +113,11 @@ export default function ConnectForm() {
           type="submit"
           className="flex w-full items-center justify-center gap-2 rounded-full gradient-cta px-6 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
         >
-          Send Message
+          Submit Request
           <Send className="h-4 w-4" />
         </button>
         <p className="text-center text-xs text-navy-900/40">
-          We read every message ourselves. No ticket queue.
+          Your inquiry is confidential. We respond within one business day.
         </p>
       </form>
     </div>

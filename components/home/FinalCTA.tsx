@@ -1,13 +1,14 @@
 "use client";
 
-import { CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
 const POINTS = [
-  "Tested against real brand data, not just theory",
-  "Independent. Nobody's paying us to say nice things about their platform",
-  "Updated when we're wrong or when the market moves on",
-  "Written by people who've actually done this work",
+  "Every recommendation tested against real data, not theory",
+  "Independent. Nobody pays us to say nice things about their platform",
+  "Senior-led engagements, not junior analysts on a template",
+  "We execute alongside your team, not just advise from the sidelines",
 ];
 
 export default function FinalCTA() {
@@ -18,15 +19,14 @@ export default function FinalCTA() {
         <div className="grid lg:grid-cols-2 gap-12 items-center rounded-3xl bg-noise bg-navy-950 p-8 sm:p-14">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
-              Why Bother Reading Us
+              Why Partner With Us
             </span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-              Because you already have enough to skim.
+              Intelligence is worthless without execution.
             </h2>
             <p className="mt-4 text-white/60 leading-relaxed">
-              Anyone can reword a headline. We&apos;d rather tell you what it
-              actually means for your business, and give you something you
-              can act on before your next standup.
+              Anyone can hand you a report. We build the strategy, then stay
+              in the work with your team until it&apos;s actually delivered.
             </p>
             <ul className="mt-8 space-y-4">
               {POINTS.map((point) => (
@@ -40,28 +40,21 @@ export default function FinalCTA() {
 
           <div className="glass rounded-2xl p-8">
             <h3 className="font-display text-xl font-bold text-navy-950">
-              Start with this week&apos;s briefing
+              Ready to talk strategy?
             </h3>
             <p className="mt-2 text-sm text-navy-900/60 leading-relaxed">
-              No account needed, no paywall. Just subscribe and start reading.
+              Tell us about your business and we&apos;ll map where our
+              expertise creates the most leverage for you.
             </p>
-            <form className="mt-6 space-y-3" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                required
-                placeholder="you@company.com"
-                className="w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/40 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
-              />
-              <button
-                type="submit"
-                className="w-full rounded-xl gradient-cta px-4 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-              >
-                Subscribe for free
-              </button>
-            </form>
-            <p className="mt-4 text-[11px] text-navy-900/40">
-              Already read by a few thousand people who run ecommerce
-              businesses for a living.
+            <Link
+              href="/connect"
+              className="mt-6 flex items-center justify-center gap-2 rounded-xl gradient-cta px-4 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+            >
+              Book a Consultation
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <p className="mt-4 text-center text-[11px] text-navy-900/40">
+              Trusted by growth teams at ambitious ecommerce brands.
             </p>
           </div>
         </div>

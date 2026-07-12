@@ -18,14 +18,14 @@ export default function Footer() {
             </Link>
             <div className="mt-3 flex items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-wide text-white/70">
-                Ecommerce Intelligence
+                Ecommerce Intelligence &amp; Consultancy
               </span>
               <span className="h-0.5 w-8 rounded-full gradient-cta" />
             </div>
             <p className="mt-4 text-sm text-white/50 leading-relaxed max-w-xs">
-              We write about D2C, marketplaces, and quick commerce for people
-              who actually run these businesses, not just read about them
-              from the sidelines.
+              A data-led intelligence and growth consultancy for D2C,
+              marketplace, and quick commerce leaders. Proprietary research,
+              senior-led advisory, and hands-on execution.
             </p>
 
             <a
@@ -54,7 +54,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Content
+              Expertise
             </h4>
             <ul className="mt-4 space-y-3">
               {CONTENT_PILLARS.map((p) => (
@@ -72,22 +72,27 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Explore
+              Company
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
                 <Link href="/articles" className="text-sm text-white/50 hover:text-white transition-colors">
-                  All Articles
+                  Insights &amp; Case Studies
                 </Link>
               </li>
               <li>
                 <Link href="/process" className="text-sm text-white/50 hover:text-white transition-colors">
-                  The 6-D Process
+                  Our Methodology
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-sm text-white/50 hover:text-white transition-colors">
                   About NotEcommerce
+                </Link>
+              </li>
+              <li>
+                <Link href="/connect" className="text-sm text-white/50 hover:text-white transition-colors">
+                  Book a Consultation
                 </Link>
               </li>
             </ul>
@@ -116,10 +121,10 @@ export default function Footer() {
 
         <div className="mt-14 border-t border-white/10 pt-8">
           <span className="text-xs font-semibold uppercase tracking-widest text-white/40">
-            The Reader Promise
+            Our Standards
           </span>
           <div className="mt-4 flex flex-wrap gap-3">
-            {["Independent analysis", "No sponsored placements", "Free to read, always"].map(
+            {["Independent analysis", "No pay-to-play placements", "Senior-led engagements"].map(
               (item) => (
                 <span
                   key={item}
