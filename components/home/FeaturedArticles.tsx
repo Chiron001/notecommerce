@@ -1,11 +1,18 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getFeaturedArticles } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import Reveal from "@/components/Reveal";
+import SwipeProgress from "@/components/SwipeProgress";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export default function FeaturedArticles() {
   const articles = getFeaturedArticles();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isCarousel = !useMediaQuery("(min-width: 768px)");
 
   return (
     <section className="bg-cream-50 py-24">
@@ -31,17 +38,27 @@ export default function FeaturedArticles() {
           </div>
         </Reveal>
 
-        <div className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+        <div
+          ref={scrollRef}
+          className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+        >
           {articles.map((article, i) => (
             <Reveal
               key={article.slug}
               delay={i * 0.1}
+              triggerOnMount={isCarousel}
               className="w-[82%] shrink-0 snap-start md:w-auto"
             >
               <ArticleCard article={article} />
             </Reveal>
           ))}
         </div>
+
+        <SwipeProgress
+          scrollRef={scrollRef}
+          count={articles.length}
+          className="mt-5 md:hidden"
+        />
       </div>
     </section>
   );

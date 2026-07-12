@@ -1,6 +1,11 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import { avatarUrl } from "@/lib/images";
 import Reveal from "@/components/Reveal";
+import SwipeProgress from "@/components/SwipeProgress";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const STORIES = [
   {
@@ -30,6 +35,9 @@ const STORIES = [
 ];
 
 export default function GrowthStories() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isCarousel = !useMediaQuery("(min-width: 768px)");
+
   return (
     <section className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -45,11 +53,15 @@ export default function GrowthStories() {
           </div>
         </Reveal>
 
-        <div className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+        <div
+          ref={scrollRef}
+          className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+        >
           {STORIES.map((story, i) => (
             <Reveal
               key={story.name}
               delay={i * 0.1}
+              triggerOnMount={isCarousel}
               className="w-[82%] shrink-0 snap-start md:w-auto"
             >
               <div className="rounded-2xl bg-cream-50 p-8 ring-1 ring-navy-900/5 flex flex-col h-full">
@@ -79,6 +91,12 @@ export default function GrowthStories() {
             </Reveal>
           ))}
         </div>
+
+        <SwipeProgress
+          scrollRef={scrollRef}
+          count={STORIES.length}
+          className="mt-5 md:hidden"
+        />
       </div>
     </section>
   );
