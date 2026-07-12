@@ -2,19 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, FileSearch, Mail } from "lucide-react";
-import { CONTENT_PILLARS, getPillarBySlug, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
-import { ARTICLES } from "@/lib/articles";
+import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
+import { getAllPillars, getCaseStudiesByPillar, getPillarBySlug } from "@/lib/payload";
 import ArticleCard from "@/components/ArticleCard";
 import PillarNav from "@/components/articles/PillarNav";
 import Reveal from "@/components/Reveal";
+
+export const revalidate = 60;
 
 const GRID_WIDTH_BY_COUNT: Record<number, string> = {
   1: "max-w-sm mx-auto",
   2: "max-w-2xl mx-auto",
 };
 
-export function generateStaticParams() {
-  return CONTENT_PILLARS.map((pillar) => ({ slug: pillar.slug }));
+export async function generateStaticParams() {
+  const pillars = await getAllPillars();
+  return pillars.map((pillar) => ({ slug: pillar.slug }));
 }
 
 export async function generateMetadata({
@@ -23,11 +26,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const pillar = getPillarBySlug(slug);
+  const pillar = await getPillarBySlug(slug);
   if (!pillar) return {};
   return {
-    title: `${pillar.title}: NotEcommerce`,
-    description: pillar.description,
+    title: pillar.meta?.title || `${pillar.title}: NotEcommerce`,
+    description: pillar.meta?.description || pillar.description,
   };
 }
 
@@ -37,11 +40,11 @@ export default async function PillarPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const pillar = getPillarBySlug(slug);
+  const [pillar, allPillars] = await Promise.all([getPillarBySlug(slug), getAllPillars()]);
   if (!pillar) notFound();
 
   const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
-  const articles = ARTICLES.filter((a) => a.pillar === pillar.slug);
+  const articles = await getCaseStudiesByPillar(String(pillar.id));
 
   return (
     <>
@@ -97,7 +100,7 @@ export default async function PillarPage({
             Related Insights
           </span>
           <div className="mt-6">
-            <PillarNav active={pillar.slug} />
+            <PillarNav active={pillar.slug} pillars={allPillars} />
           </div>
 
           {articles.length > 0 ? (

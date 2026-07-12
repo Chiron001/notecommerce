@@ -10,7 +10,9 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import ConnectForm from "@/components/connect/ConnectForm";
-import { CONTENT_PILLARS } from "@/lib/pillars";
+import { getAllPillars } from "@/lib/payload";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Connect: NotEcommerce",
@@ -48,7 +50,9 @@ const PILLAR_ICONS: Record<string, typeof BarChart3> = {
   "economics-profitability": Calculator,
 };
 
-export default function ConnectPage() {
+export default async function ConnectPage() {
+  const pillars = await getAllPillars();
+
   return (
     <>
       <section className="relative overflow-hidden bg-noise bg-navy-950 pt-32 pb-20 lg:pt-40">
@@ -111,7 +115,7 @@ export default function ConnectPage() {
           </Reveal>
 
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CONTENT_PILLARS.map((pillar, i) => {
+            {pillars.map((pillar, i) => {
               const Icon = PILLAR_ICONS[pillar.slug] ?? Layers;
               return (
                 <Reveal key={pillar.slug} delay={(i % 3) * 0.08}>

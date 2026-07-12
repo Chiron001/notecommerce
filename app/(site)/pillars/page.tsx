@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CONTENT_PILLARS, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
+import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
+import { getAllPillars } from "@/lib/payload";
 import Reveal from "@/components/Reveal";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Expertise: NotEcommerce",
@@ -10,7 +13,9 @@ export const metadata: Metadata = {
     "Six practice areas spanning market intelligence, growth strategy, performance marketing, retention, platform operations, and unit economics.",
 };
 
-export default function PillarsIndexPage() {
+export default async function PillarsIndexPage() {
+  const pillars = await getAllPillars();
+
   return (
     <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
       <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
@@ -34,7 +39,7 @@ export default function PillarsIndexPage() {
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CONTENT_PILLARS.map((pillar, i) => {
+          {pillars.map((pillar, i) => {
             const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
             return (
               <Reveal key={pillar.slug} delay={(i % 3) * 0.08}>

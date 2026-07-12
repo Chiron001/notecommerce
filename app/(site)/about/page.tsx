@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { CONTENT_PILLARS, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
+import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
+import { getAllPillars } from "@/lib/payload";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import Reveal from "@/components/Reveal";
 import Counter from "@/components/Counter";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "About: NotEcommerce",
@@ -13,7 +16,9 @@ export const metadata: Metadata = {
     "NotEcommerce is a data-led ecommerce intelligence and growth consultancy, serving D2C, marketplace, and quick commerce leaders with proprietary research and senior-led advisory.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const pillars = await getAllPillars();
+
   return (
     <>
       <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
@@ -85,7 +90,7 @@ export default function AboutPage() {
 
             <Reveal delay={0.1}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {CONTENT_PILLARS.map((pillar) => {
+                {pillars.map((pillar) => {
                   const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
                   return (
                     <Link

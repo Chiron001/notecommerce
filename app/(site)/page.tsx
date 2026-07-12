@@ -6,14 +6,22 @@ import PlatformCoverage from "@/components/home/PlatformCoverage";
 import NewsletterCTA from "@/components/home/NewsletterCTA";
 import GrowthStories from "@/components/home/GrowthStories";
 import FinalCTA from "@/components/home/FinalCTA";
+import { getAllPillars, getFeaturedCaseStudies } from "@/lib/payload";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const [pillars, featuredCaseStudies] = await Promise.all([
+    getAllPillars(),
+    getFeaturedCaseStudies(),
+  ]);
+
   return (
     <>
       <Hero />
       <StatsBar />
-      <ContentPillars />
-      <FeaturedArticles />
+      <ContentPillars pillars={pillars} />
+      <FeaturedArticles articles={featuredCaseStudies} />
       <PlatformCoverage />
       <NewsletterCTA />
       <GrowthStories />

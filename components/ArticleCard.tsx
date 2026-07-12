@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Article } from "@/lib/articles";
-import { CONTENT_PILLARS } from "@/lib/pillars";
+import type { CaseStudy, Pillar } from "@/payload-types";
 import { photoUrl } from "@/lib/images";
 
 function formatDate(date: string) {
@@ -12,8 +11,12 @@ function formatDate(date: string) {
   });
 }
 
-export default function ArticleCard({ article }: { article: Article }) {
-  const pillar = CONTENT_PILLARS.find((p) => p.slug === article.pillar);
+export default function ArticleCard({ article }: { article: CaseStudy }) {
+  const pillar = typeof article.pillar === "object" ? (article.pillar as Pillar) : null;
+  const cover = typeof article.coverImage === "object" ? article.coverImage : null;
+  const imageSrc = cover?.sizes?.card?.url || cover?.url || photoUrl(article.slug, 600, 400);
+  const gradientFrom = article.coverGradientFrom || "#003466";
+  const gradientTo = article.coverGradientTo || "#0b4a82";
 
   return (
     <Link
@@ -22,22 +25,26 @@ export default function ArticleCard({ article }: { article: Article }) {
     >
       <div className="relative h-44 w-full overflow-hidden">
         <Image
-          src={photoUrl(article.slug, 600, 400)}
-          alt=""
+          src={imageSrc}
+          alt={cover?.alt || ""}
           fill
           sizes="(min-width: 768px) 33vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div
-          className="absolute inset-0 mix-blend-multiply"
-          style={{
-            background: `linear-gradient(135deg, ${article.cover.from}, ${article.cover.to})`,
-            opacity: 0.55,
-          }}
-        />
-        <span className="glass absolute left-3 bottom-3 rounded-full px-2.5 py-1 text-[11px] font-semibold text-navy-900">
-          {pillar?.title}
-        </span>
+        {!cover && (
+          <div
+            className="absolute inset-0 mix-blend-multiply"
+            style={{
+              background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+              opacity: 0.55,
+            }}
+          />
+        )}
+        {pillar && (
+          <span className="glass absolute left-3 bottom-3 rounded-full px-2.5 py-1 text-[11px] font-semibold text-navy-900">
+            {pillar.title}
+          </span>
+        )}
       </div>
       <div className="p-6 flex flex-col flex-1">
         <h3 className="line-clamp-2 font-display text-lg font-bold text-navy-950 leading-snug group-hover:text-indigo-600 transition-colors">
@@ -47,7 +54,7 @@ export default function ArticleCard({ article }: { article: Article }) {
           {article.excerpt}
         </p>
         <div className="mt-5 flex items-center justify-between text-xs text-navy-900/40">
-          <span>{formatDate(article.date)}</span>
+          <span>{formatDate(article.publishedDate)}</span>
           <span>{article.readTime}</span>
         </div>
       </div>

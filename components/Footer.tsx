@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
-import { CONTENT_PILLARS } from "@/lib/pillars";
+import type { Pillar } from "@/payload-types";
 import { LogoFull } from "@/components/Logo";
 import FooterColumn from "@/components/FooterColumn";
 
-export default function Footer() {
+export default function Footer({ pillars }: { pillars: Pillar[] }) {
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
@@ -46,7 +46,7 @@ export default function Footer() {
 
           <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-x-8">
             <FooterColumn title="Expertise">
-              {CONTENT_PILLARS.map((p) => (
+              {pillars.map((p) => (
                 <li key={p.slug}>
                   <Link
                     href={`/pillars/${p.slug}`}

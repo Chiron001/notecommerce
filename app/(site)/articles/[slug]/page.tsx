@@ -3,15 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { ARTICLES, getArticleBySlug, getRelatedArticles } from "@/lib/articles";
-import { CONTENT_PILLARS } from "@/lib/pillars";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { Pillar } from "@/payload-types";
+import { getAllCaseStudies, getCaseStudiesByPillar, getCaseStudyBySlug } from "@/lib/payload";
 import { photoUrl, avatarUrl } from "@/lib/images";
 import NewsletterCTA from "@/components/home/NewsletterCTA";
 import ArticleCard from "@/components/ArticleCard";
 import Reveal from "@/components/Reveal";
 
-export function generateStaticParams() {
-  return ARTICLES.map((article) => ({ slug: article.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const articles = await getAllCaseStudies();
+  return articles.map((article) => ({ slug: article.slug }));
 }
 
 export async function generateMetadata({
@@ -20,11 +24,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getCaseStudyBySlug(slug);
   if (!article) return {};
   return {
-    title: `${article.title}: NotEcommerce`,
-    description: article.excerpt,
+    title: article.meta?.title || `${article.title}: NotEcommerce`,
+    description: article.meta?.description || article.excerpt,
   };
 }
 
@@ -42,12 +46,15 @@ export default async function ArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getCaseStudyBySlug(slug);
   if (!article) notFound();
 
-  const pillar = CONTENT_PILLARS.find((p) => p.slug === article.pillar);
-  const related = getRelatedArticles(article.slug, article.pillar);
+  const pillar = typeof article.pillar === "object" ? (article.pillar as Pillar) : null;
+  const related = pillar ? await getCaseStudiesByPillar(String(pillar.id), article.slug) : [];
   const authorAvatarId = (article.slug.length % 60) + 1;
+  const cover = typeof article.coverImage === "object" ? article.coverImage : null;
+  const gradientFrom = article.coverGradientFrom || "#003466";
+  const gradientTo = article.coverGradientTo || "#0b4a82";
 
   return (
     <article>
@@ -82,14 +89,14 @@ export default async function ArticlePage({
               />
               <div>
                 <div className="text-sm font-semibold text-navy-950">
-                  {article.author.name}
+                  {article.authorName}
                 </div>
                 <div className="text-xs text-navy-900/50">
-                  {article.author.role}
+                  {article.authorRole}
                 </div>
               </div>
               <span className="ml-auto text-xs text-navy-900/40 text-right">
-                {formatDate(article.date)}
+                {formatDate(article.publishedDate)}
                 <br />
                 {article.readTime}
               </span>
@@ -100,40 +107,28 @@ export default async function ArticlePage({
 
       <div className="relative h-64 sm:h-80 w-full overflow-hidden">
         <Image
-          src={photoUrl(article.slug, 1600, 700)}
-          alt=""
+          src={cover?.sizes?.hero?.url || cover?.url || photoUrl(article.slug, 1600, 700)}
+          alt={cover?.alt || ""}
           fill
           sizes="100vw"
           priority
           className="object-cover"
         />
-        <div
-          className="absolute inset-0 mix-blend-multiply"
-          style={{
-            background: `linear-gradient(135deg, ${article.cover.from}, ${article.cover.to})`,
-            opacity: 0.5,
-          }}
-        />
+        {!cover && (
+          <div
+            className="absolute inset-0 mix-blend-multiply"
+            style={{
+              background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+              opacity: 0.5,
+            }}
+          />
+        )}
       </div>
 
       <div className="mx-auto max-w-3xl px-6 lg:px-8 py-16">
         <Reveal>
           <div className="prose-article">
-            {article.blocks.map((block, i) => {
-              if (block.type === "h2") {
-                return <h2 key={i}>{block.text}</h2>;
-              }
-              if (block.type === "ul") {
-                return (
-                  <ul key={i}>
-                    {block.items.map((item, j) => (
-                      <li key={j}>{item}</li>
-                    ))}
-                  </ul>
-                );
-              }
-              return <p key={i}>{block.text}</p>;
-            })}
+            <RichText data={article.body} />
           </div>
         </Reveal>
       </div>

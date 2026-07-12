@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
+import { getAllPillars } from "@/lib/payload";
+
+export const revalidate = 60;
 
 const heading = Plus_Jakarta_Sans({
   variable: "--font-heading",
@@ -23,11 +26,13 @@ export const metadata: Metadata = {
     "NotEcommerce is a data-led ecommerce intelligence and growth consultancy for D2C, marketplace, and quick commerce leaders. Proprietary research, senior-led advisory, and hands-on execution.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pillars = await getAllPillars();
+
   return (
     <html
       lang="en"
@@ -42,7 +47,7 @@ export default function RootLayout({
           <main id="main-content" className="flex-1">
             {children}
           </main>
-          <Footer />
+          <Footer pillars={pillars} />
         </MotionProvider>
       </body>
     </html>

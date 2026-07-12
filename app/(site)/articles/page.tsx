@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { ARTICLES } from "@/lib/articles";
+import { getAllCaseStudies, getAllPillars } from "@/lib/payload";
 import ArticleCard from "@/components/ArticleCard";
 import PillarNav from "@/components/articles/PillarNav";
 import Reveal from "@/components/Reveal";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Insights & Case Studies: NotEcommerce",
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
     "Proprietary research, case studies, and market intelligence for founders and operators building in D2C, marketplaces, and quick commerce.",
 };
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
+  const [articles, pillars] = await Promise.all([getAllCaseStudies(), getAllPillars()]);
+
   return (
     <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
@@ -32,11 +36,11 @@ export default function ArticlesPage() {
         </Reveal>
 
         <div className="mt-12">
-          <PillarNav active="all" />
+          <PillarNav active="all" pillars={pillars} />
         </div>
 
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {ARTICLES.map((article, i) => (
+          {articles.map((article, i) => (
             <Reveal key={article.slug} delay={(i % 3) * 0.08} className="h-full">
               <ArticleCard article={article} />
             </Reveal>

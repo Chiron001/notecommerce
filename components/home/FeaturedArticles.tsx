@@ -3,14 +3,13 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getFeaturedArticles } from "@/lib/articles";
+import type { CaseStudy } from "@/payload-types";
 import ArticleCard from "@/components/ArticleCard";
 import Reveal from "@/components/Reveal";
 import SwipeProgress from "@/components/SwipeProgress";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
-export default function FeaturedArticles() {
-  const articles = getFeaturedArticles();
+export default function FeaturedArticles({ articles }: { articles: CaseStudy[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isCarousel = !useMediaQuery("(min-width: 768px)");
 

@@ -1,7 +1,13 @@
 import Link from "next/link";
-import { CONTENT_PILLARS, type PillarSlug } from "@/lib/pillars";
+import type { Pillar } from "@/payload-types";
 
-export default function PillarNav({ active }: { active: PillarSlug | "all" }) {
+export default function PillarNav({
+  active,
+  pillars,
+}: {
+  active: string | "all";
+  pillars: Pillar[];
+}) {
   return (
     <div className="flex flex-wrap gap-2">
       <Link
@@ -14,7 +20,7 @@ export default function PillarNav({ active }: { active: PillarSlug | "all" }) {
       >
         All Articles
       </Link>
-      {CONTENT_PILLARS.map((pillar) => (
+      {pillars.map((pillar) => (
         <Link
           key={pillar.slug}
           href={`/pillars/${pillar.slug}`}

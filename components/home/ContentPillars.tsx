@@ -3,12 +3,13 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CONTENT_PILLARS, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
+import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
+import type { Pillar } from "@/payload-types";
 import Reveal from "@/components/Reveal";
 import SwipeProgress from "@/components/SwipeProgress";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
-export default function ContentPillars() {
+export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isCarousel = !useMediaQuery("(min-width: 640px)");
 
@@ -36,7 +37,7 @@ export default function ContentPillars() {
           ref={scrollRef}
           className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
         >
-          {CONTENT_PILLARS.map((pillar, i) => {
+          {pillars.map((pillar, i) => {
             const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
             return (
               <Reveal
@@ -73,7 +74,7 @@ export default function ContentPillars() {
 
         <SwipeProgress
           scrollRef={scrollRef}
-          count={CONTENT_PILLARS.length}
+          count={pillars.length}
           className="mt-5 sm:hidden"
         />
       </div>

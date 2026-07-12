@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
-import { CONTENT_PILLARS } from "@/lib/pillars";
+import { getAllPillars } from "@/lib/payload";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const pillars = await getAllPillars();
   return (
     <section className="relative overflow-hidden bg-cream-50 pt-32 pb-24 lg:pt-40">
       <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
@@ -42,7 +43,7 @@ export default function NotFound() {
             Or jump to a practice area
           </h2>
           <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {CONTENT_PILLARS.map((pillar) => (
+            {pillars.map((pillar) => (
               <Link
                 key={pillar.slug}
                 href={`/pillars/${pillar.slug}`}

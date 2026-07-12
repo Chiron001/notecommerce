@@ -1,24 +1,160 @@
-import type { PillarSlug } from "./pillars";
+import { getPayload } from "payload";
+import config from "../payload.config";
 
-export type ArticleBlock =
+type ArticleBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
   | { type: "ul"; items: string[] };
 
-export type Article = {
+function textNode(text: string) {
+  return {
+    type: "text",
+    text,
+    format: 0,
+    detail: 0,
+    mode: "normal",
+    style: "",
+    version: 1,
+  };
+}
+
+function blocksToLexical(blocks: ArticleBlock[]) {
+  const children = blocks.map((block) => {
+    if (block.type === "h2") {
+      return {
+        type: "heading",
+        tag: "h2",
+        children: [textNode(block.text)],
+        direction: "ltr",
+        format: "",
+        indent: 0,
+        version: 1,
+      };
+    }
+    if (block.type === "ul") {
+      return {
+        type: "list",
+        listType: "bullet",
+        tag: "ul",
+        start: 1,
+        children: block.items.map((item, i) => ({
+          type: "listitem",
+          value: i + 1,
+          children: [textNode(item)],
+          direction: "ltr",
+          format: "",
+          indent: 0,
+          version: 1,
+        })),
+        direction: "ltr",
+        format: "",
+        indent: 0,
+        version: 1,
+      };
+    }
+    return {
+      type: "paragraph",
+      children: [textNode(block.text)],
+      direction: "ltr",
+      format: "",
+      indent: 0,
+      version: 1,
+    };
+  });
+
+  return {
+    root: {
+      type: "root",
+      children,
+      direction: "ltr" as const,
+      format: "" as const,
+      indent: 0,
+      version: 1,
+    },
+  };
+}
+
+const PILLARS = [
+  {
+    slug: "market-intelligence",
+    title: "Market Intelligence",
+    description:
+      "Proprietary research into category shifts, consumer behavior, and platform dynamics, delivered as intelligence, not commentary.",
+    serviceDescription:
+      "We run continuous, proprietary research programs so your team makes category decisions on evidence, not instinct. Category tracking, competitive benchmarking, and demand forecasting, built around the markets you actually operate in.",
+    stat: "120+",
+    statLabel: "Reports & briefings",
+    accent: "emerald" as const,
+  },
+  {
+    slug: "brand-growth-strategy",
+    title: "Brand Growth Strategy",
+    description:
+      "End-to-end growth strategy across acquisition, retention, pricing, assortment, and channel mix.",
+    serviceDescription:
+      "We design and execute the growth strategy, not just the slide deck. Acquisition architecture, pricing and assortment strategy, and channel mix, built with your team and carried through to execution.",
+    stat: "80+",
+    statLabel: "Strategy engagements",
+    accent: "amber" as const,
+  },
+  {
+    slug: "performance-marketing",
+    title: "Performance & Marketing",
+    description:
+      "Full-funnel performance marketing across Meta, Google, and marketplace ads, engineered for measurable incrementality.",
+    serviceDescription:
+      "Our media team manages spend across Meta, Google, and marketplace ads with a single mandate: provable incrementality. No blended CAC theater, no vanity metrics.",
+    stat: "60+",
+    statLabel: "Channel engagements",
+    accent: "violet" as const,
+  },
+  {
+    slug: "customer-retention",
+    title: "Customer & Retention",
+    description:
+      "CRM, lifecycle marketing, and LTV infrastructure that turns first-time buyers into your most valuable customers.",
+    serviceDescription:
+      "We build the CRM and lifecycle infrastructure your growth actually depends on: segmentation, retention flows, and LTV modeling designed to compound, not just convert.",
+    stat: "45+",
+    statLabel: "Retention programs",
+    accent: "indigo" as const,
+  },
+  {
+    slug: "ecommerce-platforms",
+    title: "Ecommerce Platforms",
+    description:
+      "Deep operating expertise across Shopify, Amazon, Flipkart, Blinkit, and Zepto, from setup to ongoing optimization.",
+    serviceDescription:
+      "From storefront architecture to marketplace operations, our platform specialists run day-to-day execution across Shopify, Amazon, Flipkart, Blinkit, and Zepto so your team doesn't have to become platform experts themselves.",
+    stat: "30+",
+    statLabel: "Platforms managed",
+    accent: "emerald" as const,
+  },
+  {
+    slug: "economics-profitability",
+    title: "Economics & Profitability",
+    description:
+      "Unit economics and contribution margin modeling that shows exactly where to invest, and where to stop.",
+    serviceDescription:
+      "We build the contribution margin models your finance team wishes it had: channel-level, cohort-level, and built to inform real capital allocation decisions, not just quarterly reporting.",
+    stat: "50+",
+    statLabel: "Economics engagements",
+    accent: "amber" as const,
+  },
+];
+
+const ARTICLES: {
   slug: string;
   title: string;
   excerpt: string;
-  pillar: PillarSlug;
+  pillar: string;
   date: string;
   readTime: string;
   author: { name: string; role: string };
   cover: { from: string; to: string };
   featured?: boolean;
   blocks: ArticleBlock[];
-};
-
-export const ARTICLES: Article[] = [
+}[] = [
   {
     slug: "hul-digital-comeback",
     title: "Inside HUL's Digital Comeback: What Every D2C Brand Can Learn",
@@ -39,9 +175,7 @@ export const ARTICLES: Article[] = [
         type: "p",
         text: "What makes the HUL story useful to a D2C founder isn't the scale. It's the sequence. Large incumbents rarely move first on a new channel. They move once the channel has already proven its economics, which is exactly why watching where HUL leans in tells you, indirectly, where the consumer already went.",
       },
-      {
-        type: "h2",
-        text: "Quick commerce forced a portfolio rethink" },
+      { type: "h2", text: "Quick commerce forced a portfolio rethink" },
       {
         type: "p",
         text: "Ten minute delivery didn't just add a new channel. It changed what 'assortment' even means. On a quick commerce app, shelf space is a handful of SKUs deep, not a full store aisle. That rewards brands with tight, high velocity portfolios over brands carrying long tails of variants built for general trade. HUL's response was to prioritise its highest velocity SKUs for quick commerce placement and treat the channel as its own merchandising problem, not a smaller version of modern trade.",
@@ -50,9 +184,7 @@ export const ARTICLES: Article[] = [
         type: "p",
         text: "The lesson for smaller brands is simple to say and easy to skip: don't port your general trade or marketplace assortment into quick commerce unchanged. Build a quick commerce specific SKU set around your fastest movers, and treat listing depth as a decision you actually make, not a default you inherit.",
       },
-      {
-        type: "h2",
-        text: "Digital first brands as a build or acquire decision" },
+      { type: "h2", text: "Digital first brands as a build or acquire decision" },
       {
         type: "p",
         text: "Rather than trying to out innovate agile, digital native challengers from scratch, HUL has leaned on a mix of incubation and acquisition to bring digital first brand DNA in house, spanning skincare, personal care, and wellness categories that skew toward younger, online first buyers. The interesting part isn't the M&A itself. It's the admission that digital first brand building is a distinct skill, one worth acquiring rather than assuming you already have it.",
@@ -61,9 +193,7 @@ export const ARTICLES: Article[] = [
         type: "p",
         text: "For founders, that's a bit of validation. The things you're building, fast creative iteration, community led launches, a real feel for performance marketing, aren't a smaller scale version of what big FMCG does. They're a different discipline entirely, and increasingly the one that decides who wins shelf space next, physical or digital.",
       },
-      {
-        type: "h2",
-        text: "The takeaway" },
+      { type: "h2", text: "The takeaway" },
       {
         type: "ul",
         items: [
@@ -281,14 +411,65 @@ export const ARTICLES: Article[] = [
   },
 ];
 
-export function getArticleBySlug(slug: string) {
-  return ARTICLES.find((a) => a.slug === slug);
+async function seed() {
+  const payload = await getPayload({ config });
+
+  const pillarIds: Record<string, number> = {};
+
+  for (const pillar of PILLARS) {
+    const existing = await payload.find({
+      collection: "pillars",
+      where: { slug: { equals: pillar.slug } },
+      limit: 1,
+    });
+    if (existing.docs[0]) {
+      pillarIds[pillar.slug] = existing.docs[0].id;
+      payload.logger.info(`Pillar already exists, skipping: ${pillar.title}`);
+      continue;
+    }
+    const doc = await payload.create({ collection: "pillars", data: pillar });
+    pillarIds[pillar.slug] = doc.id;
+    payload.logger.info(`Created pillar: ${pillar.title}`);
+  }
+
+  for (const article of ARTICLES) {
+    const existing = await payload.find({
+      collection: "case-studies",
+      where: { slug: { equals: article.slug } },
+      limit: 1,
+    });
+    if (existing.docs[0]) {
+      payload.logger.info(`Case study already exists, skipping: ${article.title}`);
+      continue;
+    }
+    await payload.create({
+      collection: "case-studies",
+      data: {
+        title: article.title,
+        slug: article.slug,
+        excerpt: article.excerpt,
+        pillar: pillarIds[article.pillar],
+        coverGradientFrom: article.cover.from,
+        coverGradientTo: article.cover.to,
+        authorName: article.author.name,
+        authorRole: article.author.role,
+        publishedDate: new Date(article.date).toISOString(),
+        readTime: article.readTime,
+        featured: article.featured ?? false,
+        body: blocksToLexical(article.blocks),
+        _status: "published",
+      },
+    });
+    payload.logger.info(`Created case study: ${article.title}`);
+  }
+
+  payload.logger.info("Seed complete.");
+  process.exit(0);
 }
 
-export function getFeaturedArticles() {
-  return ARTICLES.filter((a) => a.featured);
-}
-
-export function getRelatedArticles(slug: string, pillar: PillarSlug, limit = 3) {
-  return ARTICLES.filter((a) => a.slug !== slug && a.pillar === pillar).slice(0, limit);
+try {
+  await seed();
+} catch (err) {
+  console.error(err);
+  process.exit(1);
 }
