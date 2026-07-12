@@ -50,7 +50,7 @@ export default function ProcessSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="process" className="bg-noise bg-navy-950 py-24">
+    <section className="bg-noise bg-navy-950 pt-32 pb-24 lg:pt-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto">

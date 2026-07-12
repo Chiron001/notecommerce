@@ -39,7 +39,7 @@ export default function Hero() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/#process"
+                href="/process"
                 className="glass inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-navy-950 hover:bg-white/70 transition-colors"
               >
                 How we work

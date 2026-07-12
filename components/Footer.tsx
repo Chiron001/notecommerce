@@ -81,12 +81,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#process" className="text-sm text-white/50 hover:text-white transition-colors">
+                <Link href="/process" className="text-sm text-white/50 hover:text-white transition-colors">
                   The 6-D Process
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="text-sm text-white/50 hover:text-white transition-colors">
+                <Link href="/about" className="text-sm text-white/50 hover:text-white transition-colors">
                   About NotEcommerce
                 </Link>
               </li>

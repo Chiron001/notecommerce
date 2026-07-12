@@ -1,7 +1,7 @@
 export const NAV_LINKS = [
-  { label: "Our Process", href: "/#process" },
+  { label: "Our Process", href: "/process" },
   { label: "Articles", href: "/articles" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
 ];
 
 export const SOCIAL_LINKS = [
