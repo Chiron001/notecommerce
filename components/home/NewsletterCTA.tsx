@@ -10,7 +10,7 @@ export default function NewsletterCTA() {
         <div className="gradient-cta rounded-3xl px-8 sm:px-16 py-16 text-center relative overflow-hidden">
           <div className="absolute inset-0 gradient-hero-blob opacity-60 pointer-events-none" />
           <div className="relative">
-            <span className="glass inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold text-white">
+            <span className="glass-dark inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold text-white">
               The Intelligence Briefing
             </span>
             <h2 className="mt-6 font-display text-3xl sm:text-4xl font-extrabold text-white max-w-2xl mx-auto">

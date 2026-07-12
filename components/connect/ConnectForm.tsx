@@ -35,7 +35,7 @@ export default function ConnectForm() {
 
   if (sent) {
     return (
-      <div className="glass rounded-3xl p-8 text-center">
+      <div className="rounded-3xl bg-white shadow-2xl shadow-navy-950/30 p-8 text-center">
         <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-500" />
         <h3 className="mt-4 font-display text-xl font-bold text-navy-950">
           Your email app should be open
@@ -55,7 +55,7 @@ export default function ConnectForm() {
   }
 
   return (
-    <div className="glass rounded-3xl p-8">
+    <div className="rounded-3xl bg-white shadow-2xl shadow-navy-950/30 p-8">
       <h3 className="font-display text-xl font-bold text-navy-950">Get in Touch</h3>
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -68,7 +68,7 @@ export default function ConnectForm() {
               name="name"
               required
               placeholder="Jane Doe"
-              className="mt-1.5 w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/30 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
+              className="mt-1.5 w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/45 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
@@ -80,7 +80,7 @@ export default function ConnectForm() {
               name="email"
               required
               placeholder="jane@brand.com"
-              className="mt-1.5 w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/30 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
+              className="mt-1.5 w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/45 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function ConnectForm() {
             type="text"
             name="company"
             placeholder="Acme Global"
-            className="mt-1.5 w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/30 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
+            className="mt-1.5 w-full rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/45 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
@@ -105,7 +105,7 @@ export default function ConnectForm() {
             name="message"
             rows={4}
             placeholder="Tell us about your category, your goals, and the outcome you're chasing."
-            className="mt-1.5 w-full resize-none rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/30 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
+            className="mt-1.5 w-full resize-none rounded-xl bg-white px-4 py-3 text-sm text-navy-950 placeholder:text-navy-900/45 outline-none ring-1 ring-navy-900/10 focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 

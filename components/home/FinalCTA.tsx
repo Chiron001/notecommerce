@@ -38,7 +38,7 @@ export default function FinalCTA() {
             </ul>
           </div>
 
-          <div className="glass rounded-2xl p-8">
+          <div className="rounded-2xl bg-white shadow-2xl shadow-navy-950/30 p-8">
             <h3 className="font-display text-xl font-bold text-navy-950">
               Ready to talk strategy?
             </h3>
@@ -53,7 +53,7 @@ export default function FinalCTA() {
               Book a Consultation
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <p className="mt-4 text-center text-[11px] text-navy-900/40">
+            <p className="mt-4 text-center text-[11px] text-navy-900/50">
               Trusted by growth teams at ambitious ecommerce brands.
             </p>
           </div>
