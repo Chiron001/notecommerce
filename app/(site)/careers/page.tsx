@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import { resolvePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Careers: NotEcommerce",
-  description:
-    "We hire rarely and selectively. If you're a senior ecommerce operator who wants to do the best work of your career, we want to hear from you.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("careers", {
+    title: "Careers: NotEcommerce",
+    description:
+      "We hire rarely and selectively. If you're a senior ecommerce operator who wants to do the best work of your career, we want to hear from you.",
+  });
+}
 
 const QUALITIES = [
   {

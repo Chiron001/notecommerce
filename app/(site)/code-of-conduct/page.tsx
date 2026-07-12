@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import { resolvePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Code of Conduct: NotEcommerce",
-  description:
-    "The standards NotEcommerce holds itself to across research, advisory, and client work.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("code-of-conduct", {
+    title: "Code of Conduct: NotEcommerce",
+    description:
+      "The standards NotEcommerce holds itself to across research, advisory, and client work.",
+  });
+}
 
 export default function CodeOfConductPage() {
   return (

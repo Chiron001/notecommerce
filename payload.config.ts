@@ -11,6 +11,8 @@ import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Pillars } from "./collections/Pillars";
 import { CaseStudies } from "./collections/CaseStudies";
+import { Pages } from "./collections/Pages";
+import { SiteSettings } from "./globals/SiteSettings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -35,7 +37,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pillars, CaseStudies],
+  collections: [Users, Media, Pillars, CaseStudies, Pages],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",
   typescript: {
@@ -57,11 +60,14 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN ?? "",
     }),
     seoPlugin({
-      collections: ["pillars", "case-studies"],
+      collections: ["pillars", "case-studies", "pages"],
+      globals: ["site-settings"],
       uploadsCollection: "media",
       generateTitle: ({ doc }) => {
         const title = typeof doc?.title === "string" ? doc.title : "";
-        return title ? `${title}: NotEcommerce` : "NotEcommerce";
+        if (title) return `${title}: NotEcommerce`;
+        const siteName = typeof doc?.siteName === "string" ? doc.siteName : "";
+        return siteName || "NotEcommerce";
       },
       generateDescription: ({ doc }) => {
         if (typeof doc?.excerpt === "string") return doc.excerpt;

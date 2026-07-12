@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import { resolvePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy: NotEcommerce",
-  description: "How NotEcommerce collects, uses, and protects your information.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("privacy", {
+    title: "Privacy Policy: NotEcommerce",
+    description: "How NotEcommerce collects, uses, and protects your information.",
+  });
+}
 
 export default function PrivacyPage() {
   return (

@@ -7,14 +7,17 @@ import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import Reveal from "@/components/Reveal";
 import Counter from "@/components/Counter";
+import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "About: NotEcommerce",
-  description:
-    "NotEcommerce is a data-led ecommerce intelligence and growth consultancy, serving D2C, marketplace, and quick commerce leaders with proprietary research and senior-led advisory.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("about", {
+    title: "About: NotEcommerce",
+    description:
+      "NotEcommerce is a data-led ecommerce intelligence and growth consultancy, serving D2C, marketplace, and quick commerce leaders with proprietary research and senior-led advisory.",
+  });
+}
 
 export default async function AboutPage() {
   const pillars = await getAllPillars();

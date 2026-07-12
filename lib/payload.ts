@@ -1,6 +1,7 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import type { CaseStudy, Pillar } from "@/payload-types";
+import type { CaseStudy, Page, Pillar, SiteSetting } from "@/payload-types";
+import type { PageKey } from "@/collections/Pages";
 
 export async function getPayloadClient() {
   return getPayload({ config });
@@ -81,4 +82,20 @@ export async function getCaseStudiesByPillar(pillarId: string, excludeSlug?: str
     depth: 1,
   });
   return docs;
+}
+
+export async function getSiteSettings(): Promise<SiteSetting> {
+  const payload = await getPayloadClient();
+  return payload.findGlobal({ slug: "site-settings", depth: 1 });
+}
+
+export async function getPageSEO(pageKey: PageKey): Promise<Page | null> {
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: "pages",
+    where: { pageKey: { equals: pageKey } },
+    limit: 1,
+    depth: 1,
+  });
+  return docs[0] ?? null;
 }

@@ -11,14 +11,17 @@ import {
 import Reveal from "@/components/Reveal";
 import ConnectForm from "@/components/connect/ConnectForm";
 import { getAllPillars } from "@/lib/payload";
+import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Connect: NotEcommerce",
-  description:
-    "Book a consultation with NotEcommerce. Tell us about your business and we'll show you where our research and advisory can move the needle.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("connect", {
+    title: "Connect: NotEcommerce",
+    description:
+      "Book a consultation with NotEcommerce. Tell us about your business and we'll show you where our research and advisory can move the needle.",
+  });
+}
 
 const HERO_POINTS = [
   {

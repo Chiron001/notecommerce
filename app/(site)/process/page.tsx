@@ -3,12 +3,15 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProcessSection from "@/components/ProcessSection";
 import Reveal from "@/components/Reveal";
+import { resolvePageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Methodology: NotEcommerce",
-  description:
-    "The 6-D Methodology behind every engagement and every report we publish: Discover, Define, Design, Develop, Deploy, Deliver.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("process", {
+    title: "Methodology: NotEcommerce",
+    description:
+      "The 6-D Methodology behind every engagement and every report we publish: Discover, Define, Design, Develop, Deploy, Deliver.",
+  });
+}
 
 export default function ProcessPage() {
   return (

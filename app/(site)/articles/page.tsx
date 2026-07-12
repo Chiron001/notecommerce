@@ -3,14 +3,17 @@ import { getAllCaseStudies, getAllPillars } from "@/lib/payload";
 import ArticleCard from "@/components/ArticleCard";
 import PillarNav from "@/components/articles/PillarNav";
 import Reveal from "@/components/Reveal";
+import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Insights & Case Studies: NotEcommerce",
-  description:
-    "Proprietary research, case studies, and market intelligence for founders and operators building in D2C, marketplaces, and quick commerce.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("articles", {
+    title: "Insights & Case Studies: NotEcommerce",
+    description:
+      "Proprietary research, case studies, and market intelligence for founders and operators building in D2C, marketplaces, and quick commerce.",
+  });
+}
 
 export default async function ArticlesPage() {
   const [articles, pillars] = await Promise.all([getAllCaseStudies(), getAllPillars()]);

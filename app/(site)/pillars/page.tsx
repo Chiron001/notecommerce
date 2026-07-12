@@ -4,14 +4,17 @@ import { ArrowUpRight } from "lucide-react";
 import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
 import { getAllPillars } from "@/lib/payload";
 import Reveal from "@/components/Reveal";
+import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Expertise: NotEcommerce",
-  description:
-    "Six practice areas spanning market intelligence, growth strategy, performance marketing, retention, platform operations, and unit economics.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return resolvePageMetadata("pillars", {
+    title: "Expertise: NotEcommerce",
+    description:
+      "Six practice areas spanning market intelligence, growth strategy, performance marketing, retention, platform operations, and unit economics.",
+  });
+}
 
 export default async function PillarsIndexPage() {
   const pillars = await getAllPillars();
