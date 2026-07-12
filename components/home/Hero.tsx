@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-cream-50">
       <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-28">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <Reveal>
             <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold text-navy-800 shadow-sm">

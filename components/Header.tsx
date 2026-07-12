@@ -10,52 +10,51 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40">
-      <div className="h-1 gradient-cta" />
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center text-navy-900 text-xl" aria-label="NotEcommerce home">
+    <header className="fixed top-0 inset-x-0 z-50 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+        <div className="flex items-center gap-8 rounded-full bg-navy-950/70 backdrop-blur-xl px-5 py-2.5 shadow-lg shadow-navy-950/10 ring-1 ring-white/10">
+          <Link href="/" className="flex shrink-0 items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
             <LogoFull />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-navy-900/70 hover:text-navy-950 transition-colors"
+                className="whitespace-nowrap text-sm font-medium text-white/70 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/articles"
-              className="rounded-full px-5 py-2.5 text-sm font-semibold text-white gradient-cta hover:opacity-90 transition-opacity"
-            >
-              Connect
-            </Link>
-          </div>
-
-          <button
-            className="md:hidden text-navy-950"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
+
+        <div className="hidden md:flex items-center">
+          <Link
+            href="/articles"
+            className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-950 shadow-lg hover:bg-cream-50 transition-colors"
+          >
+            Connect
+          </Link>
+        </div>
+
+        <button
+          className="rounded-full bg-navy-950/70 backdrop-blur-xl p-2.5 text-white ring-1 ring-white/10 md:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-navy-900/10 bg-white px-6 py-4 space-y-4">
+        <div className="mx-auto mt-2 max-w-7xl space-y-3 rounded-2xl bg-navy-950/90 backdrop-blur-xl p-4 ring-1 ring-white/10 md:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block text-sm font-medium text-navy-900/80"
+              className="block text-sm font-medium text-white/80"
               onClick={() => setOpen(false)}
             >
               {link.label}
@@ -63,7 +62,7 @@ export default function Header() {
           ))}
           <Link
             href="/articles"
-            className="block rounded-full px-5 py-2.5 text-sm font-semibold text-white gradient-cta text-center"
+            className="block rounded-full bg-white px-5 py-2.5 text-center text-sm font-semibold text-navy-950"
             onClick={() => setOpen(false)}
           >
             Connect

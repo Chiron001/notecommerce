@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ArticlesPage() {
   return (
-    <section className="bg-cream-50 py-20">
+    <section className="bg-cream-50 pt-32 pb-20 lg:pt-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">

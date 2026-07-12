@@ -51,7 +51,7 @@ export default async function ArticlePage({
 
   return (
     <article>
-      <div className="bg-cream-50 py-16">
+      <div className="bg-cream-50 pt-32 pb-16 lg:pt-40">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <Reveal>
             <Link
