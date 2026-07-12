@@ -1,6 +1,7 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
-import ArticlesExplorer from "@/components/articles/ArticlesExplorer";
+import { ARTICLES } from "@/lib/articles";
+import ArticleCard from "@/components/ArticleCard";
+import PillarNav from "@/components/articles/PillarNav";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -23,15 +24,21 @@ export default function ArticlesPage() {
             </h1>
             <p className="mt-4 text-navy-900/60 leading-relaxed">
               Every breakdown and briefing we&apos;ve published, in one place.
-              Filter by topic if you already know what you&apos;re after.
+              Jump to a topic page if you already know what you&apos;re after.
             </p>
           </div>
         </Reveal>
 
         <div className="mt-12">
-          <Suspense fallback={null}>
-            <ArticlesExplorer />
-          </Suspense>
+          <PillarNav active="all" />
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          {ARTICLES.map((article, i) => (
+            <Reveal key={article.slug} delay={(i % 3) * 0.08} className="h-full">
+              <ArticleCard article={article} />
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

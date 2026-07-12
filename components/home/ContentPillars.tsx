@@ -1,14 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CONTENT_PILLARS } from "@/lib/pillars";
+import { CONTENT_PILLARS, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
 import Reveal from "@/components/Reveal";
-
-const ACCENT_STYLES: Record<string, { bar: string; text: string; chip: string }> = {
-  emerald: { bar: "bg-emerald-500", text: "text-emerald-600", chip: "bg-emerald-500/10" },
-  amber: { bar: "bg-amber-500", text: "text-amber-600", chip: "bg-amber-500/10" },
-  violet: { bar: "bg-violet-500", text: "text-violet-600", chip: "bg-violet-500/10" },
-  indigo: { bar: "bg-indigo-600", text: "text-indigo-600", chip: "bg-indigo-600/10" },
-};
 
 export default function ContentPillars() {
   return (
@@ -33,11 +26,11 @@ export default function ContentPillars() {
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {CONTENT_PILLARS.map((pillar, i) => {
-            const accent = ACCENT_STYLES[pillar.accent] ?? ACCENT_STYLES.indigo;
+            const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
             return (
               <Reveal key={pillar.slug} delay={(i % 3) * 0.08}>
                 <Link
-                  href={`/articles?pillar=${pillar.slug}`}
+                  href={`/pillars/${pillar.slug}`}
                   className="group relative flex flex-col h-full rounded-2xl bg-white/80 backdrop-blur-sm p-6 ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-lg"
                 >
                   <span className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl ${accent.bar}`} />

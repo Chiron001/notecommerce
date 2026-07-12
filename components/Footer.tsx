@@ -60,7 +60,7 @@ export default function Footer() {
               {CONTENT_PILLARS.map((p) => (
                 <li key={p.slug}>
                   <Link
-                    href={`/articles?pillar=${p.slug}`}
+                    href={`/pillars/${p.slug}`}
                     className="text-sm text-white/50 hover:text-white transition-colors"
                   >
                     {p.title}
