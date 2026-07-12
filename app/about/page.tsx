@@ -6,7 +6,6 @@ import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import Reveal from "@/components/Reveal";
 import Counter from "@/components/Counter";
-import NewsletterCTA from "@/components/home/NewsletterCTA";
 
 export const metadata: Metadata = {
   title: "About: NotEcommerce",
@@ -176,8 +175,6 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
-
-      <NewsletterCTA />
     </>
   );
 }

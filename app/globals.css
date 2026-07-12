@@ -42,6 +42,36 @@ h1, h2, h3, h4, .font-display {
   font-family: var(--font-heading), var(--font-body), Arial, Helvetica, sans-serif;
 }
 
+/* Consistent, visible keyboard focus ring across the site */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #2f8fd6;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background: #ffffff;
+  color: var(--color-navy-900);
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
 .gradient-cta {
   background: linear-gradient(115deg, #003466 0%, #0b4a82 50%, #2f8fd6 100%);
 }

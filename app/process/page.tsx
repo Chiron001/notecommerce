@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProcessSection from "@/components/ProcessSection";
-import NewsletterCTA from "@/components/home/NewsletterCTA";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -41,8 +40,6 @@ export default function ProcessPage() {
           </Reveal>
         </div>
       </section>
-
-      <NewsletterCTA />
     </>
   );
 }

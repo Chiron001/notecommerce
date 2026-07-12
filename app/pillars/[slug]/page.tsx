@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileSearch, Mail } from "lucide-react";
 import { CONTENT_PILLARS, getPillarBySlug, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
 import { ARTICLES } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import PillarNav from "@/components/articles/PillarNav";
 import Reveal from "@/components/Reveal";
+
+const GRID_WIDTH_BY_COUNT: Record<number, string> = {
+  1: "max-w-sm mx-auto",
+  2: "max-w-2xl mx-auto",
+};
 
 export function generateStaticParams() {
   return CONTENT_PILLARS.map((pillar) => ({ slug: pillar.slug }));
@@ -95,18 +100,48 @@ export default async function PillarPage({
             <PillarNav active={pillar.slug} />
           </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-            {articles.map((article, i) => (
-              <Reveal key={article.slug} delay={(i % 3) * 0.08} className="h-full">
-                <ArticleCard article={article} />
-              </Reveal>
-            ))}
-          </div>
-
-          {articles.length === 0 && (
-            <p className="mt-16 text-center text-navy-900/50">
-              Nothing published under {pillar.title} yet. Check back soon.
-            </p>
+          {articles.length > 0 ? (
+            <div
+              className={`mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch ${
+                GRID_WIDTH_BY_COUNT[articles.length] ?? ""
+              }`}
+            >
+              {articles.map((article, i) => (
+                <Reveal key={article.slug} delay={(i % 3) * 0.08} className="h-full">
+                  <ArticleCard article={article} />
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <Reveal>
+              <div className="mt-10 mx-auto max-w-lg rounded-3xl bg-white p-10 text-center ring-1 ring-navy-900/10">
+                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-cream-50 text-navy-900/50">
+                  <FileSearch className="h-6 w-6" />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-bold text-navy-950">
+                  Nothing published here yet
+                </h3>
+                <p className="mt-2 text-sm text-navy-900/60 leading-relaxed">
+                  {`Our ${pillar.title} research is still in the works. In the meantime, get it delivered the moment it's live.`}
+                </p>
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <Link
+                    href="/articles"
+                    className="inline-flex items-center gap-2 rounded-full gradient-cta px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+                  >
+                    Browse all insights
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/#newsletter"
+                    className="inline-flex items-center gap-2 rounded-full bg-cream-50 px-5 py-2.5 text-sm font-semibold text-navy-950 ring-1 ring-navy-900/10 hover:ring-navy-900/20 transition-all"
+                  >
+                    <Mail className="h-4 w-4" />
+                    Get notified
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
           )}
         </div>
       </section>

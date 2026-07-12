@@ -129,22 +129,24 @@ export default function ConnectPage() {
                 </Reveal>
               );
             })}
-            <Reveal delay={0.48}>
-              <div className="flex h-full flex-col rounded-2xl bg-navy-950 p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl glass-dark text-violet-300">
-                  <Handshake className="h-5 w-5" />
-                </span>
-                <h3 className="mt-4 font-display text-base font-bold text-white">
-                  Custom Engagement
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="mt-6 flex flex-col sm:flex-row items-center gap-6 rounded-2xl bg-navy-950 p-8">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl glass-dark text-violet-300">
+                <Handshake className="h-6 w-6" />
+              </span>
+              <div className="text-center sm:text-left">
+                <h3 className="font-display text-base font-bold text-white">
+                  Something that doesn&apos;t fit neatly into one practice area?
                 </h3>
-                <p className="mt-2 text-sm text-white/60 leading-relaxed">
-                  Something that doesn&apos;t fit neatly into one practice
-                  area? Tell us what you&apos;re working on and we&apos;ll
-                  build the right team around it.
+                <p className="mt-1 text-sm text-white/60 leading-relaxed">
+                  Tell us what you&apos;re working on in the form above and
+                  we&apos;ll build the right team around it.
                 </p>
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

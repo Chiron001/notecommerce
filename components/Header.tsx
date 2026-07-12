@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/nav";
@@ -8,6 +9,10 @@ import { LogoFull } from "@/components/Logo";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-4 py-4 sm:px-6 lg:px-8">
@@ -18,15 +23,24 @@ export default function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="whitespace-nowrap text-sm font-medium text-white/70 hover:text-white transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative whitespace-nowrap text-sm font-medium transition-colors ${
+                    active ? "text-white" : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <span className="absolute left-1/2 -bottom-2 h-1 w-1 -translate-x-1/2 rounded-full bg-violet-400" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
@@ -50,16 +64,23 @@ export default function Header() {
 
       {open && (
         <div className="mx-auto mt-2 max-w-7xl space-y-3 rounded-2xl bg-navy-950/95 backdrop-blur-2xl p-4 ring-1 ring-white/10 md:hidden">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="block text-sm font-medium text-white/80"
-              onClick={() => setOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`flex items-center gap-2 text-sm font-medium ${
+                  active ? "text-white" : "text-white/80"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                {active && <span className="h-1 w-1 rounded-full bg-violet-400" />}
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="/connect"
             className="block rounded-full bg-white px-5 py-2.5 text-center text-sm font-semibold text-navy-950"

@@ -34,9 +34,14 @@ export default function RootLayout({
       className={`${heading.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-navy-900 overflow-x-hidden">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <MotionProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
           <Footer />
         </MotionProvider>
       </body>

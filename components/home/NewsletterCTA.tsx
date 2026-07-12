@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 
 export default function NewsletterCTA() {
   return (
-    <section className="py-24 bg-cream-50">
+    <section id="newsletter" className="py-24 bg-cream-50 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
         <div className="gradient-cta rounded-3xl px-8 sm:px-16 py-16 text-center relative overflow-hidden">
