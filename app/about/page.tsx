@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { CONTENT_PILLARS, PILLAR_ACCENT_STYLES } from "@/lib/pillars";
-import { avatarUrl } from "@/lib/images";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import Reveal from "@/components/Reveal";
@@ -15,13 +13,6 @@ export const metadata: Metadata = {
   description:
     "NotEcommerce is a small team of ecommerce operators writing about what's actually working in D2C, marketplaces, and quick commerce.",
 };
-
-const TEAM = [
-  { name: "Ananya Rao", role: "Lead Analyst, Brand Strategy", avatar: 8 },
-  { name: "Rohan Mehta", role: "Head of Market Intelligence", avatar: 21 },
-  { name: "Karan Bhatia", role: "Platforms Editor", avatar: 39 },
-  { name: "Diya Kapoor", role: "Performance Marketing Lead", avatar: 52 },
-];
 
 export default function AboutPage() {
   return (
@@ -107,41 +98,6 @@ export default function AboutPage() {
                 })}
               </div>
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-noise bg-navy-950 py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <Reveal>
-            <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
-                Who&apos;s Behind This
-              </span>
-              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-white">
-                A small team, actually doing the work.
-              </h2>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TEAM.map((person, i) => (
-              <Reveal key={person.name} delay={i * 0.08}>
-                <div className="rounded-2xl glass-dark p-6 text-center">
-                  <Image
-                    src={avatarUrl(person.avatar)}
-                    alt=""
-                    width={64}
-                    height={64}
-                    className="mx-auto h-16 w-16 rounded-full object-cover"
-                  />
-                  <div className="mt-4 font-display text-base font-bold text-white">
-                    {person.name}
-                  </div>
-                  <div className="mt-1 text-xs text-white/50">{person.role}</div>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>
