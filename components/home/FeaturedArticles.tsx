@@ -31,9 +31,9 @@ export default function FeaturedArticles() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {articles.map((article, i) => (
-            <Reveal key={article.slug} delay={i * 0.1}>
+            <Reveal key={article.slug} delay={i * 0.1} className="h-full">
               <ArticleCard article={article} />
             </Reveal>
           ))}

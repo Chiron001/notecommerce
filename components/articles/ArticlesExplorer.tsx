@@ -49,9 +49,9 @@ export default function ArticlesExplorer() {
         ))}
       </div>
 
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
         {filtered.map((article, i) => (
-          <Reveal key={article.slug} delay={(i % 3) * 0.08}>
+          <Reveal key={article.slug} delay={(i % 3) * 0.08} className="h-full">
             <ArticleCard article={article} />
           </Reveal>
         ))}

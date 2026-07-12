@@ -46,12 +46,11 @@ export default function Hero() {
               </Link>
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-navy-900/60">
-              <span>Written for people running</span>
-              <span className="font-display font-semibold text-navy-900">D2C brands</span>
-              <span className="font-display font-semibold text-navy-900">marketplace stores</span>
-              <span className="font-display font-semibold text-navy-900">quick commerce ops</span>
-            </div>
+            <p className="mt-12 text-sm text-navy-900/60 whitespace-nowrap">
+              For <span className="font-semibold text-navy-900">D2C brands</span>,{" "}
+              <span className="font-semibold text-navy-900">marketplace stores</span>, and{" "}
+              <span className="font-semibold text-navy-900">quick commerce ops</span>.
+            </p>
           </Reveal>
 
           <Reveal delay={0.15}>

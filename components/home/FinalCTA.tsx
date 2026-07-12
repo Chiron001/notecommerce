@@ -12,7 +12,7 @@ const POINTS = [
 
 export default function FinalCTA() {
   return (
-    <section className="bg-white py-24">
+    <section id="about" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
         <div className="grid lg:grid-cols-2 gap-12 items-center rounded-3xl bg-noise bg-navy-950 p-8 sm:p-14">

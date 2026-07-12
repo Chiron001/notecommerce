@@ -18,7 +18,7 @@ export default function ArticleCard({ article }: { article: Article }) {
   return (
     <Link
       href={`/articles/${article.slug}`}
-      className="group flex flex-col rounded-2xl bg-white overflow-hidden ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-xl"
+      className="group flex h-full flex-col rounded-2xl bg-white overflow-hidden ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-xl"
     >
       <div className="relative h-44 w-full overflow-hidden">
         <Image
@@ -40,10 +40,10 @@ export default function ArticleCard({ article }: { article: Article }) {
         </span>
       </div>
       <div className="p-6 flex flex-col flex-1">
-        <h3 className="font-display text-lg font-bold text-navy-950 leading-snug group-hover:text-indigo-600 transition-colors">
+        <h3 className="line-clamp-2 font-display text-lg font-bold text-navy-950 leading-snug group-hover:text-indigo-600 transition-colors">
           {article.title}
         </h3>
-        <p className="mt-2 text-sm text-navy-900/60 leading-relaxed flex-1">
+        <p className="mt-2 line-clamp-3 text-sm text-navy-900/60 leading-relaxed flex-1">
           {article.excerpt}
         </p>
         <div className="mt-5 flex items-center justify-between text-xs text-navy-900/40">

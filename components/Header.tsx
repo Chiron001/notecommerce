@@ -14,8 +14,8 @@ export default function Header() {
       <div className="h-1 gradient-cta" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center text-navy-900" aria-label="NotEcommerce home">
-            <LogoFull className="h-8 w-auto" />
+          <Link href="/" className="flex items-center text-navy-900 text-xl" aria-label="NotEcommerce home">
+            <LogoFull />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -35,7 +35,7 @@ export default function Header() {
               href="/articles"
               className="rounded-full px-5 py-2.5 text-sm font-semibold text-white gradient-cta hover:opacity-90 transition-opacity"
             >
-              Start reading
+              Connect
             </Link>
           </div>
 
@@ -66,7 +66,7 @@ export default function Header() {
             className="block rounded-full px-5 py-2.5 text-sm font-semibold text-white gradient-cta text-center"
             onClick={() => setOpen(false)}
           >
-            Read Latest Insights
+            Connect
           </Link>
         </div>
       )}

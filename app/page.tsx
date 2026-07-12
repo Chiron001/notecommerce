@@ -6,7 +6,6 @@ import FeaturedArticles from "@/components/home/FeaturedArticles";
 import PlatformCoverage from "@/components/home/PlatformCoverage";
 import NewsletterCTA from "@/components/home/NewsletterCTA";
 import GrowthStories from "@/components/home/GrowthStories";
-import FollowUs from "@/components/home/FollowUs";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
       <PlatformCoverage />
       <NewsletterCTA />
       <GrowthStories />
-      <FollowUs />
       <FinalCTA />
     </>
   );

@@ -13,8 +13,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center text-cream-50" aria-label="NotEcommerce home">
-              <LogoFull className="h-7 w-auto" />
+            <Link href="/" className="flex items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
+              <LogoFull />
             </Link>
             <div className="mt-3 flex items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-wide text-white/70">
@@ -114,24 +114,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {SOCIAL_LINKS.map((s) => (
-            <div key={s.label} className="flex items-start gap-2">
-              <SocialIcon
-                name={s.label as "Instagram" | "X" | "LinkedIn" | "Facebook"}
-                className="h-4 w-4 mt-0.5 text-indigo-400 shrink-0"
-              />
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wide text-white/70">
-                  {s.label}
-                </div>
-                <div className="text-xs text-white/40">@notecommerce</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 border-t border-white/10 pt-8">
+        <div className="mt-14 border-t border-white/10 pt-8">
           <span className="text-xs font-semibold uppercase tracking-widest text-white/40">
             The Reader Promise
           </span>
@@ -156,7 +139,7 @@ export default function Footer() {
 
       <div
         aria-hidden="true"
-        className="select-none pointer-events-none text-center leading-none font-display font-extrabold text-white/[0.04] text-[16vw] whitespace-nowrap translate-y-[28%]"
+        className="select-none pointer-events-none text-center leading-none font-display font-extrabold text-white/[0.05] text-[9vw] whitespace-nowrap translate-y-[15%]"
       >
         NOTECOMMERCE
       </div>

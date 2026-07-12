@@ -146,9 +146,9 @@ export default async function ArticlePage({
                 More on {pillar?.title}
               </h2>
             </Reveal>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
               {related.map((r, i) => (
-                <Reveal key={r.slug} delay={i * 0.08}>
+                <Reveal key={r.slug} delay={i * 0.08} className="h-full">
                   <ArticleCard article={r} />
                 </Reveal>
               ))}
