@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Mail,
   TrendingUp,
   Users,
   BarChart3,
@@ -89,14 +88,6 @@ export default function ConnectPage() {
                   </div>
                 ))}
               </div>
-
-              <a
-                href="mailto:hello@notecommerce.com"
-                className="mt-10 inline-flex items-center gap-2 rounded-full glass-dark px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
-              >
-                <Mail className="h-4 w-4" />
-                Or email us at hello@notecommerce.com
-              </a>
             </Reveal>
 
             <Reveal delay={0.15}>

@@ -47,7 +47,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            <p className="mt-12 text-sm text-navy-900/60 whitespace-nowrap">
+            <p className="mt-12 text-sm text-navy-900/60 lg:whitespace-nowrap">
               Trusted by growth teams at{" "}
               <span className="font-semibold text-navy-900">D2C brands</span>,{" "}
               <span className="font-semibold text-navy-900">marketplace sellers</span>, and{" "}

@@ -31,9 +31,13 @@ export default function FeaturedArticles() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="mt-14 -mx-6 flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 pb-4 no-scrollbar md:mx-0 md:grid md:grid-cols-3 md:items-stretch md:overflow-visible md:px-0 md:pb-0">
           {articles.map((article, i) => (
-            <Reveal key={article.slug} delay={i * 0.1} className="h-full">
+            <Reveal
+              key={article.slug}
+              delay={i * 0.1}
+              className="w-[82%] h-full shrink-0 snap-start md:w-auto"
+            >
               <ArticleCard article={article} />
             </Reveal>
           ))}

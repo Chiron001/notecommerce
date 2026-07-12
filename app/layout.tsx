@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${heading.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-navy-900">
+      <body className="min-h-full flex flex-col bg-white text-navy-900 overflow-x-hidden">
         <MotionProvider>
           <Header />
           <main className="flex-1">{children}</main>

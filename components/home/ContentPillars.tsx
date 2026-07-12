@@ -24,11 +24,15 @@ export default function ContentPillars() {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-14 -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 no-scrollbar sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
           {CONTENT_PILLARS.map((pillar, i) => {
             const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
             return (
-              <Reveal key={pillar.slug} delay={(i % 3) * 0.08}>
+              <Reveal
+                key={pillar.slug}
+                delay={(i % 3) * 0.08}
+                className="w-[82%] shrink-0 snap-start sm:w-auto"
+              >
                 <Link
                   href={`/pillars/${pillar.slug}`}
                   className="group relative flex flex-col h-full rounded-2xl bg-white/80 backdrop-blur-sm p-6 ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-lg"

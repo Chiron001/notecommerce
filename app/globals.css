@@ -66,6 +66,36 @@ h1, h2, h3, h4, .font-display {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+/* Hides the scrollbar on swipeable mobile carousels while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Auto-scrolling marquee, duplicated content track scrolls left continuously */
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* Fine data-grid texture, used for a precise, analytical feel on hero/dark sections */
 .bg-grid {
   background-image:

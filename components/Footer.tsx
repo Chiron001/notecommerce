@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import { CONTENT_PILLARS } from "@/lib/pillars";
@@ -11,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
               <LogoFull />
@@ -27,14 +26,6 @@ export default function Footer() {
               marketplace, and quick commerce leaders. Proprietary research,
               senior-led advisory, and hands-on execution.
             </p>
-
-            <a
-              href="mailto:hello@notecommerce.com"
-              className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
-            >
-              <Mail className="h-4 w-4" />
-              hello@notecommerce.com
-            </a>
 
             <div className="mt-5 flex items-center gap-3">
               {SOCIAL_LINKS.map((s) => (
@@ -97,26 +88,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          <div>
-            <h4 className="text-xs font-semibold text-white/90 uppercase tracking-widest">
-              Connect
-            </h4>
-            <ul className="mt-4 space-y-3">
-              {SOCIAL_LINKS.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm text-white/50 hover:text-white transition-colors"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-8">
@@ -138,7 +109,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-8 text-center text-xs text-white/40">
-          <p>© {new Date().getFullYear()} NotEcommerce. All rights reserved. notecommerce.com</p>
+          <p>© {new Date().getFullYear()} NotEcommerce. All rights reserved.</p>
         </div>
       </div>
 
