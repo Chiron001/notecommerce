@@ -45,12 +45,12 @@ export default function GrowthStories() {
           </div>
         </Reveal>
 
-        <div className="mt-14 -mx-6 flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 pb-4 no-scrollbar md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+        <div className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
           {STORIES.map((story, i) => (
             <Reveal
               key={story.name}
               delay={i * 0.1}
-              className="w-[82%] h-full shrink-0 snap-start md:w-auto"
+              className="w-[82%] shrink-0 snap-start md:w-auto"
             >
               <div className="rounded-2xl bg-cream-50 p-8 ring-1 ring-navy-900/5 flex flex-col h-full">
                 <span
