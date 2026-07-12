@@ -30,6 +30,7 @@ export async function getAllCaseStudies(): Promise<CaseStudy[]> {
   const payload = await getPayloadClient();
   const { docs } = await payload.find({
     collection: "case-studies",
+    where: { _status: { equals: "published" } },
     limit: 200,
     sort: "-publishedDate",
     depth: 1,
@@ -41,7 +42,9 @@ export async function getFeaturedCaseStudies(): Promise<CaseStudy[]> {
   const payload = await getPayloadClient();
   const { docs } = await payload.find({
     collection: "case-studies",
-    where: { featured: { equals: true } },
+    where: {
+      and: [{ featured: { equals: true } }, { _status: { equals: "published" } }],
+    },
     sort: "-publishedDate",
     limit: 6,
     depth: 1,
@@ -53,7 +56,9 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
   const payload = await getPayloadClient();
   const { docs } = await payload.find({
     collection: "case-studies",
-    where: { slug: { equals: slug } },
+    where: {
+      and: [{ slug: { equals: slug } }, { _status: { equals: "published" } }],
+    },
     limit: 1,
     depth: 2,
   });
@@ -67,6 +72,7 @@ export async function getCaseStudiesByPillar(pillarId: string, excludeSlug?: str
     where: {
       and: [
         { pillar: { equals: pillarId } },
+        { _status: { equals: "published" } },
         ...(excludeSlug ? [{ slug: { not_equals: excludeSlug } }] : []),
       ],
     },

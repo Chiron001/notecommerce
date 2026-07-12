@@ -10,10 +10,11 @@ import Reveal from "@/components/Reveal";
 
 export const revalidate = 60;
 
-const GRID_WIDTH_BY_COUNT: Record<number, string> = {
-  1: "max-w-sm mx-auto",
-  2: "max-w-2xl mx-auto",
+const GRID_CLASSES_BY_COUNT: Record<number, string> = {
+  1: "grid-cols-1 max-w-sm mx-auto",
+  2: "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto",
 };
+const DEFAULT_GRID_CLASSES = "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
 
 export async function generateStaticParams() {
   const pillars = await getAllPillars();
@@ -105,8 +106,8 @@ export default async function PillarPage({
 
           {articles.length > 0 ? (
             <div
-              className={`mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch ${
-                GRID_WIDTH_BY_COUNT[articles.length] ?? ""
+              className={`mt-10 grid gap-8 items-stretch ${
+                GRID_CLASSES_BY_COUNT[articles.length] ?? DEFAULT_GRID_CLASSES
               }`}
             >
               {articles.map((article, i) => (
