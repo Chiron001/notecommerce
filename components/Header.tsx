@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-4 py-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-        <div className="flex items-center gap-8 rounded-full bg-navy-950/70 backdrop-blur-xl px-5 py-2.5 shadow-lg shadow-navy-950/10 ring-1 ring-white/10">
+        <div className="flex items-center gap-8 rounded-full bg-navy-950/90 backdrop-blur-2xl px-5 py-2.5 shadow-lg shadow-navy-950/10 ring-1 ring-white/10">
           <Link href="/" className="flex shrink-0 items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
             <LogoFull />
           </Link>
@@ -40,7 +40,7 @@ export default function Header() {
         </div>
 
         <button
-          className="rounded-full bg-navy-950/70 backdrop-blur-xl p-2.5 text-white ring-1 ring-white/10 md:hidden"
+          className="rounded-full bg-navy-950/90 backdrop-blur-2xl p-2.5 text-white ring-1 ring-white/10 md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -49,7 +49,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="mx-auto mt-2 max-w-7xl space-y-3 rounded-2xl bg-navy-950/90 backdrop-blur-xl p-4 ring-1 ring-white/10 md:hidden">
+        <div className="mx-auto mt-2 max-w-7xl space-y-3 rounded-2xl bg-navy-950/95 backdrop-blur-2xl p-4 ring-1 ring-white/10 md:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
