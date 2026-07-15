@@ -62,7 +62,7 @@ export default function Header() {
             aria-label="Chat with us on WhatsApp"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:brightness-95 transition-all"
           >
-            <SocialIcon name="WhatsApp" className="h-5 w-5" />
+            <SocialIcon name="WhatsApp" className="h-6 w-6" />
           </a>
 
           <button
