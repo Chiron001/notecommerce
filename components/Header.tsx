@@ -6,6 +6,9 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/nav";
 import { LogoFull } from "@/components/Logo";
+import SocialIcon from "@/components/SocialIcon";
+
+const WHATSAPP_LINK = "https://wa.me/919319414318";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -44,22 +47,32 @@ export default function Header() {
           </nav>
         </div>
 
-        <div className="hidden md:flex items-center">
+        <div className="flex items-center gap-3">
           <Link
             href="/connect"
-            className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-950 shadow-lg hover:bg-cream-50 transition-colors"
+            className="hidden md:flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-950 shadow-lg hover:bg-cream-50 transition-colors"
           >
             Connect
           </Link>
-        </div>
 
-        <button
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950/90 backdrop-blur-2xl text-white ring-1 ring-white/10 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          <a
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Chat with us on WhatsApp"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:brightness-95 transition-all"
+          >
+            <SocialIcon name="WhatsApp" className="h-5 w-5" />
+          </a>
+
+          <button
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950/90 backdrop-blur-2xl text-white ring-1 ring-white/10 md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
