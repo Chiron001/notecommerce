@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-4 py-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-        <div className="flex items-center gap-8 rounded-full bg-navy-950/90 backdrop-blur-2xl px-5 py-2.5 shadow-lg shadow-navy-950/10 ring-1 ring-white/10">
+        <div className="flex h-11 items-center gap-8 rounded-full bg-navy-950/90 backdrop-blur-2xl px-5 shadow-lg shadow-navy-950/10 ring-1 ring-white/10 md:h-auto md:py-2.5">
           <Link href="/" className="flex shrink-0 items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
             <LogoFull />
           </Link>
@@ -54,7 +54,7 @@ export default function Header() {
         </div>
 
         <button
-          className="rounded-full bg-navy-950/90 backdrop-blur-2xl p-2.5 text-white ring-1 ring-white/10 md:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-950/90 backdrop-blur-2xl text-white ring-1 ring-white/10 md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
