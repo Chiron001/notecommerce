@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { avatarUrl } from "@/lib/images";
 import Reveal from "@/components/Reveal";
 import SwipeProgress from "@/components/SwipeProgress";
 import { useMediaQuery } from "@/lib/useMediaQuery";
@@ -14,7 +13,7 @@ const STORIES = [
     name: "Priya",
     role: "VP of Growth, D2C Personal Care Brand",
     accent: "#16a37a",
-    avatar: 5,
+    avatar: "https://images.unsplash.com/photo-1770626899426-baed57609a30?w=160&h=160&fit=facearea&facepad=2.5&q=80",
   },
   {
     quote:
@@ -22,7 +21,7 @@ const STORIES = [
     name: "Arjun",
     role: "Head of Ecommerce, Food & Beverage Brand",
     accent: "#e58a2a",
-    avatar: 14,
+    avatar: "https://images.unsplash.com/photo-1742981365880-698cfb84492d?w=160&h=160&fit=facearea&facepad=2.5&q=80",
   },
   {
     quote:
@@ -30,7 +29,7 @@ const STORIES = [
     name: "Meera",
     role: "CMO, Home & Living Marketplace Seller",
     accent: "#6d5bf0",
-    avatar: 26,
+    avatar: "https://images.unsplash.com/photo-1770627016447-cb9d29ed0398?w=160&h=160&fit=facearea&facepad=2.5&q=80",
   },
 ];
 
@@ -74,7 +73,7 @@ export default function GrowthStories() {
                 </p>
                 <div className="mt-6 flex items-center gap-3">
                   <Image
-                    src={avatarUrl(story.avatar)}
+                    src={story.avatar}
                     alt=""
                     width={40}
                     height={40}
