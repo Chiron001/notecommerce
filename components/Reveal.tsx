@@ -8,12 +8,15 @@ export default function Reveal({
   className,
   delay = 0,
   y = 24,
+  scale,
   triggerOnMount = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;
+  /** Optional subtle scale-in (e.g. 0.96) layered on top of the y-translate, for extra depth on card grids. */
+  scale?: number;
   /**
    * Animate in as soon as this mounts, instead of waiting for scroll
    * intersection. Use this for items inside a horizontally-scrolling
@@ -23,18 +26,19 @@ export default function Reveal({
    */
   triggerOnMount?: boolean;
 }) {
+  const target = { opacity: 1, y: 0, ...(scale ? { scale: 1 } : {}) };
   const motionProps = triggerOnMount
-    ? { animate: { opacity: 1, y: 0 } }
+    ? { animate: target }
     : {
-        whileInView: { opacity: 1, y: 0 },
+        whileInView: target,
         viewport: { once: true, margin: "-80px" },
       };
 
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y, ...(scale ? { scale } : {}) }}
+      transition={{ type: "spring", stiffness: 120, damping: 18, mass: 0.9, delay }}
       {...motionProps}
     >
       {children}

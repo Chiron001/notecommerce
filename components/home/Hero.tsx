@@ -1,13 +1,27 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, TrendingUp, BookOpen } from "lucide-react";
 import { photoUrl } from "@/lib/images";
 import Reveal from "@/components/Reveal";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const blobY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+
   return (
-    <section className="relative overflow-hidden bg-cream-50">
-      <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
+    <section ref={sectionRef} className="relative overflow-hidden bg-cream-50">
+      <motion.div style={{ y: blobY }} className="absolute inset-0 gradient-hero-blob pointer-events-none" />
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -32,13 +46,15 @@ export default function Hero() {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link
-                href="/connect"
-                className="inline-flex items-center gap-2 rounded-full gradient-cta px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 hover:opacity-90 transition-opacity"
-              >
-                Book a Consultation
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <MagneticButton>
+                <Link
+                  href="/connect"
+                  className="inline-flex items-center gap-2 rounded-full gradient-cta px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 hover:opacity-90 transition-opacity"
+                >
+                  Book a Consultation
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </MagneticButton>
               <Link
                 href="/articles"
                 className="glass inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-navy-950 hover:bg-white/70 transition-colors"
@@ -56,7 +72,7 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="relative">
+            <motion.div style={{ y: cardY }} className="relative">
               <div className="glass relative mx-auto max-w-md rounded-3xl p-6 shadow-2xl shadow-navy-900/10">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-wide text-navy-900/40">
@@ -110,7 +126,7 @@ export default function Hero() {
                 <div className="text-xs font-bold text-white">Weekly Intelligence Briefing</div>
                 <div className="text-[10px] text-white/50">Direct to your inbox</div>
               </div>
-            </div>
+            </motion.div>
           </Reveal>
         </div>
       </div>

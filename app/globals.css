@@ -81,19 +81,23 @@ textarea:focus-visible,
     radial-gradient(circle at 70% 60%, rgba(0, 52, 102, 0.18), transparent 55%);
 }
 
-/* Glass surfaces, used on light and dark backgrounds respectively */
+/* Glass surfaces, used on light and dark backgrounds respectively.
+   blur + saturate is the actual iOS/macOS frosted-glass formula; the inset
+   top highlight suggests a lit glass edge catching light from above. */
 .glass {
   background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .glass-dark {
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Hides the scrollbar on swipeable mobile carousels while keeping them scrollable */

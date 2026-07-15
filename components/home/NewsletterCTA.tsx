@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "@/components/Reveal";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function NewsletterCTA() {
   return (
@@ -30,12 +31,14 @@ export default function NewsletterCTA() {
                 placeholder="Enter your email"
                 className="min-w-0 flex-1 rounded-full bg-white px-5 py-3.5 text-sm text-navy-950 placeholder:text-navy-900/40 outline-none focus:ring-2 focus:ring-white"
               />
-              <button
-                type="submit"
-                className="rounded-full bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white hover:bg-navy-900 transition-colors shrink-0"
-              >
-                Subscribe
-              </button>
+              <MagneticButton className="shrink-0">
+                <button
+                  type="submit"
+                  className="rounded-full bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white hover:bg-navy-900 transition-colors"
+                >
+                  Subscribe
+                </button>
+              </MagneticButton>
             </form>
             <p className="mt-4 text-xs text-white/60">
               Free forever. Unsubscribe anytime.

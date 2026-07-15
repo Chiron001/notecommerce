@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SwipeProgress from "@/components/SwipeProgress";
+import TiltCard from "@/components/TiltCard";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const STORIES = [
@@ -63,30 +64,32 @@ export default function GrowthStories() {
               triggerOnMount={isCarousel}
               className="w-[82%] shrink-0 snap-start md:w-auto"
             >
-              <div className="rounded-2xl bg-cream-50 p-8 ring-1 ring-navy-900/5 flex flex-col h-full">
-                <span
-                  className="h-1 w-10 rounded-full"
-                  style={{ backgroundColor: story.accent }}
-                />
-                <p className="mt-6 text-navy-900/80 leading-relaxed flex-1">
-                  &ldquo;{story.quote}&rdquo;
-                </p>
-                <div className="mt-6 flex items-center gap-3">
-                  <Image
-                    src={story.avatar}
-                    alt=""
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 rounded-full object-cover"
+              <TiltCard tiltRange={3} className="h-full">
+                <div className="rounded-2xl bg-cream-50 p-8 ring-1 ring-navy-900/5 flex flex-col h-full">
+                  <span
+                    className="h-1 w-10 rounded-full"
+                    style={{ backgroundColor: story.accent }}
                   />
-                  <div>
-                    <div className="text-sm font-semibold text-navy-950">
-                      {story.name}
+                  <p className="mt-6 text-navy-900/80 leading-relaxed flex-1">
+                    &ldquo;{story.quote}&rdquo;
+                  </p>
+                  <div className="mt-6 flex items-center gap-3">
+                    <Image
+                      src={story.avatar}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="text-sm font-semibold text-navy-950">
+                        {story.name}
+                      </div>
+                      <div className="text-xs text-navy-900/50">{story.role}</div>
                     </div>
-                    <div className="text-xs text-navy-900/50">{story.role}</div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

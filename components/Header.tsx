@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { motion, useMotionTemplate, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/nav";
 import { LogoFull } from "@/components/Logo";
@@ -13,14 +14,24 @@ const WHATSAPP_LINK = "https://wa.me/919319414318";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { scrollY } = useScroll();
+  const navScale = useTransform(scrollY, [0, 80], [1, 0.96]);
+  const shadowOpacity = useTransform(scrollY, [0, 80], [0.1, 0.28]);
+  const navShadow = useMotionTemplate`0 8px 30px rgba(0, 27, 51, ${shadowOpacity})`;
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-4 py-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-        <div className="flex h-11 items-center gap-8 rounded-full bg-navy-950/90 backdrop-blur-2xl px-5 shadow-lg shadow-navy-950/10 ring-1 ring-white/10 md:h-auto md:py-2.5">
+      <motion.div
+        style={{ scale: navScale }}
+        className="mx-auto flex max-w-7xl origin-top items-center justify-between gap-4"
+      >
+        <motion.div
+          style={{ boxShadow: navShadow }}
+          className="flex h-11 items-center gap-8 rounded-full bg-navy-950/90 backdrop-blur-2xl px-5 ring-1 ring-white/10 md:h-auto md:py-2.5"
+        >
           <Link href="/" className="flex shrink-0 items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
             <LogoFull />
           </Link>
@@ -45,7 +56,7 @@ export default function Header() {
               );
             })}
           </nav>
-        </div>
+        </motion.div>
 
         <div className="flex items-center gap-3">
           <Link
@@ -73,7 +84,7 @@ export default function Header() {
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {open && (
         <div className="mx-auto mt-2 max-w-7xl space-y-3 rounded-2xl bg-navy-950/95 backdrop-blur-2xl p-4 ring-1 ring-white/10 md:hidden">

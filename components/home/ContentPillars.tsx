@@ -7,6 +7,7 @@ import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
 import type { Pillar } from "@/payload-types";
 import Reveal from "@/components/Reveal";
 import SwipeProgress from "@/components/SwipeProgress";
+import TiltCard from "@/components/TiltCard";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
@@ -46,27 +47,29 @@ export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
                 triggerOnMount={isCarousel}
                 className="w-[82%] shrink-0 snap-start sm:w-auto"
               >
-                <Link
-                  href={`/pillars/${pillar.slug}`}
-                  className="group relative flex flex-col h-full rounded-2xl bg-white/80 backdrop-blur-sm p-6 ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-lg"
-                >
-                  <span className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl ${accent.bar}`} />
-                  <div className="flex items-start justify-between">
-                    <span className={`inline-flex rounded-lg ${accent.chip} px-2.5 py-1 text-[11px] font-bold ${accent.text}`}>
-                      {pillar.stat}
+                <TiltCard tiltRange={4} className="h-full">
+                  <Link
+                    href={`/pillars/${pillar.slug}`}
+                    className="group relative flex flex-col h-full rounded-2xl bg-white/80 backdrop-blur-sm p-6 ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-lg"
+                  >
+                    <span className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl ${accent.bar}`} />
+                    <div className="flex items-start justify-between">
+                      <span className={`inline-flex rounded-lg ${accent.chip} px-2.5 py-1 text-[11px] font-bold ${accent.text}`}>
+                        {pillar.stat}
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-navy-900/30 group-hover:text-navy-900 transition-colors" />
+                    </div>
+                    <h3 className="mt-4 font-display text-lg font-bold text-navy-950">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-navy-900/60 leading-relaxed flex-1">
+                      {pillar.description}
+                    </p>
+                    <span className="mt-4 text-xs font-semibold text-navy-900/40">
+                      {pillar.statLabel}
                     </span>
-                    <ArrowUpRight className="h-4 w-4 text-navy-900/30 group-hover:text-navy-900 transition-colors" />
-                  </div>
-                  <h3 className="mt-4 font-display text-lg font-bold text-navy-950">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-navy-900/60 leading-relaxed flex-1">
-                    {pillar.description}
-                  </p>
-                  <span className="mt-4 text-xs font-semibold text-navy-900/40">
-                    {pillar.statLabel}
-                  </span>
-                </Link>
+                  </Link>
+                </TiltCard>
               </Reveal>
             );
           })}

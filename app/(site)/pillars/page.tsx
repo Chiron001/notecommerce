@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
 import { getAllPillars } from "@/lib/payload";
 import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
 import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -46,27 +47,29 @@ export default async function PillarsIndexPage() {
             const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
             return (
               <Reveal key={pillar.slug} delay={(i % 3) * 0.08}>
-                <Link
-                  href={`/pillars/${pillar.slug}`}
-                  className="group relative flex h-full flex-col rounded-2xl bg-white/85 backdrop-blur-sm p-7 ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-lg"
-                >
-                  <span className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl ${accent.bar}`} />
-                  <div className="flex items-start justify-between">
-                    <span className={`inline-flex rounded-lg ${accent.chip} px-2.5 py-1 text-[11px] font-bold ${accent.text}`}>
-                      {pillar.stat} {pillar.statLabel}
+                <TiltCard tiltRange={4}>
+                  <Link
+                    href={`/pillars/${pillar.slug}`}
+                    className="group relative flex h-full flex-col rounded-2xl bg-white/85 backdrop-blur-sm p-7 ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-lg"
+                  >
+                    <span className={`absolute inset-x-0 top-0 h-1 rounded-t-2xl ${accent.bar}`} />
+                    <div className="flex items-start justify-between">
+                      <span className={`inline-flex rounded-lg ${accent.chip} px-2.5 py-1 text-[11px] font-bold ${accent.text}`}>
+                        {pillar.stat} {pillar.statLabel}
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-navy-900/30 group-hover:text-navy-900 transition-colors" />
+                    </div>
+                    <h2 className="mt-4 font-display text-xl font-bold text-navy-950">
+                      {pillar.title}
+                    </h2>
+                    <p className="mt-3 text-sm text-navy-900/60 leading-relaxed flex-1">
+                      {pillar.serviceDescription}
+                    </p>
+                    <span className="mt-5 text-xs font-semibold text-navy-900/40 group-hover:text-indigo-600 transition-colors">
+                      View research and advisory work &rarr;
                     </span>
-                    <ArrowUpRight className="h-4 w-4 text-navy-900/30 group-hover:text-navy-900 transition-colors" />
-                  </div>
-                  <h2 className="mt-4 font-display text-xl font-bold text-navy-950">
-                    {pillar.title}
-                  </h2>
-                  <p className="mt-3 text-sm text-navy-900/60 leading-relaxed flex-1">
-                    {pillar.serviceDescription}
-                  </p>
-                  <span className="mt-5 text-xs font-semibold text-navy-900/40 group-hover:text-indigo-600 transition-colors">
-                    View research and advisory work &rarr;
-                  </span>
-                </Link>
+                  </Link>
+                </TiltCard>
               </Reveal>
             );
           })}

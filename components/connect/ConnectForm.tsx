@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function ConnectForm() {
   const [sent, setSent] = useState(false);
@@ -109,13 +110,15 @@ export default function ConnectForm() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="flex w-full items-center justify-center gap-2 rounded-full gradient-cta px-6 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-        >
-          Submit Request
-          <Send className="h-4 w-4" />
-        </button>
+        <MagneticButton>
+          <button
+            type="submit"
+            className="flex w-full items-center justify-center gap-2 rounded-full gradient-cta px-6 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+          >
+            Submit Request
+            <Send className="h-4 w-4" />
+          </button>
+        </MagneticButton>
         <p className="text-center text-xs text-navy-900/40">
           Your inquiry is confidential. We respond within one business day.
         </p>

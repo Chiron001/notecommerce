@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import MagneticButton from "@/components/MagneticButton";
 
 const POINTS = [
   "Every recommendation tested against real data, not theory",
@@ -46,13 +47,15 @@ export default function FinalCTA() {
               Tell us about your business and we&apos;ll map where our
               expertise creates the most leverage for you.
             </p>
-            <Link
-              href="/connect"
-              className="mt-6 flex items-center justify-center gap-2 rounded-xl gradient-cta px-4 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-            >
-              Book a Consultation
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <MagneticButton className="mt-6">
+              <Link
+                href="/connect"
+                className="flex items-center justify-center gap-2 rounded-xl gradient-cta px-4 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+              >
+                Book a Consultation
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </MagneticButton>
             <p className="mt-4 text-center text-[11px] text-navy-900/50">
               Trusted by growth teams at ambitious ecommerce brands.
             </p>
