@@ -31,6 +31,17 @@ function resolveConnectionString() {
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  // Payload's CSRF protection only trusts serverURL by default. The site is
+  // reachable at several equivalent origins (apex, www, and the admin
+  // subdomain), so without this allowlist a save request made from any
+  // origin other than the exact serverURL gets silently rejected while
+  // page reads keep working fine, since those aren't CSRF-checked.
+  csrf: [
+    "https://notecommerce.com",
+    "https://www.notecommerce.com",
+    "https://admin.notecommerce.com",
+    "http://localhost:3000",
+  ],
   admin: {
     user: Users.slug,
     importMap: {
