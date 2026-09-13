@@ -5,7 +5,7 @@ import { Send, CheckCircle2 } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 
 export default function ConnectForm({
-  contactEmail = "hello@notecommerce.com",
+  contactEmail = "trynotecommerce@gmail.com",
 }: {
   contactEmail?: string;
 }) {

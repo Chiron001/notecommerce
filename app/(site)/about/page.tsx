@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
-import { getAllPillars, getTeamMembers } from "@/lib/payload";
+import { getAllPillars, getTeamMembers, getSiteSettings } from "@/lib/payload";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import InitialsAvatar from "@/components/InitialsAvatar";
@@ -22,7 +22,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [pillars, team] = await Promise.all([getAllPillars(), getTeamMembers()]);
+  const [pillars, team, settings] = await Promise.all([
+    getAllPillars(),
+    getTeamMembers(),
+    getSiteSettings(),
+  ]);
 
   const stats = [
     { value: pillars.length, suffix: "", label: "Practice areas" },
@@ -38,9 +42,16 @@ export default async function AboutPage() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-                About Us
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+                  About Us
+                </span>
+                {settings.foundedYear && (
+                  <span className="rounded-full bg-navy-900/5 px-2.5 py-1 text-[11px] font-semibold text-navy-900/50">
+                    Founded {settings.foundedYear}
+                  </span>
+                )}
+              </div>
               <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
                 Built for ecommerce&apos;s most demanding teams.
               </h1>

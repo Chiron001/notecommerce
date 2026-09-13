@@ -101,11 +101,11 @@ export default async function ConnectPage() {
 
               <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 pt-8">
                 <a
-                  href={`mailto:${contactEmail || "hello@notecommerce.com"}`}
+                  href={`mailto:${contactEmail || "trynotecommerce@gmail.com"}`}
                   className="flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors"
                 >
                   <Mail className="h-4 w-4" />
-                  {contactEmail || "hello@notecommerce.com"}
+                  {contactEmail || "trynotecommerce@gmail.com"}
                 </a>
                 <a
                   href="https://wa.me/919319414318"
