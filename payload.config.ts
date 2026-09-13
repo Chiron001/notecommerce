@@ -12,6 +12,8 @@ import { Media } from "./collections/Media";
 import { Pillars } from "./collections/Pillars";
 import { CaseStudies } from "./collections/CaseStudies";
 import { Pages } from "./collections/Pages";
+import { Testimonials } from "./collections/Testimonials";
+import { Team } from "./collections/Team";
 import { SiteSettings } from "./globals/SiteSettings";
 
 const filename = fileURLToPath(import.meta.url);
@@ -48,7 +50,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pillars, CaseStudies, Pages],
+  collections: [Users, Media, Pillars, CaseStudies, Testimonials, Team, Pages],
   globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",

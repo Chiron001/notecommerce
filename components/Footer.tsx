@@ -1,13 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
-import type { Pillar } from "@/payload-types";
+import type { Pillar, SiteSetting } from "@/payload-types";
 import { LogoFull } from "@/components/Logo";
 import FooterColumn from "@/components/FooterColumn";
 
-export default function Footer({ pillars }: { pillars: Pillar[] }) {
+export default function Footer({
+  pillars,
+  siteSettings,
+}: {
+  pillars: Pillar[];
+  siteSettings: SiteSetting;
+}) {
+  const hasLegalInfo = siteSettings.legalEntityName || siteSettings.registeredAddress || siteSettings.gstNumber;
+
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
@@ -24,9 +33,19 @@ export default function Footer({ pillars }: { pillars: Pillar[] }) {
             </div>
             <p className="mt-4 text-sm text-white/50 leading-relaxed max-w-xs">
               A data-led intelligence and growth consultancy for D2C,
-              marketplace, and quick commerce leaders. Proprietary research,
-              senior-led advisory, and hands-on execution.
+              marketplace, and quick commerce leaders. Senior-led advisory
+              and hands-on execution.
             </p>
+
+            {siteSettings.contactEmail && (
+              <a
+                href={`mailto:${siteSettings.contactEmail}`}
+                className="mt-4 inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+              >
+                <Mail className="h-4 w-4" />
+                {siteSettings.contactEmail}
+              </a>
+            )}
 
             <div className="mt-5 flex items-center gap-3">
               {SOCIAL_LINKS.map((s) => (
@@ -61,7 +80,7 @@ export default function Footer({ pillars }: { pillars: Pillar[] }) {
             <FooterColumn title="Explore">
               <li>
                 <Link href="/articles" className="text-sm text-white/50 hover:text-white transition-colors">
-                  Insights &amp; Case Studies
+                  Insights
                 </Link>
               </li>
               <li>
@@ -98,6 +117,11 @@ export default function Footer({ pillars }: { pillars: Pillar[] }) {
                 </Link>
               </li>
               <li>
+                <Link href="/terms" className="text-sm text-white/50 hover:text-white transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
                 <Link href="/code-of-conduct" className="text-sm text-white/50 hover:text-white transition-colors">
                   Code of Conduct
                 </Link>
@@ -125,6 +149,13 @@ export default function Footer({ pillars }: { pillars: Pillar[] }) {
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-8 text-center text-xs text-white/40">
+          {hasLegalInfo && (
+            <p className="mb-2">
+              {siteSettings.legalEntityName}
+              {siteSettings.registeredAddress ? ` · ${siteSettings.registeredAddress}` : ""}
+              {siteSettings.gstNumber ? ` · GSTIN: ${siteSettings.gstNumber}` : ""}
+            </p>
+          )}
           <p>© {new Date().getFullYear()} NotEcommerce. All rights reserved.</p>
         </div>
       </div>

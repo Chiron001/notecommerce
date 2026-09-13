@@ -20,6 +20,48 @@ export const SiteSettings: GlobalConfig = {
     },
     {
       type: "collapsible",
+      label: "Contact",
+      fields: [
+        {
+          name: "contactEmail",
+          type: "email",
+          admin: {
+            description: "Shown publicly on the Connect page and footer, alongside WhatsApp.",
+          },
+        },
+      ],
+    },
+    {
+      type: "collapsible",
+      label: "Company (legal)",
+      admin: {
+        description:
+          "Optional. Each field only appears on the site once filled in — leave blank rather than guessing, nothing here is shown until you add it.",
+      },
+      fields: [
+        {
+          name: "legalEntityName",
+          type: "text",
+          admin: { description: 'Registered business name, e.g. "NotEcommerce Consulting Pvt. Ltd."' },
+        },
+        {
+          name: "registeredAddress",
+          type: "textarea",
+        },
+        {
+          name: "gstNumber",
+          type: "text",
+          label: "GST Number",
+        },
+        {
+          name: "foundedYear",
+          type: "text",
+          admin: { description: 'e.g. "2025"' },
+        },
+      ],
+    },
+    {
+      type: "collapsible",
       label: "Custom Code",
       fields: [
         {

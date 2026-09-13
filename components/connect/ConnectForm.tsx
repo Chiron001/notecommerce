@@ -4,7 +4,11 @@ import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 
-export default function ConnectForm() {
+export default function ConnectForm({
+  contactEmail = "hello@notecommerce.com",
+}: {
+  contactEmail?: string;
+}) {
   const [sent, setSent] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -27,7 +31,7 @@ export default function ConnectForm() {
       .filter(Boolean)
       .join("\n");
 
-    window.location.href = `mailto:hello@notecommerce.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 

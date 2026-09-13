@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
-import { getAllPillars } from "@/lib/payload";
+import { getAllPillars, getTeamMembers } from "@/lib/payload";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
+import InitialsAvatar from "@/components/InitialsAvatar";
 import Reveal from "@/components/Reveal";
 import Counter from "@/components/Counter";
 import { resolvePageMetadata } from "@/lib/seo";
@@ -20,7 +22,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const pillars = await getAllPillars();
+  const [pillars, team] = await Promise.all([getAllPillars(), getTeamMembers()]);
+
+  const stats = [
+    { value: pillars.length, suffix: "", label: "Practice areas" },
+    { value: 100, suffix: "%", label: "Senior-led engagements" },
+    { value: 0, suffix: "", label: "Pay-to-play placements" },
+  ];
 
   return (
     <>
@@ -37,23 +45,17 @@ export default async function AboutPage() {
                 Built for ecommerce&apos;s most demanding teams.
               </h1>
               <p className="mt-5 text-lg text-navy-900/70 leading-relaxed">
-                NotEcommerce is a data-led intelligence and growth
-                consultancy. We combine proprietary research with senior,
-                hands-on advisory, the same rigor top-tier consultancies
-                bring to any other industry, applied specifically to D2C,
-                marketplaces, and quick commerce.
+                NotEcommerce is a sharp, senior-led ecommerce intelligence
+                and growth consultancy. We combine proprietary research with
+                hands-on advisory, applied specifically to D2C, marketplaces,
+                and quick commerce.
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {[
-                { value: 220, suffix: "+", label: "Proprietary reports" },
-                { value: 6, suffix: "", label: "Practice areas" },
-                { value: 45, suffix: "+", label: "Markets covered" },
-                { value: 100, suffix: "%", label: "Senior-led engagements" },
-              ].map((s) => (
+            <div className="mt-14 grid grid-cols-3 gap-6 max-w-xl">
+              {stats.map((s) => (
                 <div key={s.label}>
                   <Counter value={s.value} suffix={s.suffix} className="font-display text-3xl font-extrabold text-navy-950" />
                   <div className="mt-1 text-sm text-navy-900/50">{s.label}</div>
@@ -112,7 +114,65 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-cream-50 py-24">
+      {team.length > 0 && (
+        <section className="bg-cream-50 py-24">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <Reveal>
+              <div className="max-w-2xl mx-auto text-center">
+                <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+                  Leadership
+                </span>
+                <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">
+                  Who you&apos;ll actually work with.
+                </h2>
+              </div>
+            </Reveal>
+
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {team.map((member, i) => {
+                const photo = typeof member.photo === "object" ? member.photo : null;
+                return (
+                  <Reveal key={member.id} delay={i * 0.08}>
+                    <div className="rounded-2xl bg-white p-6 ring-1 ring-navy-900/5 h-full flex flex-col">
+                      <div className="flex items-center gap-3">
+                        {photo?.url ? (
+                          <Image
+                            src={photo.url}
+                            alt=""
+                            width={56}
+                            height={56}
+                            className="h-14 w-14 rounded-full object-cover"
+                          />
+                        ) : (
+                          <InitialsAvatar name={member.name} className="h-14 w-14 text-base" />
+                        )}
+                        <div>
+                          <div className="font-display text-sm font-bold text-navy-950">{member.name}</div>
+                          <div className="text-xs text-navy-900/50">{member.role}</div>
+                        </div>
+                        {member.linkedinUrl && (
+                          <a
+                            href={member.linkedinUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`${member.name} on LinkedIn`}
+                            className="ml-auto text-navy-900/30 hover:text-navy-900 transition-colors"
+                          >
+                            <SocialIcon name="LinkedIn" className="h-4 w-4" />
+                          </a>
+                        )}
+                      </div>
+                      <p className="mt-4 text-sm text-navy-900/60 leading-relaxed flex-1">{member.bio}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className={team.length > 0 ? "bg-white py-24" : "bg-cream-50 py-24"}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">

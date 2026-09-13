@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useMotionValue, useSpring } from "framer-motion";
 
 export default function Counter({
   value,
@@ -12,22 +12,24 @@ export default function Counter({
   suffix?: string;
   className?: string;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { duration: 1400, bounce: 0 });
   const [display, setDisplay] = useState(0);
 
+  // Animate on mount rather than gating on scroll-into-view: these stats sit
+  // near the top of the page, and a missed IntersectionObserver trigger
+  // (e.g. the element is already in the initial viewport with no scroll
+  // event to fire it) left the counter permanently stuck at 0.
   useEffect(() => {
-    if (inView) motionValue.set(value);
-  }, [inView, value, motionValue]);
+    motionValue.set(value);
+  }, [value, motionValue]);
 
   useEffect(() => {
     return spring.on("change", (v) => setDisplay(Math.round(v)));
   }, [spring]);
 
   return (
-    <span ref={ref} className={className}>
+    <span className={className}>
       {display}
       {suffix}
     </span>

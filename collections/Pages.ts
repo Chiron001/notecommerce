@@ -3,12 +3,13 @@ import type { CollectionConfig } from "payload";
 export const PAGE_KEYS = [
   { label: "Home (/)", value: "home" },
   { label: "Expertise (/pillars)", value: "pillars" },
-  { label: "Insights & Case Studies (/articles)", value: "articles" },
+  { label: "Insights (/articles)", value: "articles" },
   { label: "Methodology (/process)", value: "process" },
   { label: "About (/about)", value: "about" },
   { label: "Connect (/connect)", value: "connect" },
   { label: "Careers (/careers)", value: "careers" },
   { label: "Privacy Policy (/privacy)", value: "privacy" },
+  { label: "Terms of Service (/terms)", value: "terms" },
   { label: "Code of Conduct (/code-of-conduct)", value: "code-of-conduct" },
 ] as const;
 

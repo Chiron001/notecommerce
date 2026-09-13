@@ -62,7 +62,7 @@ export default async function RootLayout({
           <main id="main-content" className="flex-1">
             {children}
           </main>
-          <Footer pillars={pillars} />
+          <Footer pillars={pillars} siteSettings={settings} />
         </MotionProvider>
         {bodyCode && (
           <Script id="site-body-code" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: bodyCode }} />

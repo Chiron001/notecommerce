@@ -82,8 +82,8 @@ const PILLARS = [
       "Proprietary research into category shifts, consumer behavior, and platform dynamics, delivered as intelligence, not commentary.",
     serviceDescription:
       "We run continuous, proprietary research programs so your team makes category decisions on evidence, not instinct. Category tracking, competitive benchmarking, and demand forecasting, built around the markets you actually operate in.",
-    stat: "120+",
-    statLabel: "Reports & briefings",
+    stat: "Proprietary",
+    statLabel: "Research, not syndicated data",
     accent: "emerald" as const,
   },
   {
@@ -93,8 +93,8 @@ const PILLARS = [
       "End-to-end growth strategy across acquisition, retention, pricing, assortment, and channel mix.",
     serviceDescription:
       "We design and execute the growth strategy, not just the slide deck. Acquisition architecture, pricing and assortment strategy, and channel mix, built with your team and carried through to execution.",
-    stat: "80+",
-    statLabel: "Strategy engagements",
+    stat: "Senior-led",
+    statLabel: "No junior handoffs",
     accent: "amber" as const,
   },
   {
@@ -104,8 +104,8 @@ const PILLARS = [
       "Full-funnel performance marketing across Meta, Google, and marketplace ads, engineered for measurable incrementality.",
     serviceDescription:
       "Our media team manages spend across Meta, Google, and marketplace ads with a single mandate: provable incrementality. No blended CAC theater, no vanity metrics.",
-    stat: "60+",
-    statLabel: "Channel engagements",
+    stat: "Platform-agnostic",
+    statLabel: "No pay-to-play placements",
     accent: "violet" as const,
   },
   {
@@ -115,8 +115,8 @@ const PILLARS = [
       "CRM, lifecycle marketing, and LTV infrastructure that turns first-time buyers into your most valuable customers.",
     serviceDescription:
       "We build the CRM and lifecycle infrastructure your growth actually depends on: segmentation, retention flows, and LTV modeling designed to compound, not just convert.",
-    stat: "45+",
-    statLabel: "Retention programs",
+    stat: "Cohort-based",
+    statLabel: "Not vanity metrics",
     accent: "indigo" as const,
   },
   {
@@ -126,8 +126,8 @@ const PILLARS = [
       "Deep operating expertise across Shopify, Amazon, Flipkart, Blinkit, and Zepto, from setup to ongoing optimization.",
     serviceDescription:
       "From storefront architecture to marketplace operations, our platform specialists run day-to-day execution across Shopify, Amazon, Flipkart, Blinkit, and Zepto so your team doesn't have to become platform experts themselves.",
-    stat: "30+",
-    statLabel: "Platforms managed",
+    stat: "Hands-on",
+    statLabel: "Day-to-day execution",
     accent: "emerald" as const,
   },
   {
@@ -137,8 +137,8 @@ const PILLARS = [
       "Unit economics and contribution margin modeling that shows exactly where to invest, and where to stop.",
     serviceDescription:
       "We build the contribution margin models your finance team wishes it had: channel-level, cohort-level, and built to inform real capital allocation decisions, not just quarterly reporting.",
-    stat: "50+",
-    statLabel: "Economics engagements",
+    stat: "P&L-first",
+    statLabel: "Full-funnel view",
     accent: "amber" as const,
   },
 ];

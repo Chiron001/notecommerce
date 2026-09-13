@@ -47,13 +47,16 @@ export const Pillars: CollectionConfig = {
       name: "stat",
       type: "text",
       required: true,
-      admin: { description: 'e.g. "120+"' },
+      admin: {
+        description:
+          'A short badge shown on the pillar card, e.g. "Senior-led". Avoid invented quantities (e.g. "120+") unless it is a real, verifiable number.',
+      },
     },
     {
       name: "statLabel",
       type: "text",
       required: true,
-      admin: { description: 'e.g. "Reports & briefings"' },
+      admin: { description: 'Supporting text under the badge, e.g. "No junior handoffs".' },
     },
     {
       name: "accent",

@@ -1,6 +1,6 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import type { CaseStudy, Page, Pillar, SiteSetting } from "@/payload-types";
+import type { CaseStudy, Page, Pillar, SiteSetting, Testimonial, Team } from "@/payload-types";
 import type { PageKey } from "@/collections/Pages";
 
 export async function getPayloadClient() {
@@ -98,4 +98,25 @@ export async function getPageSEO(pageKey: PageKey): Promise<Page | null> {
     depth: 1,
   });
   return docs[0] ?? null;
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: "testimonials",
+    limit: 12,
+    depth: 1,
+  });
+  return docs;
+}
+
+export async function getTeamMembers(): Promise<Team[]> {
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: "team",
+    limit: 20,
+    sort: "order",
+    depth: 1,
+  });
+  return docs;
 }

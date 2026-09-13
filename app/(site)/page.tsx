@@ -7,7 +7,7 @@ import PlatformCoverage from "@/components/home/PlatformCoverage";
 import NewsletterCTA from "@/components/home/NewsletterCTA";
 import GrowthStories from "@/components/home/GrowthStories";
 import FinalCTA from "@/components/home/FinalCTA";
-import { getAllPillars, getFeaturedCaseStudies } from "@/lib/payload";
+import { getAllCaseStudies, getAllPillars, getFeaturedCaseStudies, getTestimonials } from "@/lib/payload";
 import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -21,20 +21,24 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [pillars, featuredCaseStudies] = await Promise.all([
+  const [pillars, featuredCaseStudies, allCaseStudies, testimonials] = await Promise.all([
     getAllPillars(),
     getFeaturedCaseStudies(),
+    getAllCaseStudies(),
+    getTestimonials(),
   ]);
+
+  const latestArticle = allCaseStudies[0] ?? null;
 
   return (
     <>
-      <Hero />
-      <StatsBar />
+      <Hero pillars={pillars} latestArticle={latestArticle} />
+      <StatsBar pillarCount={pillars.length} />
       <ContentPillars pillars={pillars} />
       <FeaturedArticles articles={featuredCaseStudies} />
-      <PlatformCoverage />
+      <PlatformCoverage pillarCount={pillars.length} />
       <NewsletterCTA />
-      <GrowthStories />
+      <GrowthStories testimonials={testimonials} />
       <FinalCTA />
     </>
   );

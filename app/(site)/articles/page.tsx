@@ -9,9 +9,9 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   return resolvePageMetadata("articles", {
-    title: "Insights & Case Studies: NotEcommerce",
+    title: "Insights: NotEcommerce",
     description:
-      "Proprietary research, case studies, and market intelligence for founders and operators building in D2C, marketplaces, and quick commerce.",
+      "Research and analysis for founders and operators building in D2C, marketplaces, and quick commerce.",
   });
 }
 
@@ -25,15 +25,14 @@ export default async function ArticlesPage() {
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              Insights &amp; Case Studies
+              Insights
             </span>
             <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
-              Proprietary research, published.
+              Research and analysis, published.
             </h1>
             <p className="mt-4 text-navy-900/60 leading-relaxed">
-              The same intelligence behind our advisory work, in one place.
-              Jump to a practice area if you already know what you&apos;re
-              after.
+              The thinking behind our advisory work, in one place. Jump to a
+              practice area if you already know what you&apos;re after.
             </p>
           </div>
         </Reveal>

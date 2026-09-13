@@ -71,6 +71,8 @@ export interface Config {
     media: Media;
     pillars: Pillar;
     'case-studies': CaseStudy;
+    testimonials: Testimonial;
+    team: Team;
     pages: Page;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -83,6 +85,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pillars: PillarsSelect<false> | PillarsSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -266,6 +270,10 @@ export interface CaseStudy {
   coverGradientTo?: string | null;
   authorName: string;
   authorRole: string;
+  /**
+   * Optional. If left blank, an initials badge is shown instead of a stock photo.
+   */
+  authorPhoto?: (number | null) | Media;
   publishedDate: string;
   readTime: string;
   /**
@@ -300,6 +308,51 @@ export interface CaseStudy {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Real client testimonials only, with the client's real name, role, and company. If this collection is empty, the homepage testimonials section hides itself rather than showing anything invented.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  quote: string;
+  name: string;
+  /**
+   * e.g. "Founder, Nutrisapiens" — real name and real company.
+   */
+  role: string;
+  /**
+   * Optional. If left blank, an initials badge is shown instead of a stock photo.
+   */
+  photo?: (number | null) | Media;
+  accent: 'emerald' | 'amber' | 'violet' | 'indigo';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Real people only. If this collection is empty, the About page's leadership section hides itself rather than showing nothing or something invented.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team".
+ */
+export interface Team {
+  id: number;
+  name: string;
+  /**
+   * e.g. "Founder & CEO"
+   */
+  role: string;
+  bio: string;
+  photo: number | Media;
+  linkedinUrl?: string | null;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * SEO overrides for the site's fixed pages (not case studies or practice areas, those have their own SEO tab).
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -308,7 +361,16 @@ export interface CaseStudy {
 export interface Page {
   id: number;
   pageKey:
-    'home' | 'pillars' | 'articles' | 'process' | 'about' | 'connect' | 'careers' | 'privacy' | 'code-of-conduct';
+    | 'home'
+    | 'pillars'
+    | 'articles'
+    | 'process'
+    | 'about'
+    | 'connect'
+    | 'careers'
+    | 'privacy'
+    | 'terms'
+    | 'code-of-conduct';
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -359,6 +421,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'case-studies';
         value: number | CaseStudy;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'team';
+        value: number | Team;
       } | null)
     | ({
         relationTo: 'pages';
@@ -516,6 +586,7 @@ export interface CaseStudiesSelect<T extends boolean = true> {
   coverGradientTo?: T;
   authorName?: T;
   authorRole?: T;
+  authorPhoto?: T;
   publishedDate?: T;
   readTime?: T;
   featured?: T;
@@ -530,6 +601,33 @@ export interface CaseStudiesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  quote?: T;
+  name?: T;
+  role?: T;
+  photo?: T;
+  accent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team_select".
+ */
+export interface TeamSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  bio?: T;
+  photo?: T;
+  linkedinUrl?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -598,6 +696,20 @@ export interface SiteSetting {
    */
   siteName?: string | null;
   /**
+   * Shown publicly on the Connect page and footer, alongside WhatsApp.
+   */
+  contactEmail?: string | null;
+  /**
+   * Registered business name, e.g. "NotEcommerce Consulting Pvt. Ltd."
+   */
+  legalEntityName?: string | null;
+  registeredAddress?: string | null;
+  gstNumber?: string | null;
+  /**
+   * e.g. "2025"
+   */
+  foundedYear?: string | null;
+  /**
    * Injected near the top of every page, before the page becomes interactive. Paste a full <script>...</script> tag (e.g. Google Analytics, Meta Pixel) or bare JavaScript. Only <script> content is supported here, not other tags like <meta> or <link>.
    */
   headerCode?: string | null;
@@ -622,6 +734,11 @@ export interface SiteSetting {
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
   siteName?: T;
+  contactEmail?: T;
+  legalEntityName?: T;
+  registeredAddress?: T;
+  gstNumber?: T;
+  foundedYear?: T;
   headerCode?: T;
   bodyCode?: T;
   meta?:

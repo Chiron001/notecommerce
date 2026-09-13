@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { CaseStudy, Pillar } from "@/payload-types";
-import { photoUrl } from "@/lib/images";
 import TiltCard from "@/components/TiltCard";
 
 function formatDate(date: string) {
@@ -15,7 +14,6 @@ function formatDate(date: string) {
 export default function ArticleCard({ article }: { article: CaseStudy }) {
   const pillar = typeof article.pillar === "object" ? (article.pillar as Pillar) : null;
   const cover = typeof article.coverImage === "object" ? article.coverImage : null;
-  const imageSrc = cover?.sizes?.card?.url || cover?.url || photoUrl(article.slug, 600, 400);
   const gradientFrom = article.coverGradientFrom || "#003466";
   const gradientTo = article.coverGradientTo || "#0b4a82";
 
@@ -26,20 +24,19 @@ export default function ArticleCard({ article }: { article: CaseStudy }) {
         className="group flex h-full flex-col rounded-2xl bg-white overflow-hidden ring-1 ring-navy-900/10 hover:ring-navy-900/20 hover:-translate-y-1 transition-all shadow-sm hover:shadow-xl"
       >
         <div className="relative h-44 w-full overflow-hidden">
-          <Image
-            src={imageSrc}
-            alt={cover?.alt || ""}
-            fill
-            sizes="(min-width: 768px) 33vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          {!cover && (
+          {cover?.url ? (
+            <Image
+              src={cover.sizes?.card?.url || cover.url}
+              alt={cover.alt || ""}
+              fill
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            // No real cover uploaded yet: a plain brand-color gradient, never a stock photo standing in for real imagery.
             <div
-              className="absolute inset-0 mix-blend-multiply"
-              style={{
-                background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
-                opacity: 0.55,
-              }}
+              className="absolute inset-0"
+              style={{ background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})` }}
             />
           )}
           {pillar && (

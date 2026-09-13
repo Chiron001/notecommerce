@@ -93,6 +93,14 @@ export const CaseStudies: CollectionConfig = {
       ],
     },
     {
+      name: "authorPhoto",
+      type: "upload",
+      relationTo: "media",
+      admin: {
+        description: "Optional. If left blank, an initials badge is shown instead of a stock photo.",
+      },
+    },
+    {
       type: "row",
       fields: [
         {

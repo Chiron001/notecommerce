@@ -4,12 +4,18 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, TrendingUp, BookOpen } from "lucide-react";
-import { photoUrl } from "@/lib/images";
+import { ArrowRight, ShieldCheck, BookOpen } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
+import type { CaseStudy, Pillar } from "@/payload-types";
 
-export default function Hero() {
+export default function Hero({
+  pillars,
+  latestArticle,
+}: {
+  pillars: Pillar[];
+  latestArticle: CaseStudy | null;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -18,6 +24,11 @@ export default function Hero() {
 
   const blobY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const cardY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+
+  const articlePillar =
+    latestArticle && typeof latestArticle.pillar === "object" ? (latestArticle.pillar as Pillar) : null;
+  const articleCover =
+    latestArticle && typeof latestArticle.coverImage === "object" ? latestArticle.coverImage : null;
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-cream-50">
@@ -39,8 +50,8 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 text-lg text-navy-900/70 leading-relaxed max-w-xl">
-              We combine proprietary market intelligence with hands-on growth
-              strategy and execution, the rigor of a top-tier consultancy,
+              A sharp, senior-led team combining proprietary market
+              intelligence with hands-on growth strategy and execution,
               built specifically for D2C, marketplace, and quick commerce
               leaders.
             </p>
@@ -64,7 +75,7 @@ export default function Hero() {
             </div>
 
             <p className="mt-12 text-sm text-navy-900/60 lg:whitespace-nowrap">
-              Trusted by growth teams at{" "}
+              Built for{" "}
               <span className="font-semibold text-navy-900">D2C brands</span>,{" "}
               <span className="font-semibold text-navy-900">marketplace sellers</span>, and{" "}
               <span className="font-semibold text-navy-900">quick commerce operators</span>.
@@ -78,47 +89,64 @@ export default function Hero() {
                   <span className="text-xs font-semibold uppercase tracking-wide text-navy-900/40">
                     Latest Intelligence
                   </span>
-                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600">
-                    Market Intelligence
-                  </span>
+                  {articlePillar && (
+                    <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600">
+                      {articlePillar.title}
+                    </span>
+                  )}
                 </div>
 
-                <div className="mt-4 flex gap-3">
-                  <Image
-                    src={photoUrl("agentic-commerce-thumb", 160, 160)}
-                    alt=""
-                    width={64}
-                    height={64}
-                    className="h-16 w-16 shrink-0 rounded-xl object-cover"
-                  />
-                  <div>
-                    <h3 className="font-display text-base font-bold text-navy-950 leading-snug">
-                      How AI shopping agents are rewiring retail
-                    </h3>
-                    <div className="mt-2 flex items-center gap-2 text-xs text-navy-900/40">
-                      <BookOpen className="h-3.5 w-3.5" />
-                      9 min read
+                {latestArticle ? (
+                  <Link href={`/articles/${latestArticle.slug}`} className="mt-4 flex gap-3 group">
+                    {articleCover?.url ? (
+                      <Image
+                        src={articleCover.sizes?.card?.url || articleCover.url}
+                        alt=""
+                        width={64}
+                        height={64}
+                        className="h-16 w-16 shrink-0 rounded-xl object-cover"
+                      />
+                    ) : (
+                      <div
+                        className="h-16 w-16 shrink-0 rounded-xl"
+                        style={{
+                          background: `linear-gradient(135deg, ${latestArticle.coverGradientFrom || "#003466"}, ${latestArticle.coverGradientTo || "#0b4a82"})`,
+                        }}
+                      />
+                    )}
+                    <div>
+                      <h3 className="font-display text-base font-bold text-navy-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">
+                        {latestArticle.title}
+                      </h3>
+                      <div className="mt-2 flex items-center gap-2 text-xs text-navy-900/40">
+                        <BookOpen className="h-3.5 w-3.5" />
+                        {latestArticle.readTime}
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </Link>
+                ) : (
+                  <p className="mt-4 text-sm text-navy-900/50 leading-relaxed">
+                    New research publishing soon.
+                  </p>
+                )}
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-navy-950 p-4 text-white">
-                    <div className="font-display text-2xl font-extrabold">6</div>
+                    <div className="font-display text-2xl font-extrabold">{pillars.length}</div>
                     <div className="text-[11px] text-white/60 mt-1">Practice areas</div>
                   </div>
                   <div className="rounded-xl bg-cream-100 p-4">
-                    <div className="font-display text-2xl font-extrabold text-navy-950">45+</div>
-                    <div className="text-[11px] text-navy-900/50 mt-1">Markets covered</div>
+                    <div className="font-display text-2xl font-extrabold text-navy-950">100%</div>
+                    <div className="text-[11px] text-navy-900/50 mt-1">Senior-led</div>
                   </div>
                 </div>
               </div>
 
               <div className="glass absolute -top-6 -right-4 hidden sm:flex items-center gap-2 rounded-2xl px-4 py-3 shadow-xl">
-                <TrendingUp className="h-4 w-4 text-emerald-600" />
+                <ShieldCheck className="h-4 w-4 text-emerald-600" />
                 <div>
-                  <div className="text-xs font-bold text-navy-950">220+</div>
-                  <div className="text-[10px] text-navy-900/50">Proprietary reports</div>
+                  <div className="text-xs font-bold text-navy-950">0</div>
+                  <div className="text-[10px] text-navy-900/50">Pay-to-play placements</div>
                 </div>
               </div>
 

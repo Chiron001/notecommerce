@@ -6,9 +6,9 @@ import { ArrowLeft } from "lucide-react";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import type { Pillar } from "@/payload-types";
 import { getAllCaseStudies, getCaseStudiesByPillar, getCaseStudyBySlug } from "@/lib/payload";
-import { photoUrl, avatarUrl } from "@/lib/images";
 import NewsletterCTA from "@/components/home/NewsletterCTA";
 import ArticleCard from "@/components/ArticleCard";
+import InitialsAvatar from "@/components/InitialsAvatar";
 import Reveal from "@/components/Reveal";
 
 export const revalidate = 60;
@@ -51,7 +51,7 @@ export default async function ArticlePage({
 
   const pillar = typeof article.pillar === "object" ? (article.pillar as Pillar) : null;
   const related = pillar ? await getCaseStudiesByPillar(String(pillar.id), article.slug) : [];
-  const authorAvatarId = (article.slug.length % 60) + 1;
+  const authorPhoto = typeof article.authorPhoto === "object" ? article.authorPhoto : null;
   const cover = typeof article.coverImage === "object" ? article.coverImage : null;
   const gradientFrom = article.coverGradientFrom || "#003466";
   const gradientTo = article.coverGradientTo || "#0b4a82";
@@ -80,13 +80,17 @@ export default async function ArticlePage({
             </p>
 
             <div className="mt-8 flex items-center gap-4">
-              <Image
-                src={avatarUrl(authorAvatarId)}
-                alt=""
-                width={44}
-                height={44}
-                className="h-11 w-11 rounded-full object-cover"
-              />
+              {authorPhoto?.url ? (
+                <Image
+                  src={authorPhoto.url}
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="h-11 w-11 rounded-full object-cover"
+                />
+              ) : (
+                <InitialsAvatar name={article.authorName} />
+              )}
               <div>
                 <div className="text-sm font-semibold text-navy-950">
                   {article.authorName}
@@ -106,21 +110,20 @@ export default async function ArticlePage({
       </div>
 
       <div className="relative h-64 sm:h-80 w-full overflow-hidden">
-        <Image
-          src={cover?.sizes?.hero?.url || cover?.url || photoUrl(article.slug, 1600, 700)}
-          alt={cover?.alt || ""}
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover"
-        />
-        {!cover && (
+        {cover?.url ? (
+          <Image
+            src={cover.sizes?.hero?.url || cover.url}
+            alt={cover.alt || ""}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        ) : (
+          // No real cover uploaded yet: a plain brand-color gradient, never a stock photo standing in for real imagery.
           <div
-            className="absolute inset-0 mix-blend-multiply"
-            style={{
-              background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
-              opacity: 0.5,
-            }}
+            className="absolute inset-0"
+            style={{ background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})` }}
           />
         )}
       </div>

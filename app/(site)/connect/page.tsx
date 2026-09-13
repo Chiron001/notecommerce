@@ -7,10 +7,12 @@ import {
   Layers,
   Calculator,
   Handshake,
+  Mail,
+  MessageCircle,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import ConnectForm from "@/components/connect/ConnectForm";
-import { getAllPillars } from "@/lib/payload";
+import { getAllPillars, getSiteSettings } from "@/lib/payload";
 import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -54,7 +56,8 @@ const PILLAR_ICONS: Record<string, typeof BarChart3> = {
 };
 
 export default async function ConnectPage() {
-  const pillars = await getAllPillars();
+  const [pillars, settings] = await Promise.all([getAllPillars(), getSiteSettings()]);
+  const contactEmail = settings.contactEmail || undefined;
 
   return (
     <>
@@ -95,10 +98,29 @@ export default async function ConnectPage() {
                   </div>
                 ))}
               </div>
+
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 pt-8">
+                <a
+                  href={`mailto:${contactEmail || "hello@notecommerce.com"}`}
+                  className="flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors"
+                >
+                  <Mail className="h-4 w-4" />
+                  {contactEmail || "hello@notecommerce.com"}
+                </a>
+                <a
+                  href="https://wa.me/919319414318"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Chat on WhatsApp
+                </a>
+              </div>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <ConnectForm />
+              <ConnectForm contactEmail={contactEmail} />
             </Reveal>
           </div>
         </div>
