@@ -1,6 +1,7 @@
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { PLATFORM_GROUPS, PLATFORMS } from "@/lib/platforms";
+import Image from "next/image";
+import { PLATFORM_GROUPS, PLATFORM_LOGOS, PLATFORMS } from "@/lib/platforms";
 
 const GROUP_DOT = ["bg-indigo-600", "bg-amber-500", "bg-violet-500", "bg-emerald-500"];
 
@@ -51,16 +52,32 @@ export default function PlatformCoverage() {
 
       <Reveal delay={0.1}>
         <div className="marquee-hover-pause relative mt-12 overflow-hidden sm:mt-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-          <div className="marquee-track flex w-max items-center gap-12">
-            {[...PLATFORMS, ...PLATFORMS].map((platform, i) => (
-              <span
-                key={i}
-                aria-hidden={i >= PLATFORMS.length}
-                className="shrink-0 font-display text-2xl font-extrabold tracking-tight text-navy-900/20"
-              >
-                {platform}
-              </span>
-            ))}
+          {/* Four copies: the track scrolls by half its width, so two copies must
+              always overfill the viewport for the loop to stay seamless. */}
+          <div className="marquee-track flex w-max items-center gap-4 py-3">
+            {[...PLATFORM_LOGOS, ...PLATFORM_LOGOS, ...PLATFORM_LOGOS, ...PLATFORM_LOGOS].map((logo, i) => {
+              const duplicate = i >= PLATFORM_LOGOS.length;
+              const height = logo.ratio === 1 ? 36 : 28;
+              return (
+                <span
+                  key={i}
+                  aria-hidden={duplicate || undefined}
+                  // Fixed white (not bg-white, which the dark theme remaps): logos are drawn for a light background
+                  className="flex h-16 shrink-0 items-center gap-2.5 rounded-2xl bg-[#ffffff] px-7 shadow-sm ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <Image
+                    src={logo.src}
+                    alt={duplicate ? "" : logo.name}
+                    width={Math.round(height * logo.ratio)}
+                    height={height}
+                    unoptimized
+                    className="w-auto object-contain"
+                    style={{ height }}
+                  />
+                  {logo.showName && <span className="text-[15px] font-bold text-[#1f2a3d]">{logo.name}</span>}
+                </span>
+              );
+            })}
           </div>
         </div>
       </Reveal>
