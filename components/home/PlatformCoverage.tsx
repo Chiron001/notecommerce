@@ -1,20 +1,20 @@
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
 import Image from "next/image";
-import { PLATFORM_GROUPS, PLATFORM_LOGOS, PLATFORMS } from "@/lib/platforms";
+import { logoHeight, PLATFORM_GROUPS, PLATFORM_LOGOS, PLATFORMS } from "@/lib/platforms";
 
-const GROUP_DOT = ["bg-indigo-600", "bg-amber-500", "bg-violet-500", "bg-emerald-500"];
+const GROUP_DOT = ["bg-indigo-600", "bg-amber-500", "bg-violet-500", "bg-emerald-500", "bg-sky-500"];
 
 export default function PlatformCoverage() {
   return (
     <section className="overflow-hidden bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
+        <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.15fr]">
           <SectionHeader
             eyebrow="Market Coverage"
             title="Deep expertise across"
             accent="every platform that matters."
-            subtitle="D2C storefronts, marketplaces and quick commerce apps. Wherever your customers are shopping, our research and advisory work is already there."
+            subtitle="D2C storefronts, Indian and international marketplaces, and quick commerce apps. Wherever your customers are shopping, our research and advisory work is already there."
           />
 
           <Reveal delay={0.1}>
@@ -27,7 +27,13 @@ export default function PlatformCoverage() {
               </div>
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {PLATFORM_GROUPS.map((group, i) => (
-                  <div key={group.label} className="rounded-xl bg-[color:var(--surface)] p-4 ring-1 ring-[color:var(--border-soft)]">
+                  <div
+                    key={group.label}
+                    // The last (largest) group spans the full card width
+                    className={`rounded-xl bg-[color:var(--surface)] p-4 ring-1 ring-[color:var(--border-soft)] ${
+                      i === PLATFORM_GROUPS.length - 1 ? "sm:col-span-2" : ""
+                    }`}
+                  >
                     <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-navy-900/50">
                       <span className={`h-1.5 w-1.5 rounded-full ${GROUP_DOT[i % GROUP_DOT.length]}`} />
                       {group.label}
@@ -54,14 +60,18 @@ export default function PlatformCoverage() {
           same edges as the section above rather than at the viewport edges. */}
       <Reveal delay={0.1} className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="marquee-hover-pause relative mt-12 overflow-hidden sm:mt-16 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          {/* Four copies: the track scrolls by half its width, so two copies must
-              always overfill the viewport for the loop to stay seamless. */}
+          {/* Two copies: the track scrolls by half its width, and one full set
+              is wider than the container, so the loop stays seamless. The
+              duration scales with the logo count to keep a steady, readable pace. */}
           {/* Equal spacing comes from a trailing margin on every item (not flex
               gap), so the seam between copies matches the gap between logos. */}
-          <div className="marquee-track flex w-max items-center py-3">
-            {[...PLATFORM_LOGOS, ...PLATFORM_LOGOS, ...PLATFORM_LOGOS, ...PLATFORM_LOGOS].map((logo, i) => {
+          <div
+            className="marquee-track flex w-max items-center py-3"
+            style={{ animationDuration: `${PLATFORM_LOGOS.length * 3.5}s` }}
+          >
+            {[...PLATFORM_LOGOS, ...PLATFORM_LOGOS].map((logo, i) => {
               const duplicate = i >= PLATFORM_LOGOS.length;
-              const height = logo.ratio === 1 ? 36 : 28;
+              const height = logoHeight(logo.ratio);
               const width = Math.round(height * logo.ratio);
               const alt = duplicate ? "" : logo.name;
               const imgClass = "w-auto object-contain";
