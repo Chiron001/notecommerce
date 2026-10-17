@@ -12,7 +12,7 @@ export default function StatsBar({ pillarCount }: { pillarCount: number }) {
 
   return (
     <section className="relative bg-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 -mt-10 relative z-10">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-12 sm:pt-16 relative z-10">
         <Reveal>
           <div className="relative overflow-hidden rounded-2xl bg-mesh-dark shadow-elegant ring-1 ring-white/10">
             <div className="absolute inset-0 bg-grid-dark pointer-events-none opacity-60" />

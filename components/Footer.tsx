@@ -19,7 +19,6 @@ export default function Footer({
 
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
-      <div className="absolute inset-x-0 top-0 h-96 bg-mesh-dark opacity-70 pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
         <div className="mb-14 flex flex-col items-start justify-between gap-6 rounded-2xl bg-white/[0.05] p-6 ring-1 ring-white/10 sm:flex-row sm:items-center sm:p-8">
           <div>
