@@ -12,14 +12,16 @@ export const PLATFORMS = PLATFORM_GROUPS.flatMap((g) => g.platforms);
 /**
  * Logo files in /public/platforms, from Wikimedia Commons (public domain) and
  * Simple Icons (CC0). `ratio` is width / height. Icon-only marks set
- * `showName` so the platform stays recognisable. Platforms without a freely
+ * `showName` so the platform stays recognisable. `darkSrc` is a copy with
+ * white lettering for logos whose black text would vanish on the dark theme.
+ * Platforms without a freely
  * licensed official logo (Meesho, Ajio, Instamart, Myntra) are left out of
  * the logo strip rather than approximated, and still appear by name above.
  */
-export const PLATFORM_LOGOS: { name: string; src: string; ratio: number; showName?: boolean }[] = [
-  { name: "Amazon", src: "/platforms/amazon.svg", ratio: 603 / 182 },
+export const PLATFORM_LOGOS: { name: string; src: string; darkSrc?: string; ratio: number; showName?: boolean }[] = [
+  { name: "Amazon", src: "/platforms/amazon.svg", darkSrc: "/platforms/amazon-dark.svg", ratio: 603 / 182 },
   { name: "Flipkart", src: "/platforms/flipkart.png", ratio: 364 / 96 },
-  { name: "Shopify", src: "/platforms/shopify.svg", ratio: 612 / 192 },
+  { name: "Shopify", src: "/platforms/shopify.svg", darkSrc: "/platforms/shopify-dark.svg", ratio: 612 / 192 },
   { name: "Blinkit", src: "/platforms/blinkit.svg", ratio: 1 },
   { name: "Zepto", src: "/platforms/zepto.svg", ratio: 3 },
   { name: "Nykaa", src: "/platforms/nykaa.svg", ratio: 465.7 / 155.7 },

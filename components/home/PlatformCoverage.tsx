@@ -54,27 +54,30 @@ export default function PlatformCoverage() {
         <div className="marquee-hover-pause relative mt-12 overflow-hidden sm:mt-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           {/* Four copies: the track scrolls by half its width, so two copies must
               always overfill the viewport for the loop to stay seamless. */}
-          <div className="marquee-track flex w-max items-center gap-4 py-3">
+          {/* Equal spacing comes from a trailing margin on every item (not flex
+              gap), so the seam between copies matches the gap between logos. */}
+          <div className="marquee-track flex w-max items-center py-3">
             {[...PLATFORM_LOGOS, ...PLATFORM_LOGOS, ...PLATFORM_LOGOS, ...PLATFORM_LOGOS].map((logo, i) => {
               const duplicate = i >= PLATFORM_LOGOS.length;
               const height = logo.ratio === 1 ? 36 : 28;
+              const width = Math.round(height * logo.ratio);
+              const alt = duplicate ? "" : logo.name;
+              const imgClass = "w-auto object-contain";
               return (
                 <span
                   key={i}
                   aria-hidden={duplicate || undefined}
-                  // Fixed white (not bg-white, which the dark theme remaps): logos are drawn for a light background
-                  className="flex h-16 shrink-0 items-center gap-2.5 rounded-2xl bg-[#ffffff] px-7 shadow-sm ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-1"
+                  className="mr-14 flex h-12 shrink-0 items-center gap-2.5 opacity-85 dark:opacity-100 transition-all duration-300 hover:-translate-y-0.5 hover:opacity-100 sm:mr-16"
                 >
-                  <Image
-                    src={logo.src}
-                    alt={duplicate ? "" : logo.name}
-                    width={Math.round(height * logo.ratio)}
-                    height={height}
-                    unoptimized
-                    className="w-auto object-contain"
-                    style={{ height }}
-                  />
-                  {logo.showName && <span className="text-[15px] font-bold text-[#1f2a3d]">{logo.name}</span>}
+                  {logo.darkSrc ? (
+                    <>
+                      <Image src={logo.src} alt={alt} width={width} height={height} unoptimized className={`${imgClass} dark:hidden`} style={{ height }} />
+                      <Image src={logo.darkSrc} alt={alt} width={width} height={height} unoptimized className={`${imgClass} hidden dark:block`} style={{ height }} />
+                    </>
+                  ) : (
+                    <Image src={logo.src} alt={alt} width={width} height={height} unoptimized className={imgClass} style={{ height }} />
+                  )}
+                  {logo.showName && <span className="text-[15px] font-bold text-navy-950">{logo.name}</span>}
                 </span>
               );
             })}
