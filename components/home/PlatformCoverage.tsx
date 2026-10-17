@@ -50,8 +50,10 @@ export default function PlatformCoverage() {
         </div>
       </div>
 
-      <Reveal delay={0.1}>
-        <div className="marquee-hover-pause relative mt-12 overflow-hidden sm:mt-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      {/* Contained to the page's content width, so logos fade in and out at the
+          same edges as the section above rather than at the viewport edges. */}
+      <Reveal delay={0.1} className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="marquee-hover-pause relative mt-12 overflow-hidden sm:mt-16 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           {/* Four copies: the track scrolls by half its width, so two copies must
               always overfill the viewport for the loop to stay seamless. */}
           {/* Equal spacing comes from a trailing margin on every item (not flex
