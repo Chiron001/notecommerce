@@ -19,7 +19,8 @@ const SAMPLE_SHARE = [
   { platform: "Zepto", share: 18, color: "bg-teal-400" },
 ];
 
-const ROTATING_WORDS = ["marketplace.", "quick commerce app.", "storefront."];
+// Kept short: each must fit on one line of the headline, down to phone width.
+const ROTATING_WORDS = ["marketplace.", "storefront.", "dark store.", "channel."];
 
 const SAMPLE_TREND = [38, 44, 41, 52, 49, 58, 63, 61, 70, 74, 79, 86];
 
