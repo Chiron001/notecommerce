@@ -5,6 +5,8 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
+import SiteEffects from "@/components/SiteEffects";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { getAllPillars, getLatestCaseStudy, getSiteSettings } from "@/lib/payload";
 import { extractScriptContent } from "@/lib/seo";
 
@@ -49,8 +51,13 @@ export default async function RootLayout({
     <html
       lang="en"
       className={`${body.variable} h-full antialiased`}
+      // The theme script below sets the "dark" class before React hydrates
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-navy-900 overflow-x-hidden">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-[color:var(--background)] text-navy-900 overflow-x-hidden">
         {headerCode && (
           <Script id="site-header-code" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: headerCode }} />
         )}
@@ -58,6 +65,7 @@ export default async function RootLayout({
           Skip to content
         </a>
         <MotionProvider>
+          <SiteEffects />
           <Header
             pillars={pillars.map((p) => ({ title: p.title, slug: p.slug, description: p.description }))}
             announcement={

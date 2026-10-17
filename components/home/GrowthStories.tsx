@@ -24,7 +24,7 @@ export default function GrowthStories({ testimonials }: { testimonials: Testimon
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="bg-[color:var(--surface)] py-24">
+    <section className="bg-[color:var(--surface)] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader eyebrow="Client Results" title="Growth our clients" accent="put in the boardroom." />
 

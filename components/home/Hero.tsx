@@ -6,6 +6,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, BookOpen, ShieldCheck, TrendingUp } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
+import TiltCard from "@/components/TiltCard";
+import RotatingAccent from "@/components/RotatingAccent";
 import type { CaseStudy, Pillar } from "@/payload-types";
 
 // Illustrative numbers for the dashboard preview. They are labelled as a
@@ -16,6 +18,8 @@ const SAMPLE_SHARE = [
   { platform: "Flipkart", share: 21, color: "bg-sky-400" },
   { platform: "Zepto", share: 18, color: "bg-teal-400" },
 ];
+
+const ROTATING_WORDS = ["marketplace.", "quick commerce app.", "storefront."];
 
 const SAMPLE_TREND = [38, 44, 41, 52, 49, 58, 63, 61, 70, 74, 79, 86];
 
@@ -39,7 +43,7 @@ export default function Hero({
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-mesh">
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-50" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-36 pb-20 lg:pt-44 lg:pb-28">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-20 sm:pt-36 lg:pt-44 lg:pb-28">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-16 items-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1.5 text-xs font-semibold text-navy-800 ring-1 ring-[color:var(--border-soft)] shadow-sm backdrop-blur">
@@ -52,7 +56,9 @@ export default function Hero({
 
             <h1 className="mt-7 font-display text-[2.6rem] sm:text-6xl lg:text-[4.1rem] font-extrabold text-navy-950 leading-[1.04]">
               Grow your ecommerce brand
-              <span className="headline-accent block">across every marketplace.</span>
+              <span className="block">
+                <RotatingAccent prefix="across every" words={ROTATING_WORDS} />
+              </span>
             </h1>
 
             <p className="mt-6 text-lg text-[color:var(--ink-muted)] leading-relaxed max-w-xl">
@@ -61,11 +67,11 @@ export default function Hero({
               quick commerce.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <MagneticButton>
                 <Link
                   href="/connect"
-                  className="btn-shimmer inline-flex items-center gap-2 rounded-full gradient-cta px-7 py-4 text-sm font-semibold text-white shadow-glow hover:opacity-95 transition-opacity"
+                  className="btn-shimmer flex w-full items-center justify-center gap-2 rounded-full gradient-cta px-7 py-4 sm:inline-flex sm:w-auto text-sm font-semibold text-white shadow-glow hover:opacity-95 transition-opacity"
                 >
                   Book a Consultation
                   <ArrowRight className="h-4 w-4" />
@@ -73,7 +79,7 @@ export default function Hero({
               </MagneticButton>
               <Link
                 href="/articles"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-navy-950 ring-1 ring-[color:var(--border-soft)] shadow-sm hover:ring-indigo-500/40 transition-all"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-navy-950 ring-1 ring-[color:var(--border-soft)] shadow-sm hover:ring-indigo-500/40 transition-all"
               >
                 <BookOpen className="h-4 w-4 text-indigo-600" />
                 Read Our Research
@@ -100,7 +106,8 @@ export default function Hero({
           <Reveal delay={0.15}>
             <motion.div style={{ y: cardY }} className="relative mx-auto max-w-lg">
               {/* Dashboard preview */}
-              <div className="card-elegant !bg-white/90 p-5 sm:p-6 backdrop-blur">
+              <TiltCard tiltRange={5}>
+              <div className="card-elegant card-solid p-5 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-navy-900/40">
@@ -167,11 +174,13 @@ export default function Hero({
                 </div>
               </div>
 
-              {/* Floating: latest real research */}
+              </TiltCard>
+
+              {/* Latest real research: floats on larger screens, sits below the card on phones */}
               {latestArticle && (
                 <Link
                   href={`/articles/${latestArticle.slug}`}
-                  className="animate-float absolute -top-8 -left-6 hidden sm:block max-w-[15rem] rounded-2xl bg-white p-4 shadow-elegant ring-1 ring-[color:var(--border-soft)] hover:ring-indigo-500/40 transition-shadow"
+                  className="animate-float relative mt-4 block sm:absolute sm:mt-0 sm:-top-8 sm:-left-6 sm:max-w-[15rem] rounded-2xl bg-white p-4 shadow-elegant ring-1 ring-[color:var(--border-soft)] hover:ring-indigo-500/40 transition-shadow"
                 >
                   <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-indigo-600">
                     <BookOpen className="h-3 w-3" />

@@ -18,7 +18,7 @@ const NEXT_STEPS = [
 
 export default function FinalCTA({ contactEmail }: { contactEmail?: string }) {
   return (
-    <section id="consult" className="relative overflow-hidden bg-mesh py-24 lg:py-28 scroll-mt-24">
+    <section id="consult" className="relative overflow-hidden bg-mesh py-16 sm:py-24 lg:py-28 scroll-mt-24">
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.05fr]">

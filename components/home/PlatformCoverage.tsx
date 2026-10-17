@@ -6,7 +6,7 @@ const GROUP_DOT = ["bg-indigo-600", "bg-amber-500", "bg-violet-500", "bg-emerald
 
 export default function PlatformCoverage() {
   return (
-    <section className="overflow-hidden bg-white py-24">
+    <section className="overflow-hidden bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
           <SectionHeader
@@ -50,7 +50,7 @@ export default function PlatformCoverage() {
       </div>
 
       <Reveal delay={0.1}>
-        <div className="relative mt-16 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="marquee-hover-pause relative mt-12 overflow-hidden sm:mt-16 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           <div className="marquee-track flex w-max items-center gap-12">
             {[...PLATFORMS, ...PLATFORMS].map((platform, i) => (
               <span

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PILLAR_ACCENT_STYLES } from "@/lib/pillarAccents";
@@ -8,15 +7,10 @@ import { PillarIcon } from "@/lib/pillarIcons";
 import type { Pillar } from "@/payload-types";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import SwipeProgress from "@/components/SwipeProgress";
-import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const isCarousel = !useMediaQuery("(min-width: 640px)");
-
   return (
-    <section id="pillars" className="bg-white pt-28 pb-24">
+    <section id="pillars" className="bg-white pt-20 pb-16 sm:pt-28 sm:pb-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
           eyebrow="Our Expertise"
@@ -27,8 +21,7 @@ export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
         />
 
         <div
-          ref={scrollRef}
-          className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+          className="mt-12 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
         >
           {pillars.map((pillar, i) => {
             const accent = PILLAR_ACCENT_STYLES[pillar.accent] ?? PILLAR_ACCENT_STYLES.indigo;
@@ -36,8 +29,7 @@ export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
               <Reveal
                 key={pillar.slug}
                 delay={(i % 3) * 0.08}
-                triggerOnMount={isCarousel}
-                className="w-[82%] shrink-0 snap-start sm:w-auto"
+                className="h-full"
               >
                 <Link
                   href={`/pillars/${pillar.slug}`}
@@ -46,7 +38,7 @@ export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
                   <div className={`relative bg-gradient-to-br ${accent.tint} px-6 pt-6 pb-5`}>
                     <span className={`absolute inset-x-0 top-0 h-1 ${accent.bar}`} />
                     <div className="flex items-start justify-between">
-                      <span className={`flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-lg ${accent.icon}`}>
+                      <span className={`flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-lg transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110 ${accent.icon}`}>
                         <PillarIcon slug={pillar.slug} className="h-5 w-5" />
                       </span>
                       <span className={`rounded-full bg-white/80 px-2.5 py-1 text-[11px] font-bold ${accent.text}`}>
@@ -73,11 +65,6 @@ export default function ContentPillars({ pillars }: { pillars: Pillar[] }) {
           })}
         </div>
 
-        <SwipeProgress
-          scrollRef={scrollRef}
-          count={pillars.length}
-          className="mt-5 sm:hidden"
-        />
       </div>
     </section>
   );

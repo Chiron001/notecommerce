@@ -74,7 +74,7 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
   const relatedPillars = active.pillars.map((slug) => bySlug.get(slug)).filter((p): p is Pillar => Boolean(p));
 
   return (
-    <section className="relative overflow-hidden bg-mesh-dark py-24 lg:py-28">
+    <section className="relative overflow-hidden bg-mesh-dark py-16 sm:py-24 lg:py-28">
       <div className="absolute inset-0 bg-grid-dark pointer-events-none opacity-50" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
@@ -90,7 +90,7 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
           <div
             role="tablist"
             aria-label="Choose your business model"
-            className="mx-auto mt-12 flex max-w-3xl gap-2 overflow-x-auto rounded-full bg-white/5 p-1.5 ring-1 ring-white/10 no-scrollbar"
+            className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-1.5 rounded-2xl bg-white/5 p-1.5 ring-1 ring-white/10 sm:mt-12 sm:flex sm:rounded-full"
           >
             {AUDIENCES.map((a) => {
               const selected = a.key === activeKey;
@@ -103,14 +103,14 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
                   aria-controls={`solution-panel-${a.key}`}
                   id={`solution-tab-${a.key}`}
                   onClick={() => setActiveKey(a.key)}
-                  className={`relative flex flex-1 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
+                  className={`relative flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-[13px] font-semibold transition-colors sm:rounded-full sm:px-4 sm:py-2.5 sm:text-sm ${
                     selected ? "text-navy-950" : "text-white/65 hover:text-white"
                   }`}
                 >
                   {selected && (
                     <motion.span
                       layoutId="solution-tab-pill"
-                      className="absolute inset-0 rounded-full bg-white"
+                      className="absolute inset-0 rounded-xl bg-white sm:rounded-full"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -133,7 +133,7 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="grid gap-6 rounded-3xl bg-white/[0.06] p-6 ring-1 ring-white/10 backdrop-blur-xl sm:p-10 lg:grid-cols-[1.1fr_1fr]"
+              className="border-beam grid gap-6 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur-xl sm:p-10 lg:grid-cols-[1.1fr_1fr]"
             >
               <div>
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl gradient-cta text-white shadow-glow">
@@ -156,7 +156,7 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
 
                 <Link
                   href="/connect"
-                  className="btn-shimmer mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy-950 hover:bg-cream-50 transition-colors"
+                  className="btn-shimmer mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 sm:inline-flex sm:w-auto text-sm font-semibold text-navy-950 hover:bg-cream-50 transition-colors"
                 >
                   Talk to us about {active.label.toLowerCase()}
                   <ArrowRight className="h-4 w-4" />

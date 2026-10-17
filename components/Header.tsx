@@ -8,6 +8,7 @@ import { ArrowRight, ChevronDown, Menu, Sparkles, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/nav";
 import { LogoFull } from "@/components/Logo";
 import SocialIcon from "@/components/SocialIcon";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const WHATSAPP_LINK = "https://wa.me/919319414318";
 
@@ -132,7 +133,7 @@ export default function Header({
                             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                             className="absolute left-1/2 top-full w-[640px] -translate-x-1/3 pt-5"
                           >
-                            <div className="card-elegant !bg-white p-3">
+                            <div className="card-elegant card-solid p-3">
                               <div className="grid grid-cols-2 gap-1">
                                 {pillars.map((p) => (
                                   <Link
@@ -183,7 +184,7 @@ export default function Header({
             </nav>
           </motion.div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/connect"
               className="btn-shimmer hidden md:flex rounded-full gradient-cta px-5 py-2.5 text-sm font-semibold text-white shadow-glow hover:opacity-95 transition-opacity"
@@ -191,6 +192,8 @@ export default function Header({
               <span className="lg:hidden">Connect</span>
               <span className="hidden lg:inline">Book a Consultation</span>
             </Link>
+
+            <ThemeToggle />
 
             <a
               href={WHATSAPP_LINK}
@@ -212,34 +215,73 @@ export default function Header({
           </div>
         </motion.div>
 
-        {open && (
-          <div className="mx-auto mt-2 max-w-7xl space-y-3 rounded-2xl bg-navy-950/95 backdrop-blur-2xl p-4 ring-1 ring-white/10 md:hidden">
-            {NAV_LINKS.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`flex items-center gap-2 text-sm font-medium ${
-                    active ? "text-white" : "text-white/80"
-                  }`}
-                  onClick={() => setOpen(false)}
-                >
-                  {active && <span className="h-1 w-1 rounded-full bg-violet-400" />}
-                  {link.label}
-                </Link>
-              );
-            })}
-            <Link
-              href="/connect"
-              className="block rounded-full gradient-cta px-5 py-2.5 text-center text-sm font-semibold text-white"
-              onClick={() => setOpen(false)}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto mt-2 max-h-[calc(100dvh-6rem)] max-w-7xl origin-top overflow-y-auto rounded-3xl bg-navy-950/95 p-3 ring-1 ring-white/10 backdrop-blur-2xl md:hidden"
             >
-              Book a Consultation
-            </Link>
-          </div>
-        )}
+              <nav className="grid gap-1">
+                {NAV_LINKS.map((link, i) => {
+                  const active = isActive(link.href);
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.04 * i + 0.05, duration: 0.25 }}
+                    >
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-semibold transition-colors ${
+                          active ? "bg-white/10 text-white" : "text-white/80 hover:bg-white/5"
+                        }`}
+                        onClick={() => setOpen(false)}
+                      >
+                        {link.label}
+                        <ArrowRight className="h-4 w-4 text-white/30" />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              {pillars.length > 0 && (
+                <div className="mt-2 rounded-2xl bg-white/[0.04] p-3 ring-1 ring-white/10">
+                  <div className="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40">
+                    Practice areas
+                  </div>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {pillars.map((p) => (
+                      <Link
+                        key={p.slug}
+                        href={`/pillars/${p.slug}`}
+                        onClick={() => setOpen(false)}
+                        className="rounded-xl px-3 py-2.5 text-xs font-medium leading-snug text-white/75 hover:bg-white/5 hover:text-white"
+                      >
+                        {p.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <Link
+                href="/connect"
+                className="btn-shimmer mt-3 flex items-center justify-center gap-2 rounded-2xl gradient-cta px-5 py-4 text-center text-sm font-semibold text-white"
+                onClick={() => setOpen(false)}
+              >
+                Book a Consultation
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

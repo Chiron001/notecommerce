@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Theme is class-based (html.dark), set before paint by the inline script in
+   the site layout and switched by ThemeToggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #003466;
@@ -376,4 +380,241 @@ textarea:focus-visible,
 
 .prose-article strong {
   color: var(--color-navy-950);
+}
+
+/* ------------------------------------------------------------------
+   Extra motion
+   ------------------------------------------------------------------ */
+
+/* Headline accents drift slowly through their gradient */
+.headline-accent,
+.headline-accent-dark {
+  background-size: 200% 200%;
+  animation: gradient-pan 8s ease-in-out infinite alternate;
+}
+
+@keyframes gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* Cursor spotlight on elevated cards. --mx/--my are set by SpotlightEffects. */
+.card-elegant {
+  --mx: 50%;
+  --my: 50%;
+}
+
+.card-elegant::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(11, 107, 255, 0.09), transparent 45%);
+  transition: opacity 0.4s var(--ease-smooth);
+  /* Paints above the card's own background but below its content */
+  z-index: -1;
+}
+
+.card-elegant {
+  position: relative;
+  isolation: isolate;
+}
+
+.card-elegant:hover::before {
+  opacity: 1;
+}
+
+/* Rotating light beam around a panel's border */
+.border-beam {
+  position: relative;
+  isolation: isolate;
+}
+
+.border-beam::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--beam-angle), transparent 0deg, rgba(124, 58, 237, 0.9) 40deg, rgba(11, 107, 255, 0.9) 80deg, transparent 120deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam-spin 6s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+/* Marquee pauses while hovered so a name can be read */
+.marquee-hover-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headline-accent,
+  .headline-accent-dark,
+  .border-beam::before {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Dark theme
+   The navy scale doubles as text ink, so it flips to light values here;
+   the few navy *backgrounds* (dark bands, buttons) are pinned back to
+   dark below. Light surfaces become deep navy.
+   ------------------------------------------------------------------ */
+.dark {
+  color-scheme: dark;
+  --background: #050b17;
+  --foreground: #dbe4f5;
+  --surface: #071022;
+  --ink-muted: #93a3bd;
+  --border-soft: rgba(255, 255, 255, 0.09);
+  --gradient-text: linear-gradient(135deg, #5aa2ff 0%, #8f7cff 55%, #b79bff 100%);
+  --shadow-elegant: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 10px 40px rgba(77, 148, 255, 0.22);
+
+  --color-navy-950: #eef3ff;
+  --color-navy-900: #c9d6ee;
+  --color-navy-800: #a9bbdc;
+  --color-navy-700: #8ea3c9;
+  --color-cream-50: #0e1a2f;
+  --color-cream-100: #15243f;
+  --color-indigo-600: #4d94ff;
+  --color-indigo-700: #7ab0ff;
+  --primary: #5aa2ff;
+}
+
+.dark body {
+  background: var(--background);
+}
+
+/* Dark bands and buttons stay dark */
+.dark .bg-navy-950 {
+  background-color: #030812;
+}
+
+.dark .bg-navy-950\/90 {
+  background-color: rgba(3, 8, 18, 0.9);
+}
+
+.dark .bg-navy-950\/95 {
+  background-color: rgba(3, 8, 18, 0.95);
+}
+
+.dark .bg-navy-900,
+.dark .hover\:bg-navy-900:hover {
+  background-color: #0d1b33;
+}
+
+.dark .bg-mesh-dark {
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(11, 107, 255, 0.28), transparent 60%),
+    radial-gradient(ellipse 45% 40% at 90% 20%, rgba(124, 58, 237, 0.26), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(34, 211, 238, 0.1), transparent 60%),
+    #030812;
+}
+
+/* The logo sits on the dark nav pill in both themes */
+.dark .text-cream-50 {
+  color: #f4f7ff;
+}
+
+/* Light surfaces */
+.dark .bg-white {
+  background-color: #0b1528;
+}
+
+.dark .bg-white\/70 {
+  background-color: rgba(11, 21, 40, 0.7);
+}
+
+.dark .bg-white\/80 {
+  background-color: rgba(11, 21, 40, 0.8);
+}
+
+.dark .bg-white\/90 {
+  background-color: rgba(11, 21, 40, 0.9);
+}
+
+.dark .hover\:bg-white:hover {
+  background-color: #12203a;
+}
+
+.dark .bg-mesh {
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 18%, rgba(56, 132, 255, 0.18), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 88% 8%, rgba(139, 92, 246, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 85%, rgba(59, 130, 246, 0.12), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 28% 92%, rgba(45, 212, 191, 0.08), transparent 60%),
+    var(--surface);
+}
+
+.dark .bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+.dark .card-elegant {
+  background: linear-gradient(180deg, rgba(14, 26, 48, 0.92), rgba(10, 19, 36, 0.82));
+}
+
+.dark .card-elegant::before {
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(90, 162, 255, 0.12), transparent 45%);
+}
+
+.dark .card-elegant-hover:hover {
+  border-color: rgba(90, 162, 255, 0.35);
+}
+
+.dark .glass {
+  background: rgba(11, 21, 40, 0.55);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .skip-link {
+  background: #0b1528;
+}
+
+.dark .prose-article p,
+.dark .prose-article ul {
+  color: #b5c3dc;
+}
+
+/* Theme switch cross-fade (class added briefly by ThemeToggle) */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease !important;
+}
+
+/* Opaque variant of .card-elegant for menus and the hero dashboard */
+.card-solid {
+  background: #ffffff;
+}
+
+.dark .card-solid {
+  background: #0b1528;
 }

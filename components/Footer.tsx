@@ -166,7 +166,7 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-8 text-center text-xs text-white/40">
+        <div className="mt-10 border-t border-white/10 pt-8 pb-20 text-center text-xs text-white/40 md:pb-0">
           {hasLegalInfo && (
             <p className="mb-2">
               {siteSettings.legalEntityName}

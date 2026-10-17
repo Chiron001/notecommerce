@@ -15,7 +15,7 @@ export default function FeaturedArticles({ articles }: { articles: CaseStudy[] }
   if (articles.length === 0) return null;
 
   return (
-    <section className="bg-[color:var(--surface)] py-24">
+    <section className="bg-[color:var(--surface)] py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <SectionHeader
           eyebrow="Research & Insights"
