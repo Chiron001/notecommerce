@@ -153,7 +153,8 @@ export default function Header({
               </Link>
               <Link
                 href={announcement.href}
-                className="hidden shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 text-[11px] font-semibold text-[#001b33] transition-transform hover:scale-[1.03] sm:inline-flex"
+                // Fixed white (not bg-white, which the dark theme turns navy): the bar's gradient is the same in both themes
+                className="hidden shrink-0 items-center gap-1 rounded-full bg-[#ffffff] px-3 py-1 text-[11px] font-semibold text-[#001b33] transition-transform hover:scale-[1.03] sm:inline-flex"
               >
                 Read the report
                 <ArrowRight className="h-3 w-3" />
