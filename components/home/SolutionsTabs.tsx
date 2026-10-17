@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Building2, CheckCircle2, ShoppingBag, Store, Zap } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/components/Reveal";
@@ -69,9 +69,7 @@ const AUDIENCES = [
 
 export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
   const [activeKey, setActiveKey] = useState(AUDIENCES[0].key);
-  const active = AUDIENCES.find((a) => a.key === activeKey) ?? AUDIENCES[0];
   const bySlug = new Map(pillars.map((p) => [p.slug, p]));
-  const relatedPillars = active.pillars.map((slug) => bySlug.get(slug)).filter((p): p is Pillar => Boolean(p));
 
   return (
     <section className="relative overflow-hidden bg-mesh-dark py-16 sm:py-24 lg:py-28">
@@ -104,13 +102,13 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
                   id={`solution-tab-${a.key}`}
                   onClick={() => setActiveKey(a.key)}
                   className={`relative flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-[13px] font-semibold transition-colors sm:rounded-full sm:px-4 sm:py-2.5 sm:text-sm ${
-                    selected ? "text-navy-950" : "text-white/65 hover:text-white"
+                    selected ? "text-[#001b33]" : "text-white/65 hover:text-white"
                   }`}
                 >
                   {selected && (
                     <motion.span
                       layoutId="solution-tab-pill"
-                      className="absolute inset-0 rounded-xl bg-white sm:rounded-full"
+                      className="absolute inset-0 rounded-xl bg-[#ffffff] sm:rounded-full"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -122,68 +120,83 @@ export default function SolutionsTabs({ pillars }: { pillars: Pillar[] }) {
           </div>
         </Reveal>
 
-        <div className="mt-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.key}
-              id={`solution-panel-${active.key}`}
-              role="tabpanel"
-              aria-labelledby={`solution-tab-${active.key}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="border-beam grid gap-6 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur-xl sm:p-10 lg:grid-cols-[1.1fr_1fr]"
-            >
-              <div>
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl gradient-cta text-white shadow-glow">
-                  <active.icon className="h-6 w-6" />
-                </span>
-                <h3 className="mt-6 font-display text-2xl sm:text-3xl font-bold text-white">{active.headline}</h3>
-                <p className="mt-4 leading-relaxed text-white/65">{active.description}</p>
-
-                <div className="mt-7 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
-                  What we typically solve
-                </div>
-                <ul className="mt-4 space-y-3">
-                  {active.challenges.map((c) => (
-                    <li key={c} className="flex items-start gap-3 text-sm text-white/85">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href="/connect"
-                  className="btn-shimmer mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 sm:inline-flex sm:w-auto text-sm font-semibold text-navy-950 hover:bg-cream-50 transition-colors"
+        {/* Every audience's content is rendered into the same grid cell, so the
+            panel is always as tall as the longest one and switching tabs never
+            changes the page height. Only the active one is visible. */}
+        <div className="border-beam mt-10 rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur-xl sm:p-10">
+          <div className="grid">
+            {AUDIENCES.map((a) => {
+              const isActive = a.key === activeKey;
+              const related = a.pillars.map((slug) => bySlug.get(slug)).filter((p): p is Pillar => Boolean(p));
+              return (
+                <motion.div
+                  key={a.key}
+                  id={`solution-panel-${a.key}`}
+                  role="tabpanel"
+                  aria-labelledby={`solution-tab-${a.key}`}
+                  aria-hidden={!isActive}
+                  inert={!isActive}
+                  initial={false}
+                  animate={
+                    isActive
+                      ? { opacity: 1, y: 0, visibility: "visible" }
+                      : { opacity: 0, y: 12, transitionEnd: { visibility: "hidden" } }
+                  }
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid gap-6 [grid-area:1/1] lg:grid-cols-[1.1fr_1fr]"
                 >
-                  Talk to us about {active.label.toLowerCase()}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
+                  <div>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl gradient-cta text-white shadow-glow">
+                      <a.icon className="h-6 w-6" />
+                    </span>
+                    <h3 className="mt-6 font-display text-2xl sm:text-3xl font-bold text-white">{a.headline}</h3>
+                    <p className="mt-4 leading-relaxed text-white/65">{a.description}</p>
 
-              <div className="flex flex-col gap-3">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
-                  Where we focus
-                </div>
-                {relatedPillars.map((p, i) => (
-                  <Link
-                    key={p.slug}
-                    href={`/pillars/${p.slug}`}
-                    className="group flex items-start gap-4 rounded-2xl bg-white/[0.04] p-5 ring-1 ring-white/10 transition-all hover:bg-white/[0.09] hover:ring-white/20"
-                  >
-                    <span className="font-display text-sm font-bold text-indigo-500">0{i + 1}</span>
-                    <div className="flex-1">
-                      <div className="font-semibold text-white">{p.title}</div>
-                      <p className="mt-1 text-sm leading-relaxed text-white/55 line-clamp-2">{p.description}</p>
+                    <div className="mt-7 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                      What we typically solve
                     </div>
-                    <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-white/30 transition-all group-hover:translate-x-1 group-hover:text-white" />
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                    <ul className="mt-4 space-y-3">
+                      {a.challenges.map((c) => (
+                        <li key={c} className="flex items-start gap-3 text-sm text-white/85">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link
+                      href="/connect"
+                      // Fixed white: this section is navy in both themes
+                      className="btn-shimmer mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-[#ffffff] px-6 py-3.5 sm:inline-flex sm:w-auto text-sm font-semibold text-[#001b33] hover:bg-[#f4f7ff] transition-colors"
+                    >
+                      Talk to us about {a.label.toLowerCase()}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                      Where we focus
+                    </div>
+                    {related.map((p, i) => (
+                      <Link
+                        key={p.slug}
+                        href={`/pillars/${p.slug}`}
+                        className="group flex items-start gap-4 rounded-2xl bg-white/[0.04] p-5 ring-1 ring-white/10 transition-all hover:bg-white/[0.09] hover:ring-white/20"
+                      >
+                        <span className="font-display text-sm font-bold text-indigo-500">0{i + 1}</span>
+                        <div className="flex-1">
+                          <div className="font-semibold text-white">{p.title}</div>
+                          <p className="mt-1 text-sm leading-relaxed text-white/55 line-clamp-2">{p.description}</p>
+                        </div>
+                        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-white/30 transition-all group-hover:translate-x-1 group-hover:text-white" />
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
