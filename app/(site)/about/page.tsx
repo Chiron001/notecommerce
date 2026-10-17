@@ -36,14 +36,14 @@ export default async function AboutPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
+      <section className="relative overflow-hidden bg-mesh pt-32 pb-20 lg:pt-40">
         <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
         <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+                <span className="eyebrow">
                   About Us
                 </span>
                 {settings.foundedYear && (
@@ -53,7 +53,8 @@ export default async function AboutPage() {
                 )}
               </div>
               <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
-                Built for ecommerce&apos;s most demanding teams.
+                Built for ecommerce&apos;s{" "}
+                <span className="headline-accent">most demanding teams.</span>
               </h1>
               <p className="mt-5 text-lg text-navy-900/70 leading-relaxed">
                 NotEcommerce is a sharp, senior-led ecommerce intelligence
@@ -81,7 +82,7 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <Reveal>
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+              <span className="eyebrow">
                 How We Work
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">
@@ -130,7 +131,7 @@ export default async function AboutPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <Reveal>
               <div className="max-w-2xl mx-auto text-center">
-                <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+                <span className="eyebrow">
                   Leadership
                 </span>
                 <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">
@@ -187,7 +188,7 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+              <span className="eyebrow">
                 Our Standards
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">

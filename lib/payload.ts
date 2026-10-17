@@ -39,6 +39,18 @@ export async function getAllCaseStudies(): Promise<CaseStudy[]> {
   return docs;
 }
 
+export async function getLatestCaseStudy(): Promise<CaseStudy | null> {
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: "case-studies",
+    where: { _status: { equals: "published" } },
+    limit: 1,
+    sort: "-publishedDate",
+    depth: 0,
+  });
+  return docs[0] ?? null;
+}
+
 export async function getFeaturedCaseStudies(): Promise<CaseStudy[]> {
   const payload = await getPayloadClient();
   const { docs } = await payload.find({

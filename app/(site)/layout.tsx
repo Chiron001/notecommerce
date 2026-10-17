@@ -1,25 +1,21 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
-import { getAllPillars, getSiteSettings } from "@/lib/payload";
+import { getAllPillars, getLatestCaseStudy, getSiteSettings } from "@/lib/payload";
 import { extractScriptContent } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const heading = Plus_Jakarta_Sans({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-});
-
+// One typeface sitewide. Inter is a variable font, so every weight from the
+// light italic headline accents (300) to the extrabold headings is one file.
 const body = Inter({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const FALLBACK_METADATA: Metadata = {
@@ -41,14 +37,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [pillars, settings] = await Promise.all([getAllPillars(), getSiteSettings()]);
+  const [pillars, settings, latestArticle] = await Promise.all([
+    getAllPillars(),
+    getSiteSettings(),
+    getLatestCaseStudy(),
+  ]);
   const headerCode = extractScriptContent(settings.headerCode);
   const bodyCode = extractScriptContent(settings.bodyCode);
 
   return (
     <html
       lang="en"
-      className={`${heading.variable} ${body.variable} h-full antialiased`}
+      className={`${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-navy-900 overflow-x-hidden">
         {headerCode && (
@@ -58,7 +58,12 @@ export default async function RootLayout({
           Skip to content
         </a>
         <MotionProvider>
-          <Header />
+          <Header
+            pillars={pillars.map((p) => ({ title: p.title, slug: p.slug, description: p.description }))}
+            announcement={
+              latestArticle ? { title: latestArticle.title, href: `/articles/${latestArticle.slug}` } : null
+            }
+          />
           <main id="main-content" className="flex-1">
             {children}
           </main>

@@ -40,7 +40,7 @@ export default function ConnectForm({
 
   if (sent) {
     return (
-      <div className="rounded-3xl bg-white shadow-2xl shadow-navy-950/30 p-8 text-center">
+      <div className="rounded-3xl bg-white shadow-elegant ring-1 ring-[color:var(--border-soft)] p-8 text-center">
         <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-500" />
         <h3 className="mt-4 font-display text-xl font-bold text-navy-950">
           Your email app should be open
@@ -60,7 +60,7 @@ export default function ConnectForm({
   }
 
   return (
-    <div className="rounded-3xl bg-white shadow-2xl shadow-navy-950/30 p-8">
+    <div className="rounded-3xl bg-white shadow-elegant ring-1 ring-[color:var(--border-soft)] p-8">
       <h3 className="font-display text-xl font-bold text-navy-950">Get in Touch</h3>
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

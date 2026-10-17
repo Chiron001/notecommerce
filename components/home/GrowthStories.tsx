@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SwipeProgress from "@/components/SwipeProgress";
-import TiltCard from "@/components/TiltCard";
+import SectionHeader from "@/components/SectionHeader";
 import InitialsAvatar from "@/components/InitialsAvatar";
 import type { Testimonial } from "@/payload-types";
 import { useMediaQuery } from "@/lib/useMediaQuery";
@@ -24,19 +24,9 @@ export default function GrowthStories({ testimonials }: { testimonials: Testimon
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="bg-white py-24">
+    <section className="bg-[color:var(--surface)] py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <Reveal>
-          <div className="max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              Client Results
-            </span>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-              Trusted by{" "}
-              <span className="text-navy-900/40">growth leaders.</span>
-            </h2>
-          </div>
-        </Reveal>
+        <SectionHeader eyebrow="Client Results" title="Growth our clients" accent="put in the boardroom." />
 
         <div
           ref={scrollRef}
@@ -51,8 +41,8 @@ export default function GrowthStories({ testimonials }: { testimonials: Testimon
                 triggerOnMount={isCarousel}
                 className="w-[82%] shrink-0 snap-start md:w-auto"
               >
-                <TiltCard tiltRange={3} className="h-full">
-                  <div className="rounded-2xl bg-cream-50 p-8 ring-1 ring-navy-900/5 flex flex-col h-full">
+                <div className="h-full">
+                  <div className="card-elegant card-elegant-hover p-8 flex flex-col h-full">
                     <span
                       className="h-1 w-10 rounded-full"
                       style={{ backgroundColor: ACCENT_HEX[story.accent] ?? ACCENT_HEX.indigo }}
@@ -80,7 +70,7 @@ export default function GrowthStories({ testimonials }: { testimonials: Testimon
                       </div>
                     </div>
                   </div>
-                </TiltCard>
+                </div>
               </Reveal>
             );
           })}

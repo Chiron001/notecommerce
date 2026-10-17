@@ -1,72 +1,62 @@
 import Reveal from "@/components/Reveal";
-import Counter from "@/components/Counter";
-import { Store, Briefcase, ShieldCheck } from "lucide-react";
+import SectionHeader from "@/components/SectionHeader";
+import { PLATFORM_GROUPS, PLATFORMS } from "@/lib/platforms";
 
-const PLATFORMS = [
-  "Shopify",
-  "Amazon",
-  "Flipkart",
-  "Blinkit",
-  "Zepto",
-  "Instamart",
-  "Meesho",
-  "Myntra",
-  "Nykaa",
-  "Ajio",
-  "BigBasket",
-  "JioMart",
-];
+const GROUP_DOT = ["bg-indigo-600", "bg-amber-500", "bg-violet-500", "bg-emerald-500"];
 
-export default function PlatformCoverage({ pillarCount }: { pillarCount: number }) {
-  const stats = [
-    {
-      icon: Store,
-      value: PLATFORMS.length,
-      suffix: "",
-      label: "Platforms and marketplaces we track",
-    },
-    {
-      icon: Briefcase,
-      value: pillarCount,
-      suffix: "",
-      label: "Dedicated practice areas",
-    },
-    {
-      icon: ShieldCheck,
-      value: 100,
-      suffix: "%",
-      label: "Senior-led execution",
-    },
-  ];
-
+export default function PlatformCoverage() {
   return (
     <section className="overflow-hidden bg-white py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <Reveal>
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              Market Coverage
-            </span>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-              Deep expertise across every platform{" "}
-              <span className="text-navy-900/40">that matters.</span>
-            </h2>
-            <p className="mt-4 text-navy-900/60 leading-relaxed">
-              D2C storefronts, marketplaces, and quick commerce apps. Wherever
-              your customers are shopping, our research and advisory teams
-              are already there.
-            </p>
-          </div>
-        </Reveal>
+        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr]">
+          <SectionHeader
+            eyebrow="Market Coverage"
+            title="Deep expertise across"
+            accent="every platform that matters."
+            subtitle="D2C storefronts, marketplaces and quick commerce apps. Wherever your customers are shopping, our research and advisory work is already there."
+          />
+
+          <Reveal delay={0.1}>
+            <div className="card-elegant p-6 sm:p-8">
+              <div className="flex items-center justify-between">
+                <div className="text-sm font-bold text-navy-950">Platforms we track</div>
+                <span className="rounded-full bg-cream-50 px-3 py-1 text-xs font-semibold text-indigo-700">
+                  {PLATFORMS.length} platforms · {PLATFORM_GROUPS.length} channels
+                </span>
+              </div>
+              <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                {PLATFORM_GROUPS.map((group, i) => (
+                  <div key={group.label} className="rounded-xl bg-[color:var(--surface)] p-4 ring-1 ring-[color:var(--border-soft)]">
+                    <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-navy-900/50">
+                      <span className={`h-1.5 w-1.5 rounded-full ${GROUP_DOT[i % GROUP_DOT.length]}`} />
+                      {group.label}
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {group.platforms.map((p) => (
+                        <span
+                          key={p}
+                          className="rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-navy-900 ring-1 ring-[color:var(--border-soft)]"
+                        >
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
 
       <Reveal delay={0.1}>
-        <div className="relative mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-          <div className="marquee-track flex w-max gap-3">
+        <div className="relative mt-16 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <div className="marquee-track flex w-max items-center gap-12">
             {[...PLATFORMS, ...PLATFORMS].map((platform, i) => (
               <span
                 key={i}
-                className="shrink-0 rounded-full bg-cream-50 px-5 py-2.5 text-sm font-semibold text-navy-900/80 ring-1 ring-navy-900/10"
+                aria-hidden={i >= PLATFORMS.length}
+                className="shrink-0 font-display text-2xl font-extrabold tracking-tight text-navy-900/20"
               >
                 {platform}
               </span>
@@ -74,26 +64,6 @@ export default function PlatformCoverage({ pillarCount }: { pillarCount: number 
           </div>
         </div>
       </Reveal>
-
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {stats.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.08}>
-              <div className="rounded-2xl bg-navy-950 p-8 text-center">
-                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl glass-dark text-violet-300">
-                  <stat.icon className="h-6 w-6" />
-                </span>
-                <Counter
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  className="mt-4 block font-display text-3xl font-extrabold text-white"
-                />
-                <div className="mt-2 text-sm text-white/50">{stat.label}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

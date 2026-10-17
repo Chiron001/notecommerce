@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/nav";
 import SocialIcon from "@/components/SocialIcon";
 import type { Pillar, SiteSetting } from "@/payload-types";
@@ -19,7 +19,25 @@ export default function Footer({
 
   return (
     <footer className="relative overflow-hidden bg-noise bg-navy-950 text-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
+      <div className="absolute inset-x-0 top-0 h-96 bg-mesh-dark opacity-70 pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-16 pb-8">
+        <div className="mb-14 flex flex-col items-start justify-between gap-6 rounded-2xl bg-white/[0.05] p-6 ring-1 ring-white/10 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <div className="font-display text-xl sm:text-2xl font-bold text-white">
+              Ready to talk strategy?{" "}
+              <span className="headline-accent-dark">Let&apos;s map your growth.</span>
+            </div>
+            <p className="mt-1 text-sm text-white/55">A 30-minute intro call with a senior advisor. No obligation.</p>
+          </div>
+          <Link
+            href="/connect"
+            className="btn-shimmer inline-flex shrink-0 items-center gap-2 rounded-full gradient-cta px-6 py-3 text-sm font-semibold text-white shadow-glow hover:opacity-95 transition-opacity"
+          >
+            Book a Consultation
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
             <Link href="/" className="flex items-center text-cream-50 text-lg" aria-label="NotEcommerce home">
@@ -162,7 +180,7 @@ export default function Footer({
 
       <div
         aria-hidden="true"
-        className="select-none pointer-events-none text-center leading-none font-display font-extrabold text-white/[0.05] text-[9vw] whitespace-nowrap translate-y-[15%]"
+        className="select-none pointer-events-none text-center leading-none font-display font-extrabold text-[9vw] whitespace-nowrap translate-y-[15%] bg-gradient-to-b from-white/[0.09] to-white/0 bg-clip-text text-transparent"
       >
         NOTECOMMERCE
       </div>

@@ -49,7 +49,7 @@ export default async function PillarPage({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
+      <section className="relative overflow-hidden bg-mesh pt-32 pb-20 lg:pt-40">
         <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
@@ -73,7 +73,7 @@ export default async function PillarPage({
           <Reveal>
             <div className="grid lg:grid-cols-3 gap-10 items-center rounded-3xl">
               <div className="lg:col-span-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
+                <span className="eyebrow !text-indigo-500">
                   Advisory Services
                 </span>
                 <h2 className="mt-3 font-display text-2xl font-bold text-white">
@@ -97,7 +97,7 @@ export default async function PillarPage({
 
       <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+          <span className="eyebrow">
             Related Insights
           </span>
           <div className="mt-6">

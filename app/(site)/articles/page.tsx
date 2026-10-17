@@ -19,16 +19,17 @@ export default async function ArticlesPage() {
   const [articles, pillars] = await Promise.all([getAllCaseStudies(), getAllPillars()]);
 
   return (
-    <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
+    <section className="relative overflow-hidden bg-mesh pt-32 pb-20 lg:pt-40">
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+            <span className="eyebrow">
               Insights
             </span>
             <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
-              Research and analysis, published.
+              Research and analysis,{" "}
+              <span className="headline-accent">published.</span>
             </h1>
             <p className="mt-4 text-navy-900/60 leading-relaxed">
               The thinking behind our advisory work, in one place. Jump to a

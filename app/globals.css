@@ -3,33 +3,56 @@
 :root {
   --background: #ffffff;
   --foreground: #003466;
+
+  /* Design tokens. Navy stays the brand ink; blue -> violet is the accent
+     gradient used for headline accents, CTAs, borders and glows. */
+  --surface: #f7f9fc;
+  --ink: #001b33;
+  --ink-muted: #5b6b80;
+  --primary: #0b6bff;
+  --accent: #7c3aed;
+  --border-soft: #e3e8f0;
+  --gradient-primary: linear-gradient(135deg, #0b6bff 0%, #7c3aed 100%);
+  --gradient-text: linear-gradient(135deg, #0b6bff 0%, #5b4cf5 55%, #7c3aed 100%);
+  --shadow-elegant: 0 20px 60px -20px rgba(0, 27, 51, 0.18);
+  --shadow-glow: 0 10px 40px rgba(11, 107, 255, 0.18);
+  --shadow-violet: 0 10px 40px rgba(124, 58, 237, 0.18);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme {
-  /* Brand navy — exact color from the NotEcommerce logo */
+  /* Brand navy — exact color from the NotEcommerce logo. Used as ink and for dark sections. */
   --color-navy-950: #001b33;
   --color-navy-900: #003466;
   --color-navy-800: #0b4a82;
   --color-navy-700: #14619f;
 
-  /* Brand blue accent, derived from navy-900 for gradients/links/CTAs */
-  --color-indigo-600: #0b4a82;
-  --color-indigo-500: #14619f;
-  --color-violet-500: #2f8fd6;
+  /* Primary blue, for links, CTAs and the start of the accent gradient */
+  --color-indigo-700: #0052d6;
+  --color-indigo-600: #0b6bff;
+  --color-indigo-500: #3d8bff;
 
-  /* Brand light blue — exact color from the NotEcommerce logo background */
-  --color-cream-50: #daf5ff;
-  --color-cream-100: #bfe9f7;
+  /* Violet accent, the end of the accent gradient */
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+
+  /* Cool tinted surfaces */
+  --color-cream-50: #f4f7ff;
+  --color-cream-100: #e8eeff;
 
   --color-emerald-500: #16a37a;
   --color-amber-500: #e58a2a;
+
+  --radius-card: 0.875rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
+  --font-display: var(--font-body);
 }
 
 body {
@@ -39,7 +62,165 @@ body {
 }
 
 h1, h2, h3, h4, .font-display {
-  font-family: var(--font-heading), var(--font-body), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+/* Two-tone headline accent: light italic with the blue -> violet gradient,
+   e.g. "Grow your brand / across every marketplace." */
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.headline-accent {
+  font-weight: 300;
+  font-style: italic;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Italic glyphs overhang their box; padding stops background-clip cropping them */
+  padding-right: 0.08em;
+}
+
+.headline-accent-dark {
+  font-weight: 300;
+  font-style: italic;
+  background: linear-gradient(135deg, #7cc4ff 0%, #b9a4ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.08em;
+}
+
+/* Small uppercase label above every section heading */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--primary);
+}
+
+.eyebrow::before {
+  content: "";
+  height: 1px;
+  width: 1.5rem;
+  background: var(--gradient-primary);
+}
+
+/* Soft multi-colour glow behind light hero sections */
+.bg-mesh {
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 18%, rgba(125, 211, 252, 0.35), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 88% 8%, rgba(167, 139, 250, 0.3), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 85%, rgba(96, 165, 250, 0.22), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 28% 92%, rgba(94, 234, 212, 0.2), transparent 60%),
+    var(--surface);
+}
+
+.bg-mesh-dark {
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(11, 107, 255, 0.35), transparent 60%),
+    radial-gradient(ellipse 45% 40% at 90% 20%, rgba(124, 58, 237, 0.32), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(34, 211, 238, 0.14), transparent 60%),
+    var(--color-navy-950);
+}
+
+/* Elevated white card: translucent fill, hairline border, long soft shadow */
+.card-elegant {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.75));
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-elegant);
+  transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
+}
+
+.card-elegant-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(11, 107, 255, 0.3);
+  box-shadow: var(--shadow-elegant), var(--shadow-glow);
+}
+
+/* Gradient hairline border, drawn with a masked pseudo-element */
+.border-gradient {
+  position: relative;
+}
+
+.border-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(11, 107, 255, 0.5), rgba(124, 58, 237, 0.5));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+
+.animate-float {
+  animation: float 6s var(--ease-smooth) infinite alternate;
+}
+
+.animate-float-delayed {
+  animation: float 7s var(--ease-smooth) 1.2s infinite alternate;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+/* Slow shimmer sweep across the primary CTA */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: shimmer 3.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 60% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delayed,
+  .btn-shimmer::after {
+    animation: none;
+  }
 }
 
 /* Consistent, visible keyboard focus ring across the site */
@@ -48,7 +229,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #2f8fd6;
+  outline: 2px solid var(--primary);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -73,12 +254,12 @@ textarea:focus-visible,
 }
 
 .gradient-cta {
-  background: linear-gradient(115deg, #003466 0%, #0b4a82 50%, #2f8fd6 100%);
+  background: var(--gradient-primary);
 }
 
 .gradient-hero-blob {
-  background: radial-gradient(circle at 30% 30%, rgba(47, 143, 214, 0.3), transparent 60%),
-    radial-gradient(circle at 70% 60%, rgba(0, 52, 102, 0.18), transparent 55%);
+  background: radial-gradient(circle at 30% 30%, rgba(11, 107, 255, 0.28), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(124, 58, 237, 0.22), transparent 55%);
 }
 
 /* Glass surfaces, used on light and dark backgrounds respectively.
@@ -167,7 +348,7 @@ textarea:focus-visible,
 }
 
 .prose-article h2 {
-  font-family: var(--font-heading), sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 2.5rem;

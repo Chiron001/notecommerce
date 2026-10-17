@@ -38,17 +38,18 @@ const QUALITIES = [
 export default function CareersPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-cream-50 pt-32 pb-20 lg:pt-40">
+      <section className="relative overflow-hidden bg-mesh pt-32 pb-20 lg:pt-40">
         <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
         <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+              <span className="eyebrow">
                 Careers
               </span>
               <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
-                Work with a small, senior team.
+                Work with a small,{" "}
+                <span className="headline-accent">senior team.</span>
               </h1>
               <p className="mt-5 text-lg text-navy-900/70 leading-relaxed">
                 We don&apos;t hire often, and we don&apos;t hire junior. Every
@@ -64,7 +65,7 @@ export default function CareersPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+              <span className="eyebrow">
                 What We Look For
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">
@@ -98,7 +99,7 @@ export default function CareersPage() {
           <Reveal>
             <div className="grid lg:grid-cols-2 gap-12 items-center rounded-3xl">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
+                <span className="eyebrow !text-indigo-500">
                   How We Hire
                 </span>
                 <h2 className="mt-3 font-display text-2xl sm:text-3xl font-bold text-white">

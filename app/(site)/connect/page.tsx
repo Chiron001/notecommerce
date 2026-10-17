@@ -66,12 +66,12 @@ export default async function ConnectPage() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <Reveal>
-              <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
+              <span className="eyebrow !text-indigo-500">
                 Get In Touch
               </span>
               <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
                 Ecommerce intelligence to{" "}
-                <span className="bg-gradient-to-r from-indigo-500 via-violet-400 to-cream-50 bg-clip-text text-transparent">
+                <span className="headline-accent-dark">
                   maximize your growth.
                 </span>
               </h1>
@@ -130,7 +130,7 @@ export default async function ConnectPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+              <span className="eyebrow">
                 How We Can Help
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950">

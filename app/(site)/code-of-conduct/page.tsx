@@ -13,10 +13,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function CodeOfConductPage() {
   return (
     <>
-      <section className="bg-cream-50 pt-32 pb-16 lg:pt-40">
+      <section className="bg-mesh pt-32 pb-16 lg:pt-40">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <Reveal>
-            <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+            <span className="eyebrow">
               Legal
             </span>
             <h1 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-950">

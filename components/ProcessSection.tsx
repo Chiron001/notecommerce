@@ -53,12 +53,12 @@ export default function ProcessSection() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-widest text-violet-400">
+            <span className="eyebrow !text-indigo-500">
               Our Methodology
             </span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
               A rigorous, repeatable{" "}
-              <span className="text-white/40">methodology.</span>
+              <span className="headline-accent-dark">methodology.</span>
             </h2>
             <p className="mt-4 text-white/60 leading-relaxed">
               Every engagement, and every piece of intelligence we publish,

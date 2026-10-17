@@ -1,11 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import type { CaseStudy } from "@/payload-types";
 import ArticleCard from "@/components/ArticleCard";
 import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
 import SwipeProgress from "@/components/SwipeProgress";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
@@ -13,33 +12,22 @@ export default function FeaturedArticles({ articles }: { articles: CaseStudy[] }
   const scrollRef = useRef<HTMLDivElement>(null);
   const isCarousel = !useMediaQuery("(min-width: 768px)");
 
+  if (articles.length === 0) return null;
+
   return (
-    <section className="bg-cream-50 py-24">
+    <section className="bg-[color:var(--surface)] py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <Reveal>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
-                Insights &amp; Case Studies
-              </span>
-              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-                Proprietary research,{" "}
-                <span className="text-navy-900/40">applied.</span>
-              </h2>
-            </div>
-            <Link
-              href="/articles"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-navy-950 hover:gap-3 transition-all"
-            >
-              View all insights
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </Reveal>
+        <SectionHeader
+          eyebrow="Research & Insights"
+          title="Category intelligence,"
+          accent="straight from the data."
+          subtitle="Independent analysis of the platforms, categories and economics shaping Indian ecommerce."
+          link={{ href: "/articles", label: "View all research" }}
+        />
 
         <div
           ref={scrollRef}
-          className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+          className="mt-14 -mx-6 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto scroll-smooth px-6 pb-4 no-scrollbar scroll-pl-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
         >
           {articles.map((article, i) => (
             <Reveal

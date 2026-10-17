@@ -5,7 +5,7 @@ import { getAllPillars } from "@/lib/payload";
 export default async function NotFound() {
   const pillars = await getAllPillars();
   return (
-    <section className="relative overflow-hidden bg-cream-50 pt-32 pb-24 lg:pt-40">
+    <section className="relative overflow-hidden bg-mesh pt-32 pb-24 lg:pt-40">
       <div className="absolute inset-0 gradient-hero-blob pointer-events-none" />
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-40" />
       <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
