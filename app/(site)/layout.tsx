@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import MotionProvider from "@/components/MotionProvider";
 import SiteEffects from "@/components/SiteEffects";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
-import { getAllPillars, getLatestCaseStudy, getSiteSettings } from "@/lib/payload";
+import { getAllPillars, getRecentCaseStudies, getSiteSettings } from "@/lib/payload";
 import { extractScriptContent } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -39,10 +39,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [pillars, settings, latestArticle] = await Promise.all([
+  const [pillars, settings, recentArticles] = await Promise.all([
     getAllPillars(),
     getSiteSettings(),
-    getLatestCaseStudy(),
+    getRecentCaseStudies(2),
   ]);
   const headerCode = extractScriptContent(settings.headerCode);
   const bodyCode = extractScriptContent(settings.bodyCode);
@@ -68,9 +68,12 @@ export default async function RootLayout({
           <SiteEffects />
           <Header
             pillars={pillars.map((p) => ({ title: p.title, slug: p.slug, description: p.description }))}
-            announcement={
-              latestArticle ? { title: latestArticle.title, href: `/articles/${latestArticle.slug}` } : null
-            }
+            spotlight={recentArticles.map((a) => ({
+              title: a.title,
+              href: `/articles/${a.slug}`,
+              excerpt: a.excerpt,
+              label: typeof a.pillar === "object" && a.pillar ? a.pillar.title : "Research",
+            }))}
           />
           <main id="main-content" className="flex-1">
             {children}
