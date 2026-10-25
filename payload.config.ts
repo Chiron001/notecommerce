@@ -67,8 +67,11 @@ export default buildConfig({
   plugins: [
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      // Serve files straight from the public Blob URL. Proxied through Payload,
+      // URLs are absolute on our own domain, which next/image rejects because
+      // only the Blob host is in images.remotePatterns.
       collections: {
-        media: true,
+        media: { disablePayloadAccessControl: true },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN ?? "",
     }),
