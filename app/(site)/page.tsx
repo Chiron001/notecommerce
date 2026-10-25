@@ -8,7 +8,7 @@ import PlatformCoverage from "@/components/home/PlatformCoverage";
 import NewsletterCTA from "@/components/home/NewsletterCTA";
 import GrowthStories from "@/components/home/GrowthStories";
 import FinalCTA from "@/components/home/FinalCTA";
-import { getAllCaseStudies, getAllPillars, getFeaturedCaseStudies, getSiteSettings, getTestimonials } from "@/lib/payload";
+import { getAllCaseStudies, getAllPillars, getSiteSettings, getTestimonials } from "@/lib/payload";
 import { resolvePageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -22,15 +22,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [pillars, featuredCaseStudies, allCaseStudies, testimonials, settings] = await Promise.all([
+  const [pillars, allCaseStudies, testimonials, settings] = await Promise.all([
     getAllPillars(),
-    getFeaturedCaseStudies(),
     getAllCaseStudies(),
     getTestimonials(),
     getSiteSettings(),
   ]);
 
   const latestArticle = allCaseStudies[0] ?? null;
+  const latestArticles = allCaseStudies.slice(0, 3);
 
   return (
     <>
@@ -38,7 +38,7 @@ export default async function Home() {
       <StatsBar pillarCount={pillars.length} />
       <ContentPillars pillars={pillars} />
       <SolutionsTabs pillars={pillars} />
-      <FeaturedArticles articles={featuredCaseStudies} />
+      <FeaturedArticles articles={latestArticles} />
       <PlatformCoverage />
       <NewsletterCTA latestArticle={latestArticle ? { title: latestArticle.title, slug: latestArticle.slug } : null} />
       <GrowthStories testimonials={testimonials} />
