@@ -109,24 +109,26 @@ export default async function ArticlePage({
         </div>
       </div>
 
-      <div className="relative h-64 sm:h-80 w-full overflow-hidden">
-        {cover?.url ? (
+      {cover?.url ? (
+        // Matches the article column and keeps the image's own aspect ratio, so nothing is cropped.
+        <div className="mx-auto max-w-3xl px-6 pt-10 lg:px-8">
           <Image
-            src={cover.sizes?.hero?.url || cover.url}
+            src={cover.url}
             alt={cover.alt || ""}
-            fill
-            sizes="100vw"
+            width={cover.width || 1600}
+            height={cover.height || 900}
+            sizes="(min-width: 768px) 704px, 100vw"
             priority
-            className="object-cover"
+            className="h-auto w-full rounded-2xl"
           />
-        ) : (
-          // No real cover uploaded yet: a plain brand-color gradient, never a stock photo standing in for real imagery.
-          <div
-            className="absolute inset-0"
-            style={{ background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})` }}
-          />
-        )}
-      </div>
+        </div>
+      ) : (
+        // No real cover uploaded yet: a plain brand-color gradient, never a stock photo standing in for real imagery.
+        <div
+          className="h-64 sm:h-80 w-full"
+          style={{ background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})` }}
+        />
+      )}
 
       <div className="mx-auto max-w-3xl px-6 lg:px-8 py-16">
         <Reveal>
