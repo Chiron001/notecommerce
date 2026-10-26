@@ -8,10 +8,9 @@ import type { CaseStudy, Pillar } from "@/payload-types";
 import { getAllCaseStudies, getCaseStudiesByPillar, getCaseStudyBySlug, getRecentCaseStudies } from "@/lib/payload";
 import { countWords, splitAfterParagraph } from "@/lib/lexical";
 import InitialsAvatar from "@/components/InitialsAvatar";
-import Reveal from "@/components/Reveal";
 import ShareButtons from "@/components/articles/ShareButtons";
 import InlineNewsletter from "@/components/articles/InlineNewsletter";
-import ReadNextCard from "@/components/articles/ReadNextCard";
+import ReadNextCarousel from "@/components/articles/ReadNextCarousel";
 
 export const revalidate = 60;
 
@@ -252,13 +251,7 @@ export default async function ArticlePage({
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <h2 className="font-display text-2xl font-bold text-navy-950">Read next</h2>
-            <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {readNext.map((r, i) => (
-                <Reveal key={r.slug} delay={(i % 3) * 0.08}>
-                  <ReadNextCard article={r} />
-                </Reveal>
-              ))}
-            </div>
+            <ReadNextCarousel articles={readNext} />
           </div>
         </section>
       )}
